@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Decor Aeroponic | Product</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700&family=Montserrat:wght@700;800;900&family=Playfair+Display:wght@500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./site-shared.css" />
+    <link rel="stylesheet" href="./styles.css" />
+    <link rel="stylesheet" href="./product.css?v=4" />
+    <!-- Critical: layout + native controls (works even if product.css is cached or blocked) -->
+    <style>
+      #product-page {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        min-height: 100vh;
+        width: 100%;
+        color-scheme: dark;
+      }
+      #product-page > .top-nav,
+      #product-page > .site-footer {
+        width: 100%;
+        flex-shrink: 0;
+      }
+      #product-page > main.page-shell.product-main {
+        flex: 1 1 auto;
+        align-self: center;
+        width: 100%;
+        max-width: 1180px;
+        margin-left: auto;
+        margin-right: auto;
+        box-sizing: border-box;
+      }
+      #product-page button.add-to-cart-btn {
+        -webkit-appearance: none;
+        appearance: none;
+        box-sizing: border-box;
+        font-family: Inter, system-ui, sans-serif;
+        font-weight: 700;
+        font-size: 0.95rem;
+        line-height: 1.2;
+        padding: 0.62rem 1.35rem;
+        border-radius: 999px;
+        border: 1px solid #2f7a4a;
+        color: #bfe7ca;
+        background: rgba(10, 35, 24, 0.75);
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow:
+          0 0 0 1px rgba(34, 102, 63, 0.4) inset,
+          0 0 14px rgba(76, 174, 117, 0.35);
+      }
+      #product-page #review-form input[type="text"],
+      #product-page #review-form textarea,
+      #product-page #review-form select {
+        box-sizing: border-box;
+        width: 100%;
+        max-width: 100%;
+        padding: 0.65rem 1rem;
+        border-radius: 14px;
+        border: 1px solid rgba(255, 255, 255, 0.22);
+        background-color: #0a2216;
+        color: #f4f7ef;
+        font-family: Inter, system-ui, sans-serif;
+        font-size: 0.95rem;
+      }
+      #product-page #review-form select {
+        cursor: pointer;
+      }
+      #product-page #review-form textarea {
+        min-height: 5.5rem;
+        resize: vertical;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="bg-aurora" aria-hidden="true"></div>
+    <div class="product-page" id="product-page">
+      <header class="top-nav">
+        <a class="logo" href="./index.html">Decor Aeroponic</a>
+        <button
+          class="nav-toggle"
+          type="button"
+          aria-label="Toggle navigation menu"
+          aria-expanded="false"
+          aria-controls="site-nav"
+        >
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+        <nav id="site-nav">
+          <a href="./all-products.html" class="active">Products</a>
+          <a href="./know-the-product.html">Know the Product</a>
+          <a href="./cart.html" class="cart-nav-link"
+            >Cart <span class="cart-badge" data-cart-count hidden aria-label="Cart is empty"></span
+          ></a>
+          <a href="./account.html" class="account-nav-link" data-account-link
+            ><span class="account-icon" data-account-avatar aria-hidden="true">A</span
+            ><span class="account-nav-text" data-account-name>Account</span></a
+          >
+        </nav>
+      </header>
+
+      <main class="page-shell product-main">
+        <div class="product-showcase">
+          <div class="product-glass-wrap">
+            <div class="product-glass" aria-label="Product preview">
+              <div class="product-glass__body">
+                <div class="product-image-grid" id="product-image-grid" aria-label="Product gallery"></div>
+                <div class="product-glass__image-wrap">
+                  <img id="product-image" src="./3D%20tower%20.png" alt="" />
+                </div>
+                <div class="product-glass__copy">
+                  <h1 class="product-name-display" id="product-name">Tower One</h1>
+                  <div class="product-details">
+                    <p class="product-desc" id="product-desc">
+                      Our entry sculptural tower brings quiet greenery to any corner. Mist-fed roots stay tidy—no soil, no clutter.
+                    </p>
+                    <p class="product-price" id="product-price">Rs. 1,499/-</p>
+                    <div class="product-actions">
+                      <button type="button" class="add-to-cart-btn" id="add-to-cart">Add to cart</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="product-glass__accent" aria-hidden="true"></div>
+          </div>
+        </div>
+
+        <div class="product-lower">
+          <div class="product-lower__inner">
+            <section class="product-info-block" aria-labelledby="product-details-heading">
+              <h2 id="product-details-heading" class="product-info-block__title">Product details</h2>
+              <p id="product-detail-long" class="product-detail-long">
+                Full specifications and story for this tower appear here.
+              </p>
+            </section>
+
+            <div class="product-info-grid">
+              <section class="product-info-block" aria-labelledby="included-heading">
+                <h2 id="included-heading" class="product-info-block__title">What’s included</h2>
+                <ul id="product-included" class="product-included-list"></ul>
+              </section>
+              <section class="product-info-block" aria-labelledby="material-heading">
+                <h2 id="material-heading" class="product-info-block__title">Material &amp; build</h2>
+                <p id="product-material" class="product-material-text"></p>
+              </section>
+            </div>
+
+            <section class="product-info-block product-reviews" aria-labelledby="reviews-heading">
+              <h2 id="reviews-heading" class="product-info-block__title">Customer reviews</h2>
+              <div class="product-reviews__list-col">
+                <ul id="review-list" class="review-list" aria-live="polite"></ul>
+                <p id="review-empty" class="review-empty" hidden>No reviews yet. Be the first to share your experience.</p>
+              </div>
+
+              <form id="review-form" class="review-form">
+                <p class="review-form__lead">Add your review</p>
+                <div class="review-form__row">
+                  <label class="review-form__label" for="review-name">Name</label>
+                  <input id="review-name" name="author" type="text" class="review-form__input" required autocomplete="name" maxlength="80" />
+                </div>
+                <div class="review-form__row">
+                  <label class="review-form__label" for="review-rating">Rating</label>
+                  <select id="review-rating" name="rating" class="review-form__select" required>
+                    <option value="5">5 — Excellent</option>
+                    <option value="4">4 — Very good</option>
+                    <option value="3">3 — Good</option>
+                    <option value="2">2 — Fair</option>
+                    <option value="1">1 — Poor</option>
+                  </select>
+                </div>
+                <div class="review-form__row">
+                  <label class="review-form__label" for="review-body">Your review</label>
+                  <textarea id="review-body" name="body" class="review-form__textarea" rows="4" required maxlength="1200" placeholder="Tell others what you think…"></textarea>
+                </div>
+                <button type="submit" class="add-to-cart-btn review-form__submit">Post review</button>
+              </form>
+            </section>
+
+            <section class="product-info-block product-info-block--rec" aria-labelledby="rec-heading">
+              <h2 id="rec-heading" class="product-info-block__title">Recommended products</h2>
+              <div id="recommended-grid" class="recommended-grid"></div>
+            </section>
+          </div>
+        </div>
+      </main>
+
+      <footer class="site-footer">
+        <div>
+          <p>Decor Aeroponic</p>
+          <small>Eco decor for modern homes.</small>
+        </div>
+        <div class="footer-links">
+          <span>Quick Links</span>
+          <a href="./index.html">Home</a>
+          <a href="./all-products.html">Products</a>
+          <a href="./contact.html">Contact</a>
+          <a href="./cart.html">Cart</a>
+        </div>
+      </footer>
+    </div>
+    <script src="./catalog.js"></script>
+    <script src="./cart.js?v=5"></script>
+    <script src="./auth.js?v=12"></script>
+    <script src="./product.js?v=5"></script>
+  </body>
+</html>

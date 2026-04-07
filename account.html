@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Decor Aeroponic | Account</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Anton&family=Playfair+Display:wght@500;600&family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./site-shared.css?v=2" />
+    <link rel="stylesheet" href="./styles.css?v=4" />
+    <link rel="stylesheet" href="./account.css?v=9" />
+  </head>
+  <body class="account-body">
+    <div class="bg-aurora" aria-hidden="true"></div>
+    <header class="top-nav">
+      <a class="logo" href="./index.html">Decor Aeroponic</a>
+      <button
+        class="nav-toggle"
+        type="button"
+        aria-label="Toggle navigation menu"
+        aria-expanded="false"
+        aria-controls="site-nav"
+      >
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <nav id="site-nav">
+        <a href="./all-products.html">Products</a>
+        <a href="./know-the-product.html">Know the Product</a>
+        <a href="./cart.html" class="cart-nav-link"
+          >Cart <span class="cart-badge" data-cart-count hidden aria-label="Cart is empty"></span
+        ></a>
+        <a href="./account.html" class="account-nav-link active" aria-current="page" data-account-link
+          ><span class="account-icon" data-account-avatar aria-hidden="true">A</span
+          ><span class="account-nav-text" data-account-name>Account</span></a
+        >
+      </nav>
+    </header>
+
+    <main class="page-shell account-page">
+      <section class="account-shell" id="auth-forms">
+        <div class="account-visual">
+          <img src="./3d plant.png" alt="Decor aeroponic plant" />
+        </div>
+        <div class="account-auth">
+          <h1 class="account-auth__title" data-auth-title>Welcome Back</h1>
+          <p class="account-sub" data-auth-subtitle hidden></p>
+
+          <div class="auth-tabs" role="tablist" aria-label="Account actions">
+            <button type="button" class="auth-tab is-active" data-auth-panel="signin">Sign in</button>
+            <button type="button" class="auth-tab" data-auth-panel="signup">Sign up</button>
+            <button type="button" class="auth-tab" data-auth-panel="admin">Admin login</button>
+          </div>
+
+          <form id="signin-form" class="auth-form auth-panel" data-auth-panel-content="signin" novalidate>
+            <label for="signin-identity">Email / Phone number</label>
+            <input id="signin-identity" name="identity" type="text" placeholder="name@gmail.com or +91XXXXXXXXXX" required />
+            <div class="auth-actions-inline">
+              <button type="button" class="auth-btn auth-btn--ghost" id="send-otp-btn">Send OTP</button>
+            </div>
+            <label for="signin-otp">OTP</label>
+            <input id="signin-otp" name="otp" type="text" inputmode="numeric" maxlength="6" placeholder="Enter 6-digit OTP" />
+            <button type="submit" class="auth-btn">Sign in with OTP</button>
+          </form>
+
+          <form id="signup-form" class="auth-form auth-panel is-hidden" data-auth-panel-content="signup" novalidate>
+            <label for="signup-name">Name</label>
+            <input id="signup-name" name="name" type="text" maxlength="80" placeholder="Enter full name" required />
+            <label for="signup-age">Age</label>
+            <input id="signup-age" name="age" type="number" inputmode="numeric" min="1" max="120" required />
+            <label for="signup-phone">Phone number</label>
+            <input id="signup-phone" name="phone" type="tel" inputmode="tel" placeholder="+91XXXXXXXXXX" required />
+            <label for="signup-email">Email</label>
+            <input id="signup-email" name="email" type="email" placeholder="name@gmail.com" required />
+            <button type="submit" class="auth-btn">Create account</button>
+          </form>
+
+          <form id="admin-login-form" class="auth-form auth-panel is-hidden" data-auth-panel-content="admin" novalidate>
+            <label for="admin-user">Admin username</label>
+            <input id="admin-user" name="username" type="text" placeholder="admin" required />
+            <label for="admin-pass">Password</label>
+            <input id="admin-pass" name="password" type="password" placeholder="admin123" required />
+            <button type="submit" class="auth-btn">Login to dashboard</button>
+          </form>
+
+          <p id="auth-error" class="auth-error" hidden></p>
+        </div>
+      </section>
+
+      <section class="account-card" id="account-panel" hidden>
+        <h1>Your account</h1>
+        <p class="account-sub">You are signed in.</p>
+        <div class="account-info">
+          <p><span>Name</span><strong id="account-name">-</strong></p>
+          <p><span>Method</span><strong id="account-method">-</strong></p>
+          <p><span>Identity</span><strong id="account-id">-</strong></p>
+        </div>
+        <div class="account-actions">
+          <a class="auth-btn auth-btn--ghost" href="./all-products.html">Shop products</a>
+          <a class="auth-btn auth-btn--ghost" href="./admin.html">Admin dashboard</a>
+          <button type="button" class="auth-btn" id="logout-btn">Log out</button>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div>
+        <p>Decor Aeroponic</p>
+        <small>Eco decor for modern homes.</small>
+      </div>
+      <div class="footer-links">
+        <span>Quick Links</span>
+        <a href="./index.html">Home</a>
+        <a href="./all-products.html">Products</a>
+        <a href="./contact.html">Contact</a>
+        <a href="./cart.html">Cart</a>
+      </div>
+    </footer>
+
+    <script src="./catalog.js"></script>
+    <script src="./cart.js?v=5"></script>
+    <script src="./auth.js?v=12"></script>
+  </body>
+</html>

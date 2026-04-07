@@ -1,0 +1,316 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Decor Aeroponic | Admin</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Anton&family=Playfair+Display:wght@500;600&family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./site-shared.css?v=2" />
+    <link rel="stylesheet" href="./styles.css?v=4" />
+    <link rel="stylesheet" href="./admin.css?v=5" />
+  </head>
+  <body class="admin-body">
+    <div class="bg-aurora" aria-hidden="true"></div>
+    <header class="top-nav">
+      <a class="logo" href="./index.html">Decor Aeroponic</a>
+      <button
+        class="nav-toggle"
+        type="button"
+        aria-label="Toggle navigation menu"
+        aria-expanded="false"
+        aria-controls="site-nav"
+      >
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <nav id="site-nav">
+        <a href="./all-products.html">Products</a>
+        <a href="./know-the-product.html">Know the Product</a>
+        <a href="./cart.html" class="cart-nav-link"
+          >Cart <span class="cart-badge" data-cart-count hidden aria-label="Cart is empty"></span
+        ></a>
+        <a href="./account.html" class="account-nav-link" data-account-link
+          ><span class="account-icon" data-account-avatar aria-hidden="true">A</span
+          ><span class="account-nav-text" data-account-name>Account</span></a
+        >
+      </nav>
+    </header>
+
+    <main class="page-shell admin-page">
+      <h1 class="admin-title">Admin Dashboard</h1>
+
+      <section class="admin-card admin-top-pin">
+        <div class="admin-top-header">
+          <h2>Sales Monitor</h2>
+          <div class="admin-actions-row">
+            <button type="button" class="admin-btn admin-btn--ghost" id="view-contacts-btn">View user contacts</button>
+            <button type="button" class="admin-btn admin-btn--ghost" id="export-sales-csv">Export sales CSV</button>
+          </div>
+        </div>
+        <div class="admin-stats">
+          <article><span>Orders</span><strong id="stat-orders">0</strong></article>
+          <article><span>Revenue</span><strong id="stat-revenue">Rs. 0/-</strong></article>
+          <article><span>Items Sold</span><strong id="stat-items">0</strong></article>
+        </div>
+        <div class="admin-chart-head">
+          <strong>Sales trend</strong>
+          <div class="admin-segmented" role="group" aria-label="Sales trend range">
+            <button type="button" class="admin-segmented__btn is-active" data-sales-range="7">7D</button>
+            <button type="button" class="admin-segmented__btn" data-sales-range="30">30D</button>
+            <button type="button" class="admin-segmented__btn" data-sales-range="90">90D</button>
+          </div>
+        </div>
+        <div id="sales-chart" class="admin-chart" aria-label="Sales chart"></div>
+        <p class="admin-note">Green bars: daily revenue. Gold markers: timestamps when offers were enabled.</p>
+        <h3 class="admin-subhead">Product-wise sales (selected range)</h3>
+        <div class="admin-table-wrap">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>Product</th>
+                <th>Qty sold</th>
+                <th>Revenue</th>
+                <th>Last sold at</th>
+              </tr>
+            </thead>
+            <tbody id="admin-product-sales-body"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <div class="admin-workspace">
+        <section class="admin-card admin-add-card">
+          <details class="admin-collapse" id="add-product-collapse">
+            <summary>Add product</summary>
+            <form id="admin-product-form" class="admin-form" novalidate>
+              <div class="admin-grid admin-grid--2">
+                <label>Product ID<input name="id" placeholder="custom-1" required /></label>
+                <label>Name<input name="name" placeholder="Tower Bloom" required /></label>
+              </div>
+              <div class="admin-grid admin-grid--2">
+                <label>Price<input name="price" placeholder="Rs. 2,499/-" required /></label>
+                <label>Inventory<input name="inventory" type="number" min="0" value="25" required /></label>
+              </div>
+              <label>Primary image URL/path<input name="img" placeholder="./3D%20tower%20.png" /></label>
+              <label>More image URLs (one per line)<textarea name="imgs" rows="3" placeholder="./3D%20tower%20.png&#10;./3d%20plant.png"></textarea></label>
+              <label>Or upload images<input name="imgFiles" type="file" accept="image/*" multiple /></label>
+              <label>Primary image number (from merged list)<input name="primaryImageIndex" type="number" min="1" value="1" /></label>
+              <label>Short description<textarea name="desc" rows="2" placeholder="Shown in product cards"></textarea></label>
+              <label>Product details<textarea name="detailLong" rows="4" placeholder="Long details for product page"></textarea></label>
+              <label>What's included (one line per item)<textarea name="included" rows="4" placeholder="Item 1&#10;Item 2&#10;Item 3"></textarea></label>
+              <label>Material & build<textarea name="material" rows="3" placeholder="Material details"></textarea></label>
+              <button type="submit" class="admin-btn">Save product</button>
+              <p id="admin-product-msg" class="admin-msg" hidden></p>
+            </form>
+          </details>
+        </section>
+
+        <section class="admin-card admin-reviews-card">
+          <details class="admin-collapse" id="reviews-collapse">
+            <summary>Product Reviews</summary>
+            <div class="admin-table-wrap">
+              <table class="admin-table admin-table--compact">
+                <thead>
+                  <tr>
+                    <th>Product</th>
+                    <th>Author</th>
+                    <th>Rating</th>
+                    <th>Review</th>
+                    <th>Date</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="admin-reviews-body"></tbody>
+              </table>
+            </div>
+          </details>
+        </section>
+
+        <section class="admin-card admin-users-card">
+          <details class="admin-collapse" id="users-collapse" open>
+            <summary>User Profiles</summary>
+            <div class="admin-table-wrap">
+              <table class="admin-table admin-table--compact">
+                <thead>
+                  <tr>
+                    <th>Location</th>
+                    <th>Name</th>
+                    <th>Phone</th>
+                    <th>Age</th>
+                  </tr>
+                </thead>
+                <tbody id="admin-users-body"></tbody>
+              </table>
+            </div>
+          </details>
+        </section>
+
+        <section class="admin-card admin-inquiries-card">
+          <details class="admin-collapse" id="inquiries-collapse">
+            <summary>Customer Inquiries</summary>
+            <p class="admin-note">Reply opens your email client with the user's email pre-filled.</p>
+            <div class="admin-table-wrap">
+              <table class="admin-table admin-table--compact">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>Subject</th>
+                    <th>Message</th>
+                    <th>Created</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="admin-inquiries-body"></tbody>
+              </table>
+            </div>
+          </details>
+        </section>
+
+        <section class="admin-card admin-marketing-card">
+          <details class="admin-collapse" id="phone-marketing-collapse">
+            <summary>Phone Marketing</summary>
+            <form id="phone-campaign-form" class="admin-form" novalidate>
+              <label>Phone message<input name="message" placeholder="Hi! We have an offer for you..." required /></label>
+              <div class="admin-actions-row">
+                <button type="submit" class="admin-btn">Send to all users</button>
+              </div>
+              <p id="phone-campaign-msg" class="admin-msg" hidden></p>
+            </form>
+            <div class="admin-table-wrap">
+              <table class="admin-table admin-table--compact">
+                <thead>
+                  <tr>
+                    <th>Sent at</th>
+                    <th>Message</th>
+                    <th>Total users</th>
+                    <th>Phone users</th>
+                  </tr>
+                </thead>
+                <tbody id="phone-campaign-history-body"></tbody>
+              </table>
+            </div>
+          </details>
+        </section>
+
+        <section class="admin-card admin-marketing-card">
+          <details class="admin-collapse" id="email-marketing-collapse">
+            <summary>Email Marketing</summary>
+            <form id="email-campaign-form" class="admin-form" novalidate>
+              <label>Campaign subject<input name="subject" placeholder="Spring Decor Launch" required /></label>
+              <label>Email body<textarea name="body" rows="5" placeholder="Write your campaign email..."></textarea></label>
+              <div class="admin-actions-row">
+                <button type="submit" class="admin-btn">Send to all users</button>
+              </div>
+              <p id="email-campaign-msg" class="admin-msg" hidden></p>
+            </form>
+            <div class="admin-table-wrap">
+              <table class="admin-table admin-table--compact">
+                <thead>
+                  <tr>
+                    <th>Sent at</th>
+                    <th>Subject</th>
+                    <th>Total users</th>
+                    <th>Email users</th>
+                  </tr>
+                </thead>
+                <tbody id="campaign-history-body"></tbody>
+              </table>
+            </div>
+          </details>
+        </section>
+
+        <section class="admin-card admin-inventory-card">
+          <h2>Products & Inventory</h2>
+          <div class="admin-table-wrap">
+            <table class="admin-table">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Name</th>
+                  <th>Price</th>
+                  <th>Inventory</th>
+                  <th>Offer</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="admin-products-body"></tbody>
+            </table>
+          </div>
+        </section>
+      </div>
+
+      <dialog id="admin-edit-modal" class="admin-modal">
+        <form id="admin-edit-form" class="admin-form admin-modal__content" method="dialog" novalidate>
+          <h2>Edit product</h2>
+          <input type="hidden" name="id" />
+          <label>Inventory<input name="inventory" type="number" min="0" /></label>
+          <label>Name<input name="name" required /></label>
+          <label>Price<input name="price" required /></label>
+          <label>Primary image URL/path<input name="img" /></label>
+          <label>More image URLs (one per line)<textarea name="imgs" rows="3"></textarea></label>
+          <label>Or upload images<input name="imgFiles" type="file" accept="image/*" multiple /></label>
+          <label>Primary image number (from merged list)<input name="primaryImageIndex" type="number" min="1" value="1" /></label>
+          <label>Short description<textarea name="desc" rows="2"></textarea></label>
+          <label>Product details<textarea name="detailLong" rows="4"></textarea></label>
+          <label>What's included (one line per item)<textarea name="included" rows="4"></textarea></label>
+          <label>Material & build<textarea name="material" rows="3"></textarea></label>
+          <div class="admin-actions-row">
+            <button type="button" class="admin-btn admin-btn--ghost" id="admin-edit-cancel">Cancel</button>
+            <button type="submit" class="admin-btn">Save changes</button>
+          </div>
+        </form>
+      </dialog>
+
+      <dialog id="admin-contacts-modal" class="admin-modal">
+        <section class="admin-modal__content">
+          <h2>User Contacts (Email / Phone)</h2>
+          <div class="admin-table-wrap">
+            <table class="admin-table">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Method</th>
+                  <th>Identity</th>
+                  <th>Recorded</th>
+                </tr>
+              </thead>
+              <tbody id="admin-contacts-body"></tbody>
+            </table>
+          </div>
+          <div class="admin-actions-row">
+            <button type="button" class="admin-btn admin-btn--ghost" id="export-contacts-csv">Export contacts CSV</button>
+            <button type="button" class="admin-btn admin-btn--ghost" id="close-contacts-btn">Close</button>
+          </div>
+        </section>
+      </dialog>
+    </main>
+
+    <footer class="site-footer">
+      <div>
+        <p>Decor Aeroponic</p>
+        <small>Eco decor for modern homes.</small>
+      </div>
+      <div class="footer-links">
+        <span>Quick Links</span>
+        <a href="./index.html">Home</a>
+        <a href="./all-products.html">Products</a>
+        <a href="./contact.html">Contact</a>
+        <a href="./cart.html">Cart</a>
+      </div>
+    </footer>
+
+    <script src="./catalog.js"></script>
+    <script src="./cart.js?v=5"></script>
+    <script src="./auth.js?v=12"></script>
+    <script src="./admin.js?v=10"></script>
+  </body>
+</html>

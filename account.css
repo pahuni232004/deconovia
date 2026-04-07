@@ -1,0 +1,268 @@
+.account-body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.account-page {
+  flex: 1 0 auto;
+  width: min(80vw, 1400px);
+  max-width: none;
+}
+
+.account-shell,
+.account-card {
+  border: 1px solid var(--line, rgba(255, 255, 255, 0.16));
+  border-radius: 24px;
+  background: linear-gradient(
+    165deg,
+    rgba(255, 255, 255, 0.08) 0%,
+    rgba(255, 255, 255, 0.03) 100%
+  );
+  backdrop-filter: blur(12px);
+  padding: 1.4rem 1.25rem;
+}
+
+.account-shell {
+  display: grid;
+  gap: 1rem;
+  align-items: stretch;
+  overflow: visible; /* allow the plant image to visually extend outside */
+  margin-top: 150px;
+}
+
+.account-visual {
+  border-radius: 18px;
+  background: transparent;
+  border: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  overflow: visible;
+  margin: -0.9rem -0.6rem -0.6rem -0.9rem;
+}
+
+.account-visual img {
+  width: min(100%, 420px);
+  max-height: 62vh;
+  object-fit: contain;
+  filter: drop-shadow(0 18px 28px rgba(0, 0, 0, 0.35));
+  transform: translate(-12px, -16px) scale(1.08);
+}
+
+.account-auth {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  justify-self: center;
+  align-self: center;
+  width: min(100%, 352px);
+  text-align: center;
+}
+
+.account-auth__title {
+  margin: 0 0 0.3rem;
+  font-family: "Playfair Display", serif;
+  font-size: clamp(1.5rem, 2.6vw, 2.2rem);
+}
+
+.account-card h1 {
+  margin: 0 0 0.3rem;
+  font-family: "Playfair Display", serif;
+  font-size: clamp(1.5rem, 2.8vw, 2rem);
+}
+
+.account-sub {
+  margin: 0 0 1rem;
+  color: var(--muted, #b2c6b8);
+}
+
+.auth-tabs {
+  display: inline-flex;
+  gap: 0.3rem;
+  margin: 0 auto 1rem;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.12) 0%,
+    rgba(255, 255, 255, 0.05) 100%
+  );
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 999px;
+  padding: 0.2rem 0.24rem;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.24),
+    0 8px 24px rgba(0, 0, 0, 0.2);
+}
+
+.auth-tab {
+  border: 1px solid transparent;
+  background: transparent;
+  color: #c9d8cc;
+  border-radius: 999px;
+  padding: 0.34rem 0.72rem;
+  font-family: inherit;
+  cursor: pointer;
+  font-size: 0.9rem;
+  line-height: 1.1;
+  font-weight: 600;
+  transition: background-color 0.18s ease, color 0.18s ease, border-color 0.18s ease, transform 0.18s ease;
+}
+
+.auth-tab:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: #e8f2ec;
+}
+
+.auth-tab:focus-visible {
+  outline: none;
+  border-color: rgba(155, 221, 112, 0.65);
+  box-shadow: 0 0 0 2px rgba(155, 221, 112, 0.25);
+}
+
+.auth-tab.is-active {
+  background: linear-gradient(135deg, rgba(155, 221, 112, 0.36) 0%, rgba(82, 166, 109, 0.4) 100%);
+  border-color: rgba(155, 221, 112, 0.55);
+  color: #f4fff8;
+  box-shadow: 0 6px 14px rgba(43, 113, 68, 0.35);
+  transform: translateY(-1px);
+}
+
+.auth-form {
+  display: grid;
+  gap: 0.35rem;
+}
+
+.auth-panel.is-hidden {
+  display: none;
+}
+
+.auth-form.is-hidden {
+  display: none;
+}
+
+.auth-actions-inline {
+  display: flex;
+  gap: 0.4rem;
+  margin: 0.15rem 0 0.35rem;
+}
+
+.auth-form label {
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--muted, #b2c6b8);
+  text-align: left;
+  justify-self: start;
+}
+
+.auth-form input {
+  width: 100%;
+  padding: 0.52rem 0.82rem;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  background: rgba(0, 0, 0, 0.28);
+  color: var(--text, #f4f7ef);
+  font-family: inherit;
+  margin-bottom: 0.55rem;
+  font-size: 0.96rem;
+}
+
+.auth-form input[type="password"] {
+  letter-spacing: 0.08em;
+}
+
+.auth-btn {
+  border: 1px solid #2f7a4a;
+  background: rgba(10, 35, 24, 0.75);
+  color: #bfe7ca;
+  border-radius: 999px;
+  padding: 0.48rem 0.95rem;
+  font-family: inherit;
+  font-weight: 700;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.96rem;
+}
+
+.auth-btn--ghost {
+  border-color: rgba(255, 255, 255, 0.18);
+  background: rgba(0, 0, 0, 0.2);
+  color: var(--muted, #b2c6b8);
+}
+
+.auth-error {
+  margin: 0.8rem 0 0;
+  color: #ffb7b7;
+}
+
+.account-info {
+  margin-top: 1rem;
+  display: grid;
+  gap: 0.6rem;
+}
+
+.account-info p {
+  margin: 0;
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.account-info span {
+  color: var(--muted, #b2c6b8);
+}
+
+.account-actions {
+  margin-top: 1.2rem;
+  display: flex;
+  gap: 0.7rem;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 940px) {
+  .account-page {
+    width: min(94vw, 560px);
+  }
+
+  .account-shell,
+  .account-card {
+    padding: 1rem 0.9rem;
+    border-radius: 18px;
+  }
+
+  .account-shell {
+    margin-top: 1.2rem;
+    grid-template-columns: 1fr;
+    gap: 0.7rem;
+  }
+
+  .account-visual {
+    display: none;
+  }
+
+  .account-auth {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+@media (min-width: 941px) {
+  .account-page {
+    width: min(80vw, 1500px);
+  }
+
+  .account-shell,
+  .account-card {
+    padding: 1.7rem 1.7rem;
+  }
+
+  .account-shell {
+    grid-template-columns: minmax(300px, 1fr) minmax(360px, 1.05fr);
+    gap: 1.2rem;
+  }
+}

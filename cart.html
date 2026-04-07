@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Decor Aeroponic | Cart</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Anton&family=Playfair+Display:wght@500;600&family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./site-shared.css" />
+    <link rel="stylesheet" href="./styles.css?v=4" />
+    <link rel="stylesheet" href="./cart.css?v=3" />
+  </head>
+  <body class="cart-body">
+    <div class="bg-aurora" aria-hidden="true"></div>
+    <header class="top-nav">
+      <a class="logo" href="./index.html">Decor Aeroponic</a>
+      <button
+        class="nav-toggle"
+        type="button"
+        aria-label="Toggle navigation menu"
+        aria-expanded="false"
+        aria-controls="site-nav"
+      >
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <nav id="site-nav">
+        <a href="./all-products.html">Products</a>
+        <a href="./know-the-product.html">Know the Product</a>
+        <a href="./cart.html" class="cart-nav-link active" aria-current="page"
+          >Cart <span class="cart-badge" data-cart-count hidden aria-label="Cart is empty"></span
+        ></a>
+        <a href="./account.html" class="account-nav-link" data-account-link
+          ><span class="account-icon" data-account-avatar aria-hidden="true">A</span
+          ><span class="account-nav-text" data-account-name>Account</span></a
+        >
+      </nav>
+    </header>
+
+    <main class="page-shell cart-page cart-page--bag">
+      <h1 class="cart-page__title">Your cart</h1>
+
+      <div class="cart-layout">
+        <div class="cart-panel cart-panel--bag">
+          <div class="cart-table-wrap">
+            <table class="cart-table">
+              <thead>
+                <tr>
+                  <th scope="col">Product</th>
+                  <th scope="col">Qty</th>
+                  <th scope="col">Line</th>
+                  <th scope="col"><span class="visually-hidden">Remove</span></th>
+                </tr>
+              </thead>
+              <tbody id="cart-lines-body"></tbody>
+            </table>
+          </div>
+
+          <div id="cart-empty" class="cart-empty" hidden>
+            <p>Your cart is empty.</p>
+            <a href="./all-products.html">Browse products</a>
+          </div>
+
+          <div class="cart-summary-row">
+            <div class="cart-actions">
+              <button type="button" class="cart-btn cart-btn--ghost" id="cart-clear-btn">Clear cart</button>
+              <a class="cart-btn cart-btn--ghost" href="./all-products.html">Continue shopping</a>
+            </div>
+            <div>
+              <span class="visually-hidden">Subtotal</span>
+              <strong id="cart-subtotal">Rs. 0/-</strong>
+            </div>
+          </div>
+
+          <div class="cart-checkout-wrap">
+            <p class="cart-note" style="margin-top: 0">Shipping and taxes are estimated at checkout.</p>
+            <a class="cart-btn cart-btn--primary cart-btn--checkout" href="./checkout.html" id="cart-checkout-btn">
+              <span>Proceed to checkout</span>
+              <span aria-hidden="true" class="cart-btn__arrow">→</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      <div>
+        <p>Decor Aeroponic</p>
+        <small>Eco decor for modern homes.</small>
+      </div>
+      <div class="footer-links">
+        <span>Quick Links</span>
+        <a href="./index.html">Home</a>
+        <a href="./all-products.html">Products</a>
+        <a href="./contact.html">Contact</a>
+        <a href="./cart.html">Cart</a>
+      </div>
+    </footer>
+
+    <script src="./catalog.js"></script>
+    <script src="./cart.js?v=5"></script>
+    <script src="./auth.js?v=12"></script>
+  </body>
+</html>
