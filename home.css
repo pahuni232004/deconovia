@@ -984,7 +984,7 @@ body::after {
 
 .hero-float {
   position: absolute;
-  left: calc(50% + 55px);
+  left: calc(50% + 200px);
   top: calc(18vh - 45px);
   width: min(460px, 45vw);
   transform: translate3d(-50%, 0, 0) rotate(-8deg);
@@ -1005,9 +1005,10 @@ body::after {
 
 .star-row {
   display: grid;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 1.35rem;
   align-items: end;
+  justify-items: center;
 }
 
 .star-product {
@@ -1357,7 +1358,7 @@ body::after {
 
   .panel-4 {
     margin-top: 0;
-    padding-bottom: 7.5rem;
+    padding-bottom: 4rem;
   }
 
   .panel-4 .panel-grid {
@@ -1382,6 +1383,7 @@ body::after {
   .panel-5 {
     margin-top: 0;
     padding-top: 2rem;
+    min-height: auto;
   }
 
   .site-footer {
@@ -1393,7 +1395,7 @@ body::after {
   }
 
   .star-row {
-    grid-template-columns: repeat(5, minmax(160px, 1fr));
+    grid-template-columns: repeat(4, minmax(140px, 1fr));
     gap: 0.9rem;
     overflow-x: auto;
     overflow-y: hidden;
@@ -1403,7 +1405,7 @@ body::after {
   }
 
   .star-product {
-    min-width: 160px;
+    min-width: 140px;
     scroll-snap-align: start;
   }
 
@@ -1440,10 +1442,6 @@ body::after {
 }
 
 @media (max-width: 600px) {
-  .panel-5 {
-    margin-top: 0;
-  }
-
   .site-footer {
     margin-top: 0;
   }
@@ -1473,6 +1471,11 @@ body::after {
   .panel {
     min-height: 88vh;
     padding: 4.5rem 1rem 1.2rem;
+  }
+
+  .panel-5 {
+    margin-top: 0;
+    min-height: auto;
   }
 
   .hero-float {
@@ -1565,12 +1568,12 @@ body::after {
   }
 
   .star-row {
-    grid-template-columns: repeat(5, minmax(145px, 1fr));
+    grid-template-columns: repeat(4, minmax(130px, 1fr));
     gap: 0.75rem;
   }
 
   .star-product {
-    min-width: 145px;
+    min-width: 130px;
   }
 
   .star-product img {
@@ -1587,7 +1590,7 @@ body::after {
   }
 
   .panel-4 {
-    padding-bottom: 6.5rem;
+    padding-bottom: 3.5rem;
   }
 
   .panel-4-seal {
@@ -1677,23 +1680,36 @@ body::after {
   }
 }
 
-/* ── Hero background icon watermark ──────────────────── */
+/* ── Hero background icon watermarks ─────────────────── */
 .hero-bg-icon {
   position: absolute;
-  right: 3%;
-  top: 50%;
-  transform: translateY(-46%);
-  width: clamp(240px, 36vw, 520px);
-  opacity: 0.055;
+  width: clamp(300px, 42vw, 580px);
+  opacity: 0.09;
   pointer-events: none;
   z-index: 0;
   user-select: none;
 }
 
+.hero-bg-icon-tr {
+  top: -28%;
+  right: -14%;
+}
+
+.hero-bg-icon-bl {
+  bottom: -28%;
+  left: -12%;
+}
+
 @media (max-width: 980px) {
   .hero-bg-icon {
-    width: clamp(180px, 52vw, 340px);
-    right: -4%;
-    top: 42%;
+    width: clamp(200px, 55vw, 360px);
+  }
+  .hero-bg-icon-tr {
+    top: -18%;
+    right: -16%;
+  }
+  .hero-bg-icon-bl {
+    bottom: -18%;
+    left: -14%;
   }
 }
