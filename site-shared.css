@@ -220,7 +220,8 @@
   }
 
   .footer-links {
-    align-items: center;
+    align-items: flex-start;
+    padding-left: 1rem;
   }
 
   .footer-bottom {

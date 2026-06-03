@@ -27,10 +27,7 @@ const animateHero = () => {
   const initialTop = window.innerHeight * (HERO_BASE_TOP_VH / 100) + HERO_BASE_TOP_PX_ADJUST;
   const initialLeft = frameRect.width / 2 + HERO_BASE_LEFT_OFFSET;
   const heroHeight = heroFloat.offsetHeight || heroFloat.getBoundingClientRect().height;
-  const mergeTargetImageSelector =
-    window.innerWidth <= MOBILE_BREAKPOINT
-      ? ".star-product:nth-child(3) img"
-      : ".star-product:nth-last-child(2) img";
+  const mergeTargetImageSelector = ".star-product:nth-child(1) img";
   const mergeTargetImage = starProducts.querySelector(mergeTargetImageSelector);
   const rightMostRect = mergeTargetImage
     ? mergeTargetImage.getBoundingClientRect()
@@ -77,7 +74,7 @@ const animateHero = () => {
   const travelY = progress * Math.max(targetTranslateY, 0);
   const straightenEase = Math.pow(panelTwoProgress, 1.25);
   let rotation = -8 * (1 - straightenEase);
-  const midScale = 0.86;
+  const midScale = 0.92;
   const secondSectionScale = 1 - (1 - midScale) * straightenEase;
   const shrinkStart = 0.82;
   const shrinkProgress = clamp((progress - shrinkStart) / (1 - shrinkStart), 0, 1);
@@ -150,11 +147,11 @@ const animateHero = () => {
     const panelFourLockStart = panelThreeEnd;
     if (progress >= panelFourLockStart) {
       // Mobile lock target tuned to match desired section-4 composition.
-      const desiredPhoneCenterX = frameRect.width * 0.79 - 300;
-      const panelFourTargetCenterX = isTargetPhone ? desiredPhoneCenterX : frameRect.width * 0.84 + 130;
+      const desiredPhoneCenterX = frameRect.width * 0.88 - 200;
+      const panelFourTargetCenterX = isTargetPhone ? desiredPhoneCenterX : frameRect.width * 0.78 + 90;
       const panelFourTargetCenterY = isTargetPhone
-        ? panelFour.offsetTop + panelFour.offsetHeight * 0.76 - 2050
-        : panelFour.offsetTop + panelFour.offsetHeight * 0.74 - 430;
+        ? panelFour.offsetTop + panelFour.offsetHeight * 0.55 - 1700
+        : panelFour.offsetTop + panelFour.offsetHeight * 0.55 - 280;
       const lockTargetX = panelFourTargetCenterX - initialLeft;
       const lockTargetY = panelFourTargetCenterY - (initialTop + heroHeight / 2);
       const lockedScale = Math.max(scale, 0.72);

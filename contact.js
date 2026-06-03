@@ -1,5 +1,5 @@
 /* ── Replace the value below with your deployed Apps Script URL ── */
-const SHEET_URL = 'PASTE_YOUR_APPS_SCRIPT_URL_HERE';
+const SHEET_URL = 'https://script.google.com/macros/s/AKfycbwa-MsT4Lo2DLgL0voOQNw0F5TZmQ9u9lY4rUMGuKRQPxgFnRk_RFXRwc_K6_bb_9gNGw/exec';
 
 document.addEventListener('DOMContentLoaded', () => {
 
