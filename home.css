@@ -986,7 +986,7 @@ body::after {
   position: absolute;
   left: calc(50% + 55px);
   top: calc(18vh - 45px);
-  width: min(315px, 34vw);
+  width: min(380px, 40vw);
   transform: translate3d(-50%, 0, 0) rotate(-8deg);
   transform-origin: center;
   z-index: 24;

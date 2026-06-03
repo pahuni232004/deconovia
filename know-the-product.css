@@ -360,6 +360,7 @@
   .cat-section {
     flex-direction: column;
     min-height: auto;
+    overflow: visible;
   }
 
   .cat-section--alt {
@@ -370,13 +371,17 @@
     width: 100%;
     position: relative;
     top: auto;
-    height: clamp(240px, 40vw, 360px);
+    height: clamp(380px, 60vw, 540px);
     align-self: auto;
+    overflow: visible;
+    padding: 1.5rem 0;
   }
 
   .cat-product-img {
-    width: min(60%, 280px);
-    max-height: 32vh;
+    height: calc(100% - 3rem);
+    width: auto;
+    max-width: min(65%, 280px);
+    max-height: none;
     animation: catFloat 5s ease-in-out infinite;
   }
 
@@ -429,6 +434,14 @@
 
   .cat-tabs::-webkit-scrollbar {
     display: none;
+  }
+
+  .cat-visual-col {
+    height: clamp(320px, 75vw, 460px);
+  }
+
+  .cat-product-img {
+    max-width: min(55%, 220px);
   }
 
   .cat-info-col {

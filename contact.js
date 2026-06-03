@@ -1,61 +1,56 @@
-const API_BASE = "";
+/* ── Replace the value below with your deployed Apps Script URL ── */
+const SHEET_URL = 'PASTE_YOUR_APPS_SCRIPT_URL_HERE';
 
-async function apiFetch(path, options = {}) {
-  const res = await fetch(`${API_BASE}${path}`, {
-    ...options,
-    credentials: "include",
-    headers: {
-      "Content-Type": "application/json",
-      ...(options.headers || {}),
-    },
-  });
-  let data = null;
-  try {
-    data = await res.json();
-  } catch {
-    /* ignore */
+document.addEventListener('DOMContentLoaded', () => {
+
+  /* ── Mobile nav toggle ──────────────────────────────────────── */
+  const toggle = document.querySelector('.nav-toggle');
+  const topNav = document.querySelector('.top-nav');
+  if (toggle && topNav) {
+    toggle.addEventListener('click', () => {
+      const open = topNav.classList.toggle('menu-open');
+      toggle.setAttribute('aria-expanded', String(open));
+    });
   }
-  if (!res.ok) {
-    const msg = data?.error || `Request failed (${res.status})`;
-    throw new Error(msg);
-  }
-  return data;
-}
 
-function showMessage(messageEl, text, isError = false) {
-  if (!messageEl) return;
-  messageEl.hidden = false;
-  messageEl.textContent = text;
-  messageEl.style.color = isError ? "#ffd6d6" : "#bff6cb";
-}
+  /* ── Contact form → Google Sheet ───────────────────────────── */
+  const form   = document.getElementById('contact-inquiry-form');
+  const msgEl  = document.getElementById('contact-form-msg');
+  if (!form || !msgEl) return;
 
-document.addEventListener("DOMContentLoaded", () => {
-  const form = document.getElementById("contact-inquiry-form");
-  const messageEl = document.getElementById("contact-form-msg");
-  if (!form || !messageEl) return;
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
 
-  form.addEventListener("submit", async (event) => {
-    event.preventDefault();
-    const formData = new FormData(form);
-    const name = String(formData.get("name") || "").trim();
-    const email = String(formData.get("email") || "").trim();
-    const phone = String(formData.get("phone") || "").trim();
-    const subject = String(formData.get("subject") || "").trim();
-    const message = String(formData.get("message") || "").trim();
-
-    if (!name || !email || !phone || !subject || !message) {
-      showMessage(messageEl, "Please complete all fields before submitting.", true);
+    const data = Object.fromEntries(new FormData(form));
+    const required = ['name', 'email', 'phone', 'subject', 'message'];
+    if (required.some(k => !data[k]?.trim())) {
+      showMsg(msgEl, 'Please complete all fields before submitting.', true);
       return;
     }
+
+    const btn = form.querySelector('button[type="submit"]');
+    if (btn) btn.disabled = true;
+
     try {
-      await apiFetch("/api/contact/inquiries", {
-        method: "POST",
-        body: JSON.stringify({ name, email, phone, subject, message }),
+      /* no-cors lets the request fire without triggering a CORS error.
+         We can't read the response, but the Apps Script receives it. */
+      await fetch(SHEET_URL, {
+        method: 'POST',
+        body: new URLSearchParams(data),
+        mode: 'no-cors',
       });
-      showMessage(messageEl, "Thank you. Your inquiry has been submitted successfully.");
+      showMsg(msgEl, 'Thank you! Your inquiry has been submitted successfully.', false);
       form.reset();
-    } catch (err) {
-      showMessage(messageEl, err?.message || "Failed to submit inquiry.", true);
+    } catch {
+      showMsg(msgEl, 'Something went wrong. Please try again or contact us directly.', true);
+    } finally {
+      if (btn) btn.disabled = false;
     }
   });
 });
+
+function showMsg(el, text, isError) {
+  el.hidden = false;
+  el.textContent = text;
+  el.style.color = isError ? '#b83232' : '#3d6b2e';
+}
