@@ -1,0 +1,405 @@
+/* What We Sell ─ Split-Heading Image Page */
+
+*, *::before, *::after { box-sizing: border-box; }
+
+.sell-body {
+  margin: 0;
+  background: #f5ede0;
+  color: #3d2b1f;
+  font-family: "Raleway", sans-serif;
+  overflow-x: hidden;
+}
+
+/* ── Hero ──────────────────────────────────────────────────── */
+.sell-hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 6rem 5% 4rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.sell-hero-kicker {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #8b5a2b;
+  margin: 0 0 1.2rem;
+  display: block;
+}
+
+.sell-hero-title {
+  font-family: "Golden", serif;
+  font-size: clamp(4rem, 14vw, 13rem);
+  color: #3d2b1f;
+  line-height: 0.88;
+  margin: 0 0 2rem;
+}
+
+.sell-hero-sub {
+  font-size: clamp(1rem, 2vw, 1.2rem);
+  color: #6e4e3a;
+  max-width: 50ch;
+  line-height: 1.65;
+  margin: 0 auto 3rem;
+}
+
+.sell-hero-img-wrap {
+  width: min(520px, 80%);
+  position: relative;
+}
+
+.sell-hero-img {
+  width: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0 28px 64px rgba(101,67,33,0.22));
+  animation: heroFloat 5s ease-in-out infinite;
+}
+
+@keyframes heroFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-20px); }
+}
+
+/* ── Section dividers ──────────────────────────────────────── */
+.sell-chapter {
+  padding: 5rem 6% 1.5rem;
+  text-align: center;
+}
+
+.sell-chapter-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #8b5a2b;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.sell-chapter-title {
+  font-family: "Golden", serif;
+  font-size: clamp(2rem, 5vw, 4rem);
+  color: #3d2b1f;
+  margin: 0;
+  line-height: 1.05;
+}
+
+/* ── Split Block ───────────────────────────────────────────── */
+.split-block {
+  position: relative;
+  padding: 0 0 5rem;
+  overflow: hidden;
+}
+
+/* Alternate: above-text aligned right */
+.split-block--alt .sb-above { text-align: right; }
+.split-block--alt .sb-on    { right: auto; left: 6%; text-align: left; }
+.split-block--alt .sb-stat  { right: auto; left: 6%; }
+.split-block--alt .sb-sub   { margin-left: auto; text-align: right; }
+
+.sb-above {
+  font-family: "Golden", serif;
+  font-size: clamp(3.5rem, 10vw, 10rem);
+  color: #3d2b1f;
+  line-height: 0.88;
+  margin: 0;
+  padding: 2.5rem 6% 0;
+  display: block;
+  position: relative;
+  z-index: 2;
+}
+
+.sb-image-wrap {
+  position: relative;
+  width: 100%;
+  height: clamp(300px, 62vh, 700px);
+  overflow: hidden;
+  margin-top: -0.12em; /* slight overlap so text kisses image edge */
+}
+
+.sb-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  transition: transform 0.6s ease;
+}
+
+.split-block:hover .sb-img { transform: scale(1.025); }
+
+/* Overlay gradient for readability of on-image text */
+.sb-image-wrap::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(61,43,31,0.08) 0%,
+    transparent 40%,
+    rgba(61,43,31,0.35) 100%
+  );
+  pointer-events: none;
+}
+
+.sb-on {
+  position: absolute;
+  bottom: 1.2rem;
+  right: 6%;
+  font-family: "Golden", serif;
+  font-size: clamp(3rem, 9vw, 9rem);
+  color: rgba(255,255,255,0.93);
+  margin: 0;
+  line-height: 0.88;
+  text-align: right;
+  text-shadow: 0 3px 24px rgba(0,0,0,0.45);
+  z-index: 2;
+}
+
+.sb-stat {
+  position: absolute;
+  top: 1.5rem;
+  right: 6%;
+  font-family: "Golden", serif;
+  font-size: clamp(1.5rem, 3.5vw, 3rem);
+  color: rgba(232,196,154,0.95);
+  text-shadow: 0 2px 12px rgba(0,0,0,0.4);
+  z-index: 2;
+  background: rgba(42,28,18,0.55);
+  padding: 0.3em 0.7em;
+  border-radius: 999px;
+  backdrop-filter: blur(6px);
+  line-height: 1;
+}
+
+.sb-sub {
+  font-size: 0.95rem;
+  color: #6e4e3a;
+  padding: 1.4rem 6% 0;
+  margin: 0;
+  max-width: 52ch;
+  line-height: 1.7;
+}
+
+/* placeholder for missing images */
+.sb-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #e8d8c4, #d4b896);
+}
+
+.sb-placeholder span {
+  font-family: "Golden", serif;
+  font-size: 1.2rem;
+  color: rgba(139,90,43,0.4);
+  letter-spacing: 0.1em;
+}
+
+/* ── Use case intro strip ──────────────────────────────────── */
+.sell-use-intro {
+  background: #3d2b1f;
+  padding: 5rem 6%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  align-items: center;
+}
+
+.sui-text h2 {
+  font-family: "Golden", serif;
+  font-size: clamp(2rem, 5vw, 4rem);
+  color: #e8c49a;
+  margin: 0 0 1rem;
+  line-height: 1.05;
+}
+
+.sui-text p {
+  color: rgba(245,237,224,0.65);
+  font-size: 1rem;
+  line-height: 1.7;
+  margin: 0;
+}
+
+.sui-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  justify-content: flex-end;
+}
+
+.sui-tag {
+  background: rgba(232,196,154,0.12);
+  border: 1px solid rgba(232,196,154,0.25);
+  color: #e8c49a;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.5rem 1.1rem;
+  border-radius: 2rem;
+}
+
+/* ── CTA Banner ────────────────────────────────────────────── */
+.sell-cta {
+  background: #f5ede0;
+  padding: 5rem 6%;
+  text-align: center;
+  border-top: 1px solid rgba(101,67,33,0.12);
+}
+
+.sell-cta h2 {
+  font-family: "Golden", serif;
+  font-size: clamp(1.8rem, 4vw, 3.2rem);
+  color: #3d2b1f;
+  margin: 0 0 1rem;
+}
+
+.sell-cta p {
+  color: #6e4e3a;
+  font-size: 0.95rem;
+  max-width: 50ch;
+  margin: 0 auto 2rem;
+  line-height: 1.65;
+}
+
+.sell-cta-link {
+  display: inline-block;
+  background: #8b5a2b;
+  color: #f5ede0;
+  font-family: "Raleway", sans-serif;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 0.85rem 2.2rem;
+  border-radius: 2rem;
+  transition: background 0.2s;
+}
+
+.sell-cta-link:hover { background: #6e4220; }
+
+/* ── Mobile ────────────────────────────────────────────────── */
+@media (max-width: 860px) {
+  .sell-hero {
+    min-height: 80vh;
+    padding: 5rem 5% 3rem;
+  }
+
+  .sell-hero-title {
+    font-size: clamp(3rem, 14vw, 7rem);
+  }
+
+  .sell-hero-img-wrap {
+    width: min(380px, 88%);
+  }
+
+  .sell-chapter {
+    padding: 3.5rem 5% 1rem;
+  }
+
+  .sb-above {
+    font-size: clamp(2.8rem, 12vw, 7rem);
+    padding: 2rem 5% 0;
+  }
+
+  .sb-on {
+    font-size: clamp(2.4rem, 10vw, 6rem);
+  }
+
+  .sb-image-wrap {
+    height: clamp(260px, 52vw, 520px);
+  }
+
+  .sb-sub {
+    padding: 1.2rem 5% 0;
+  }
+
+  .sell-use-intro {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    padding: 3.5rem 5%;
+  }
+
+  .sui-tags { justify-content: flex-start; }
+
+  .sell-cta {
+    padding: 3.5rem 5%;
+  }
+}
+
+@media (max-width: 480px) {
+  .sell-hero {
+    min-height: 70vh;
+    padding: 4rem 4% 2.5rem;
+  }
+
+  .sell-hero-title {
+    font-size: clamp(2.5rem, 16vw, 5rem);
+  }
+
+  .sell-hero-sub {
+    font-size: 0.9rem;
+  }
+
+  .sb-above {
+    font-size: clamp(2.2rem, 14vw, 5rem);
+    padding: 1.5rem 4% 0;
+  }
+
+  .sb-on {
+    font-size: clamp(2rem, 12vw, 4.5rem);
+    bottom: 0.8rem;
+    right: 4%;
+  }
+
+  .split-block--alt .sb-on {
+    left: 4%;
+  }
+
+  .sb-stat {
+    font-size: clamp(0.9rem, 4.5vw, 1.4rem);
+    top: 1rem;
+    right: 4%;
+    padding: 0.25em 0.6em;
+  }
+
+  .split-block--alt .sb-stat {
+    left: 4%;
+    right: auto;
+  }
+
+  .sb-sub {
+    padding: 1rem 4% 0;
+    font-size: 0.88rem;
+  }
+
+  .sell-chapter {
+    padding: 2.5rem 4% 0.75rem;
+  }
+
+  .sell-chapter-title {
+    font-size: clamp(1.6rem, 7vw, 2.5rem);
+  }
+
+  .sui-text h2 {
+    font-size: clamp(1.6rem, 6vw, 2.5rem);
+  }
+
+  .sell-cta h2 {
+    font-size: clamp(1.5rem, 6vw, 2.2rem);
+  }
+
+  .sell-cta {
+    padding: 3rem 4%;
+  }
+}

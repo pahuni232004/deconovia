@@ -1,186 +1,63 @@
-/**
- * Know the Product: 4 scroll steps (sun/moon), Section 5 flashlight → solid + Deconovia (scroll to advance).
- */
+/* Product Catalog — interactive behaviour */
 (function () {
-  const STEPS = [
-    { sunOpacity: 1, sunBrightness: 1.02, sunHalo: 0.92 },
-    { sunOpacity: 0.9, sunBrightness: 0.88, sunHalo: 0.62 },
-    { sunOpacity: 0.62, sunBrightness: 0.62, sunHalo: 0.32 },
-    { sunOpacity: 0.32, sunBrightness: 0.38, sunHalo: 0.1 },
-  ];
+  'use strict';
 
-  const torchSection = document.getElementById("know-torch-section");
-  const torchSolid = torchSection?.querySelector(".know-torch-solid");
-  const TORCH_ACTIVATE_DELAY_MS = 900;
-  let torchDominantSinceMs = 0;
-  const panels = Array.from(document.querySelectorAll(".know-panel[data-know-index]"));
-  if (!panels.length) return;
+  const sections = document.querySelectorAll('.cat-section');
+  const tabs     = document.querySelectorAll('.cat-tab');
+  const dots     = document.querySelectorAll('.cat-dot');
+  const header   = document.getElementById('cat-header') || document.querySelector('.top-nav');
 
-  function applyStep(step) {
-    const s = Math.max(0, Math.min(STEPS.length - 1, step));
-    const cfg = STEPS[s];
-    document.body.dataset.knowStep = String(s);
-    document.documentElement.style.setProperty("--know-sun-opacity", String(cfg.sunOpacity));
-    document.documentElement.style.setProperty("--know-sun-brightness", String(cfg.sunBrightness));
-    document.documentElement.style.setProperty("--know-sun-halo", String(cfg.sunHalo));
+  function scrollTo(id) {
+    const el = document.getElementById(id);
+    if (!el) return;
+    const offset = (header ? header.offsetHeight : 68) + 8;
+    window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - offset, behavior: 'smooth' });
   }
 
-  function visibleRatio(el) {
-    if (!el) return 0;
-    const r = el.getBoundingClientRect();
-    const vh = window.innerHeight || 1;
-    const top = Math.max(r.top, 0);
-    const bottom = Math.min(r.bottom, vh);
-    return Math.max(0, bottom - top) / vh;
+  tabs.forEach(t => t.addEventListener('click', () => scrollTo(t.dataset.target)));
+  dots.forEach(d => d.addEventListener('click', () => scrollTo(d.dataset.target)));
+
+  function setActive(id) {
+    tabs.forEach(t => { const on = t.dataset.target === id; t.classList.toggle('active', on); t.setAttribute('aria-selected', on); });
+    dots.forEach(d => d.classList.toggle('active', d.dataset.target === id));
   }
 
-  function isTorchDominant() {
-    return torchSection && visibleRatio(torchSection) > 0.48;
+  if ('IntersectionObserver' in window && sections.length) {
+    const sIO = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) setActive(e.target.id); });
+    }, { threshold: 0.4 });
+    sections.forEach(s => sIO.observe(s));
+
+    const rIO = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (!e.isIntersecting) return;
+        e.target.querySelectorAll('.cat-spec').forEach((el, i) => { el.style.transitionDelay = `${i * 0.06}s`; el.classList.add('visible'); });
+        e.target.querySelector('.cat-product-desc')?.classList.add('visible');
+        e.target.querySelector('.cat-tags')?.classList.add('visible');
+        rIO.unobserve(e.target);
+      });
+    }, { threshold: 0.12 });
+    sections.forEach(s => rIO.observe(s));
   }
 
-  function computeStep() {
-    const vh = window.innerHeight || 1;
-    // Use an upper trigger line so sky/sun colors react sooner during scroll.
-    const centerY = vh * 0.34;
-    let best = 0;
-    let bestDist = Infinity;
-    panels.forEach((panel, i) => {
-      const r = panel.getBoundingClientRect();
-      const mid = (r.top + r.bottom) / 2;
-      const d = Math.abs(mid - centerY);
-      if (d < bestDist) {
-        bestDist = d;
-        best = i;
-      }
+  sections.forEach(sec => {
+    const img = sec.querySelector('.cat-product-img');
+    if (!img) return;
+    sec.addEventListener('mouseenter', () => { img.style.animation = 'none'; });
+    sec.addEventListener('mouseleave', () => { img.style.animation = ''; img.style.transform = ''; });
+    sec.addEventListener('mousemove', e => {
+      const r = sec.getBoundingClientRect();
+      const dx = (e.clientX - r.left - r.width / 2) / (r.width / 2);
+      const dy = (e.clientY - r.top - r.height / 2) / (r.height / 2);
+      img.style.transform = `rotateX(${-dy * 7}deg) rotateY(${dx * 9}deg) scale(1.04)`;
     });
-    return best;
-  }
-
-  let ticking = false;
-  function onScrollOrResize() {
-    if (ticking) return;
-    ticking = true;
-    requestAnimationFrame(() => {
-      ticking = false;
-      if (isTorchDominant()) {
-        applyStep(3);
-        return;
-      }
-      applyStep(computeStep());
-    });
-  }
-
-  window.addEventListener("scroll", onScrollOrResize, { passive: true });
-  window.addEventListener("resize", onScrollOrResize);
-  applyStep(0);
-  queueMicrotask(onScrollOrResize);
-
-  if (!torchSection) return;
-
-  function activateTorchSolid() {
-    if (torchSection.classList.contains("know-torch-solid-active")) return;
-    torchSection.classList.add("know-torch-solid-active");
-    if (torchSolid) {
-      torchSolid.removeAttribute("aria-hidden");
-      torchSolid.removeAttribute("inert");
-    }
-  }
-
-  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-  function canActivateTorchSolid() {
-    if (!document.body.classList.contains("know-torch-mode")) return false;
-    if (torchSection.classList.contains("know-torch-solid-active")) return false;
-    if (reduceMotion) return true;
-    if (!torchDominantSinceMs) return false;
-    return performance.now() - torchDominantSinceMs >= TORCH_ACTIVATE_DELAY_MS;
-  }
-
-  function setTorchPosition(clientX, clientY) {
-    if (torchSection.classList.contains("know-torch-solid-active")) return;
-    const r = torchSection.getBoundingClientRect();
-    torchSection.style.setProperty("--torch-x", `${clientX - r.left}px`);
-    torchSection.style.setProperty("--torch-y", `${clientY - r.top}px`);
-  }
-
-  function centerTorch() {
-    const r = torchSection.getBoundingClientRect();
-    setTorchPosition(r.left + r.width / 2, r.top + r.height / 2);
-  }
-
-  const torchIo = new IntersectionObserver(
-    (entries) => {
-      const e = entries[0];
-      if (!e) return;
-      const ratio = e.intersectionRatio;
-      e.target.classList.toggle("is-revealed", ratio > 0.12);
-      const dominant = ratio > 0.38;
-      document.body.classList.toggle("know-torch-mode", dominant);
-      if (dominant && !torchDominantSinceMs) {
-        torchDominantSinceMs = performance.now();
-      }
-      if (!dominant) {
-        torchDominantSinceMs = 0;
-      }
-      if (ratio > 0.12 && !torchSection.classList.contains("know-torch-solid-active")) centerTorch();
-    },
-    { threshold: [0, 0.08, 0.12, 0.25, 0.38, 0.55, 0.75, 1] }
-  );
-  torchIo.observe(torchSection);
-
-  torchSection.addEventListener(
-    "wheel",
-    (ev) => {
-      if (!canActivateTorchSolid()) return;
-      if (ev.deltaY > 6) activateTorchSolid();
-    },
-    { passive: true }
-  );
-
-  let touchY0 = null;
-  torchSection.addEventListener(
-    "touchstart",
-    (ev) => {
-      touchY0 = ev.touches[0] ? ev.touches[0].clientY : null;
-    },
-    { passive: true }
-  );
-  torchSection.addEventListener(
-    "touchmove",
-    (ev) => {
-      if (touchY0 == null || !ev.touches[0]) return;
-      if (!canActivateTorchSolid()) return;
-      const dy = touchY0 - ev.touches[0].clientY;
-      if (dy > 28) {
-        activateTorchSolid();
-        touchY0 = null;
-      }
-    },
-    { passive: true }
-  );
-
-  torchSection.addEventListener(
-    "pointermove",
-    (ev) => {
-      setTorchPosition(ev.clientX, ev.clientY);
-    },
-    { passive: true }
-  );
-
-  torchSection.addEventListener(
-    "pointerenter",
-    (ev) => {
-      setTorchPosition(ev.clientX, ev.clientY);
-    },
-    { passive: true }
-  );
-
-  window.addEventListener("resize", () => {
-    if (
-      torchSection.classList.contains("is-revealed") &&
-      !torchSection.classList.contains("know-torch-solid-active")
-    ) {
-      centerTorch();
-    }
   });
+
+  const toggle = document.querySelector('.nav-toggle');
+  const nav = document.querySelector('.top-nav');
+  if (toggle && nav) {
+    toggle.addEventListener('click', () => { const open = nav.classList.toggle('menu-open'); toggle.setAttribute('aria-expanded', open); });
+  }
+
+  if (location.hash) setTimeout(() => scrollTo(location.hash.slice(1)), 300);
 })();
