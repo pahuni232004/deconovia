@@ -345,14 +345,6 @@ body::after {
   z-index: 28;
 }
 
-.panel-3 {
-  z-index: 28;
-}
-
-.panel-4 {
-  z-index: 28;
-}
-
 .panel-2::before {
   content: "";
   position: absolute;
@@ -1032,6 +1024,10 @@ body::after {
   transform: translateY(-7.5px);
 }
 
+.star-product:nth-child(4):hover {
+  transform: none;
+}
+
 .star-product img {
   width: 100%;
   height: 264px;
@@ -1291,12 +1287,6 @@ body::after {
   .panel-2 {
     z-index: 35;
     background: rgba(237, 220, 200, 0.94);
-  }
-
-  .panel-3,
-  .panel-4 {
-    z-index: 35;
-    background: rgba(245, 237, 224, 0.96);
   }
 
   .panel-2 h2 {
