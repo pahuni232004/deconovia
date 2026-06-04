@@ -166,6 +166,10 @@ const animateHero = () => {
     scale = targetScale;
   }
 
+  // Fade out hero-float as it fully merges so the actual product card takes over
+  // (allows hover effects on Spira to work without dual-image artefact)
+  heroFloat.style.opacity = mergeProgress >= 0.92 ? String(Math.max(0, 1 - (mergeProgress - 0.92) / 0.08)) : '1';
+
   heroFloat.style.transform = `translate3d(calc(-50% + ${xShift}px), ${yShift}px, 0) rotate(${rotation}deg) scale(${scale})`;
 };
 
