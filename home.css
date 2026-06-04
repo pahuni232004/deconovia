@@ -342,6 +342,15 @@ body::after {
   background: rgba(237, 220, 200, 0.45);
   overflow: hidden;
   isolation: isolate;
+  z-index: 28;
+}
+
+.panel-3 {
+  z-index: 28;
+}
+
+.panel-4 {
+  z-index: 28;
 }
 
 .panel-2::before {
@@ -1282,6 +1291,12 @@ body::after {
   .panel-2 {
     z-index: 35;
     background: rgba(237, 220, 200, 0.94);
+  }
+
+  .panel-3,
+  .panel-4 {
+    z-index: 35;
+    background: rgba(245, 237, 224, 0.96);
   }
 
   .panel-2 h2 {
