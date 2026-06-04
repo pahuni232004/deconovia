@@ -124,12 +124,12 @@ body::after {
   font-weight: 700;
   padding: 0.5rem 0.8rem;
   border-radius: 4px;
-  background: linear-gradient(120deg, #c4853a, #8b5a2b);
+  background: #700519;
   color: #f5ede0;
 }
 
 .buy-btn.dark {
-  background: #8b5a2b;
+  background: #700519;
   color: #f5ede0;
 }
 
@@ -330,12 +330,12 @@ body::after {
   margin-top: 20px;
   border-radius: 999px;
   background: transparent;
-  border: 1px solid rgba(139, 90, 43, 0.5);
-  color: #8b5a2b;
+  border: 1px solid rgba(112, 5, 25, 0.5);
+  color: #700519;
   box-shadow:
-    0 0 0 1px rgba(139, 90, 43, 0.2) inset,
-    0 0 12px rgba(196, 133, 58, 0.2),
-    0 0 24px rgba(139, 90, 43, 0.12);
+    0 0 0 1px rgba(112, 5, 25, 0.2) inset,
+    0 0 12px rgba(112, 5, 25, 0.2),
+    0 0 24px rgba(112, 5, 25, 0.12);
 }
 
 .panel-2 {
@@ -962,12 +962,12 @@ body::after {
   line-height: 1;
   border-radius: 999px;
   background: transparent;
-  border: 1px solid rgba(139, 90, 43, 0.5);
-  color: #8b5a2b;
+  border: 1px solid rgba(112, 5, 25, 0.5);
+  color: #700519;
   box-shadow:
-    0 0 0 1px rgba(139, 90, 43, 0.2) inset,
-    0 0 12px rgba(196, 133, 58, 0.2),
-    0 0 24px rgba(139, 90, 43, 0.12);
+    0 0 0 1px rgba(112, 5, 25, 0.2) inset,
+    0 0 12px rgba(112, 5, 25, 0.2),
+    0 0 24px rgba(112, 5, 25, 0.12);
 }
 
 .kicker {
@@ -1380,6 +1380,10 @@ body::after {
     opacity: 0.35;
   }
 
+  .panel-3 {
+    min-height: auto;
+  }
+
   .panel-5 {
     margin-top: 0;
     padding-top: 2rem;
@@ -1473,9 +1477,13 @@ body::after {
     padding: 4.5rem 1rem 1.2rem;
   }
 
+  .panel-3,
+  .panel-5 {
+    min-height: auto;
+  }
+
   .panel-5 {
     margin-top: 0;
-    min-height: auto;
   }
 
   .hero-float {

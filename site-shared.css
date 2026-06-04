@@ -74,7 +74,7 @@
 /* ── Footer ──────────────────────────────────────────────────── */
 
 .site-footer {
-  background: #2a1c12;
+  background: #700519;
   color: #f5ede0;
   padding: 3rem 6% 1.8rem;
 }
@@ -214,7 +214,7 @@
   }
 
   .footer-logo-wrap img {
-    max-width: 160px;
+    max-width: 210px;
   }
 
   .footer-links {
@@ -236,6 +236,6 @@
   }
 
   .footer-logo-wrap img {
-    max-width: 130px;
+    max-width: 170px;
   }
 }

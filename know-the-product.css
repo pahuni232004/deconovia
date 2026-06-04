@@ -314,19 +314,19 @@
   font-weight: 700;
   font-size: 1rem;
   text-decoration: none;
-  background: #8b5a2b;
+  background: #700519;
   color: #f5ede0;
-  border: 1px solid #8b5a2b;
-  box-shadow: 0 6px 20px rgba(139, 90, 43, 0.25);
+  border: 1px solid #700519;
+  box-shadow: 0 6px 20px rgba(112, 5, 25, 0.25);
   transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
   align-self: flex-start;
 }
 
 .cat-cta:hover {
-  background: #c4853a;
-  border-color: #c4853a;
+  background: #8a0620;
+  border-color: #8a0620;
   transform: translateY(-2px);
-  box-shadow: 0 10px 28px rgba(196, 133, 58, 0.3);
+  box-shadow: 0 10px 28px rgba(112, 5, 25, 0.3);
 }
 
 /* ── Section divider accent ───────────────────────────── */
