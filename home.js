@@ -126,7 +126,7 @@ const animateHero = () => {
       const rightWindow = isTargetPhone ? 0.36 : 0.45;
       const easeToRight = clamp((sectionThreeProgress - rightStart) / rightWindow, 0, 1);
       const smoothRight = easeToRight * easeToRight * (3 - 2 * easeToRight);
-      const rightTravel = (isTargetPhone ? 285 : 360) * smoothRight;
+      const rightTravel = (isTargetPhone ? 230 : 270) * smoothRight;
 
       xShift += leftHold + rightTravel;
     }

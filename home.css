@@ -947,7 +947,7 @@ body::after {
   margin: 0 0 1rem;
   max-width: 13ch;
   text-transform: uppercase;
-  font-size: clamp(3.63rem, 7.26vw, 7.26rem);
+  font-size: clamp(2.8rem, 5.5vw, 5.5rem);
   line-height: calc(1em + 8px);
   text-wrap: pretty;
 }
