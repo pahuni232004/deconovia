@@ -7,7 +7,7 @@ const panelFour = document.querySelector(".panel-4");
 const storyFrame = document.querySelector(".story-frame");
 const navToggle = document.querySelector(".nav-toggle");
 const topNav = document.querySelector(".top-nav");
-const HERO_BASE_LEFT_OFFSET = 200;
+const HERO_BASE_LEFT_OFFSET = 55;
 const HERO_BASE_TOP_VH = 18;
 const HERO_BASE_TOP_PX_ADJUST = -45;
 const MOBILE_BREAKPOINT = 980;
@@ -150,8 +150,8 @@ const animateHero = () => {
       const desiredPhoneCenterX = frameRect.width * 0.88 - 200;
       const panelFourTargetCenterX = isTargetPhone ? desiredPhoneCenterX : frameRect.width * 0.78 + 90;
       const panelFourTargetCenterY = isTargetPhone
-        ? panelFour.offsetTop + panelFour.offsetHeight * 0.55 - 1000
-        : panelFour.offsetTop + panelFour.offsetHeight * 0.55 + 400;
+        ? panelFour.offsetTop + panelFour.offsetHeight * 0.55 - 900
+        : panelFour.offsetTop + panelFour.offsetHeight * 0.55 + 500;
       const lockTargetX = panelFourTargetCenterX - initialLeft;
       const lockTargetY = panelFourTargetCenterY - (initialTop + heroHeight / 2);
       const lockedScale = Math.max(scale, 0.72);
