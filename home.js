@@ -119,7 +119,7 @@ const animateHero = () => {
       // Smoothstep easing avoids a visible jump between section 2 -> section 3.
       const easeInLeft = clamp(sectionThreeProgress / 0.24, 0, 1);
       const smoothLeft = easeInLeft * easeInLeft * (3 - 2 * easeInLeft);
-      const leftHold = (isTargetPhone ? -62 : -70) * smoothLeft;
+      const leftHold = (isTargetPhone ? 15 : 20) * smoothLeft;
 
       // Second-half drift to the right, also eased.
       const rightStart = isTargetPhone ? 0.2 : 0.3;
