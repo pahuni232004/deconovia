@@ -73,7 +73,7 @@ const animateHero = () => {
 
   const travelY = progress * Math.max(targetTranslateY, 0);
   const straightenEase = Math.pow(panelTwoProgress, 1.25);
-  let rotation = -8 * (1 - straightenEase);
+  let rotation = window.innerWidth <= MOBILE_BREAKPOINT ? 0 : -8 * (1 - straightenEase);
   const midScale = 0.92;
   const secondSectionScale = 1 - (1 - midScale) * straightenEase;
   const shrinkStart = 0.82;

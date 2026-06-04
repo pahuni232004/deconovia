@@ -482,31 +482,34 @@
 
 /* ── Kit note ─────────────────────────────────────────── */
 .cat-kit-note {
-  background: #3d2b1f;
+  background: #f5ede0;
   padding: 4rem 6%;
   text-align: center;
 }
 .cat-kit-inner {
   max-width: 640px;
   margin: 0 auto;
+  border: 2px solid #44030F;
+  border-radius: 24px;
+  padding: 2.2rem 2.5rem;
 }
 .cat-kit-note h3 {
   font-family: "Golden", serif;
   font-size: clamp(1.6rem, 3vw, 2.2rem);
-  color: #e8c49a;
+  color: #44030F;
   margin: 0 0 1rem;
 }
 .cat-kit-note p {
-  color: rgba(245,237,224,0.75);
+  color: #6e4e3a;
   font-size: 0.95rem;
   line-height: 1.7;
   margin: 0 0 0.75rem;
 }
 .cat-kit-sub {
   font-size: 0.85rem !important;
-  color: rgba(245,237,224,0.45) !important;
+  color: rgba(61,43,31,0.55) !important;
 }
-.cat-kit-sub a { color: #e8c49a; }
+.cat-kit-sub a { color: #44030F; }
 .cat-img-placeholder {
   width: 68%;
   max-width: 380px;
