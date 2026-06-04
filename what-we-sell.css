@@ -35,10 +35,10 @@
 
 .sell-hero-title {
   font-family: "Golden", serif;
-  font-size: clamp(4rem, 14vw, 13rem);
+  font-size: clamp(4rem, 9vw, 8rem);
   color: #3d2b1f;
-  line-height: 0.88;
-  margin: 0 0 2rem;
+  line-height: 1;
+  margin: 0 0 2.5rem;
 }
 
 .sell-hero-sub {
