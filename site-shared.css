@@ -202,23 +202,32 @@
   }
 
   .footer-inner {
-    flex-direction: row;
-    align-items: flex-start;
-    justify-content: center;
-    gap: 2rem;
-    text-align: left;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.2rem;
+    text-align: center;
   }
 
   .footer-logo-wrap {
     flex: none;
+    display: flex;
+    justify-content: center;
   }
 
   .footer-logo-wrap img {
     max-width: 210px;
   }
 
+  .footer-links-label {
+    display: none;
+  }
+
   .footer-links {
-    align-items: flex-start;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 0.35rem 1rem;
     padding-left: 0;
   }
 
