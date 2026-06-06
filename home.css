@@ -1385,7 +1385,7 @@ body::after {
 
   .panel-4 .panel-grid {
     justify-content: center;
-    padding-top: 20px;
+    padding-top: 50px;
   }
 
   .panel-4 .luxury-big {
@@ -1415,7 +1415,7 @@ body::after {
 
   .panel-5 {
     margin-top: 0;
-    padding-top: 8rem;
+    padding-top: 11rem;
     min-height: auto;
   }
 
