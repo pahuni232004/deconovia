@@ -138,6 +138,12 @@
 
 .split-block:hover .sb-img { transform: scale(1.025); }
 
+/* Single-image strips: contain so image isn't cropped */
+.sb-image-wrap--single .sb-img {
+  object-fit: contain;
+  background: #ede0cc;
+}
+
 /* Overlay gradient for readability of on-image text */
 .sb-image-wrap::after {
   content: '';

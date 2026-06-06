@@ -255,7 +255,6 @@ body::after {
 .panel-2 h2 {
   font-family: "Golden", serif;
   color: #5c3d2e;
-  text-transform: uppercase;
   max-width: 100%;
   letter-spacing: 0.02em;
 }
@@ -466,7 +465,7 @@ body::after {
 }
 
 .benefit-item {
-  width: min(430px, 100%);
+  width: min(600px, 100%);
   padding: 0.9rem 1rem;
   border: 1px solid rgba(101, 67, 33, 0.15);
   border-radius: 22px 22px 22px 8px;
