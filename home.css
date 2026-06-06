@@ -288,7 +288,6 @@ body::after {
 .split-right {
   margin: 0;
   font-family: "Golden", serif;
-  text-transform: uppercase;
   letter-spacing: 0.01em;
   line-height: 0.95;
   color: #5c3d2e;
@@ -473,7 +472,7 @@ body::after {
 }
 
 .benefit-item {
-  width: min(600px, 100%);
+  width: min(740px, 100%);
   padding: 0.9rem 1rem;
   border: 1px solid rgba(101, 67, 33, 0.15);
   border-radius: 22px 22px 22px 8px;
@@ -960,7 +959,6 @@ body::after {
 .panel-4 .luxury-big {
   margin: 0 0 1rem;
   max-width: 13ch;
-  text-transform: uppercase;
   font-size: clamp(2.8rem, 5.5vw, 5.5rem);
   line-height: calc(1em + 8px);
   text-wrap: pretty;

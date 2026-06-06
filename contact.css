@@ -55,7 +55,7 @@
 /* ── Shell ───────────────────────────────────────────── */
 
 .contact-shell {
-  width: min(860px, calc(100% - 2rem));
+  width: min(1200px, calc(100% - 2rem));
   margin: 2rem auto 3rem;
   display: grid;
   gap: 1.35rem;
