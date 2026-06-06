@@ -139,20 +139,23 @@ const animateHero = () => {
       if (!mobileFreezePoint) {
         mobileFreezePoint = { x: xShift, y: yShift, rotation, scale };
       }
-      const lockedScale = Math.max(mobileFreezePoint.scale, 0.72);
-
-      // Section 4: move tower to sit beside the bottom of the CTA text block.
-      if (progress >= panelFourStart) {
-        const desiredPhoneCenterX = frameRect.width * 0.88 - 200;
-        const panelFourTargetCenterX = isTargetPhone ? desiredPhoneCenterX : frameRect.width * 0.78 + 90;
-        const panelFourTargetCenterY = panelFour.offsetTop + (isTargetPhone ? 420 : 540);
-        const lockTargetX = panelFourTargetCenterX - initialLeft;
-        const lockTargetY = panelFourTargetCenterY - (initialTop + heroHeight / 2);
-        heroFloat.style.transform = `translate3d(calc(-50% + ${lockTargetX}px), ${lockTargetY}px, 0) rotate(${mobileFreezePoint.rotation}deg) scale(${lockedScale})`;
-        return;
-      }
-
       heroFloat.style.transform = `translate3d(calc(-50% + ${mobileFreezePoint.x}px), ${mobileFreezePoint.y}px, 0) rotate(${mobileFreezePoint.rotation}deg) scale(${mobileFreezePoint.scale})`;
+      return;
+    }
+
+    // Mobile: keep current path through section 3, then stop in section 4 beside the large copy.
+    const panelFourLockStart = panelThreeEnd;
+    if (progress >= panelFourLockStart) {
+      // Mobile lock target tuned to match desired section-4 composition.
+      const desiredPhoneCenterX = frameRect.width * 0.88 - 200;
+      const panelFourTargetCenterX = isTargetPhone ? desiredPhoneCenterX : frameRect.width * 0.78 + 90;
+      const panelFourTargetCenterY = isTargetPhone
+        ? panelFour.offsetTop + panelFour.offsetHeight * 0.55 - 800
+        : panelFour.offsetTop + panelFour.offsetHeight * 0.55 + 600;
+      const lockTargetX = panelFourTargetCenterX - initialLeft;
+      const lockTargetY = panelFourTargetCenterY - (initialTop + heroHeight / 2);
+      const lockedScale = Math.max(scale, 0.72);
+      heroFloat.style.transform = `translate3d(calc(-50% + ${lockTargetX}px), ${lockTargetY}px, 0) rotate(${rotation}deg) scale(${lockedScale})`;
       return;
     }
   }
