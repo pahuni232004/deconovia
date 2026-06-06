@@ -252,7 +252,14 @@ body::after {
   text-shadow: 0 8px 28px rgba(61, 43, 31, 0.12);
 }
 
-.panel-2 h2,
+.panel-2 h2 {
+  font-family: "Golden", serif;
+  color: #5c3d2e;
+  text-transform: uppercase;
+  max-width: 100%;
+  letter-spacing: 0.02em;
+}
+
 .panel-4 h2 {
   font-family: "Golden", serif;
   color: #5c3d2e;
@@ -489,9 +496,10 @@ body::after {
   margin: 0;
   font-family: "Raleway", sans-serif;
   letter-spacing: 0.01em;
-  font-size: 1.04rem;
-  font-weight: 600;
+  font-size: 1.45rem;
+  font-weight: 700;
   color: #3d2b1f;
+  line-height: 1.25;
 }
 
 .benefit-item p {
@@ -516,6 +524,7 @@ body::after {
 }
 
 .modernity-line::before {
+  display: none;
   content: "";
   position: absolute;
   left: 4%;
