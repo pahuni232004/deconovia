@@ -36,6 +36,12 @@
   display: block;
 }
 
+@media (min-width: 861px) {
+  .logo img {
+    height: 80px;
+  }
+}
+
 .top-nav nav {
   display: flex;
   gap: 0.2rem;
