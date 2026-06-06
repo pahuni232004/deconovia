@@ -44,7 +44,8 @@
 .sell-hero-sub {
   font-size: clamp(1rem, 2vw, 1.2rem);
   color: #6e4e3a;
-  max-width: 50ch;
+  max-width: none;
+  white-space: nowrap;
   line-height: 1.65;
   margin: 0 auto 3rem;
 }
@@ -308,6 +309,11 @@
 
   .sell-hero-title {
     font-size: clamp(3rem, 14vw, 7rem);
+  }
+
+  .sell-hero-sub {
+    white-space: normal;
+    max-width: 44ch;
   }
 
   .sell-hero-img-wrap {

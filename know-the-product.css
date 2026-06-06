@@ -193,7 +193,7 @@
 
 /* ── Product name ─────────────────────────────────────── */
 .cat-product-name {
-  margin: 0 0 0.6rem;
+  margin: 1.4rem 0 0.6rem;
   font-family: "Golden", serif;
   font-size: clamp(3rem, 5.5vw, 5.5rem);
   line-height: 0.95;

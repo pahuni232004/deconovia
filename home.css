@@ -235,6 +235,14 @@ body::after {
   z-index: 2;
 }
 
+.panel-4 .panel-grid {
+  max-width: 1400px;
+}
+
+.panel-4 .cta-copy {
+  width: min(760px, 100%);
+}
+
 .line-leaf {
   display: none;
 }
