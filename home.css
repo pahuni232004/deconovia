@@ -931,7 +931,7 @@ body::after {
 
 .panel-5 {
   min-height: auto;
-  margin-top: -250px;
+  margin-top: -100px;
   padding-top: 3rem;
   padding-bottom: 3rem;
 }
@@ -958,7 +958,7 @@ body::after {
 
 .panel-4 .luxury-big {
   margin: 0 0 1rem;
-  max-width: 13ch;
+  max-width: 9ch;
   font-size: clamp(2.8rem, 5.5vw, 5.5rem);
   line-height: calc(1em + 8px);
   text-wrap: pretty;
@@ -1292,6 +1292,8 @@ body::after {
     padding-top: 3.5rem;
     padding-left: 6%;
     padding-right: 6%;
+    min-height: auto;
+    padding-bottom: 0;
   }
 
   .panel-2 {
@@ -1411,7 +1413,7 @@ body::after {
 
   .panel-5 {
     margin-top: 0;
-    padding-top: 5rem;
+    padding-top: 8rem;
     min-height: auto;
   }
 
