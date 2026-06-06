@@ -308,7 +308,7 @@ body::after {
   margin: 1rem 0 0;
   max-width: 560px;
   color: #6e4e3a;
-  font-size: 0.98rem;
+  font-size: 1.18rem;
   line-height: 1.6;
   font-weight: 500;
   letter-spacing: 0.01em;
@@ -1284,7 +1284,7 @@ body::after {
     padding-left: 0;
     padding-right: 0;
     box-sizing: border-box;
-    font-size: 0.9rem;
+    font-size: 1.05rem;
     line-height: 1.45;
     order: 0;
   }
@@ -1550,7 +1550,7 @@ body::after {
   }
 
   .split-subheading {
-    font-size: 0.84rem;
+    font-size: 1rem;
     line-height: 1.4;
   }
 
