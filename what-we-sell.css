@@ -308,7 +308,8 @@
   }
 
   .sell-hero-title {
-    font-size: clamp(3rem, 14vw, 7rem);
+    font-size: clamp(2rem, 9vw, 7rem);
+    white-space: nowrap;
   }
 
   .sell-hero-sub {
@@ -361,7 +362,8 @@
   }
 
   .sell-hero-title {
-    font-size: clamp(2.5rem, 16vw, 5rem);
+    font-size: clamp(1.6rem, 10vw, 5rem);
+    white-space: nowrap;
   }
 
   .sell-hero-sub {
