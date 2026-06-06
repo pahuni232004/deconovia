@@ -150,8 +150,8 @@ const animateHero = () => {
       const desiredPhoneCenterX = frameRect.width * 0.88 - 200;
       const panelFourTargetCenterX = isTargetPhone ? desiredPhoneCenterX : frameRect.width * 0.78 + 90;
       const panelFourTargetCenterY = isTargetPhone
-        ? panelFour.offsetTop + panelFour.offsetHeight * 0.55 - 850
-        : panelFour.offsetTop + panelFour.offsetHeight * 0.55 + 550;
+        ? panelFour.offsetTop + panelFour.offsetHeight * 0.55 - 820
+        : panelFour.offsetTop + panelFour.offsetHeight * 0.55 + 580;
       const lockTargetX = panelFourTargetCenterX - initialLeft;
       const lockTargetY = panelFourTargetCenterY - (initialTop + heroHeight / 2);
       const lockedScale = Math.max(scale, 0.72);
