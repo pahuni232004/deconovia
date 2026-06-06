@@ -1284,7 +1284,7 @@ body::after {
     padding-left: 0;
     padding-right: 0;
     box-sizing: border-box;
-    font-size: 1.05rem;
+    font-size: 1.35rem;
     line-height: 1.45;
     order: 0;
   }
@@ -1550,7 +1550,7 @@ body::after {
   }
 
   .split-subheading {
-    font-size: 1rem;
+    font-size: 1.3rem;
     line-height: 1.4;
   }
 
