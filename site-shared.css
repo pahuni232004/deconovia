@@ -36,6 +36,12 @@
   display: block;
 }
 
+@media (min-width: 861px) {
+  .logo img {
+    height: 80px;
+  }
+}
+
 .top-nav nav {
   display: flex;
   gap: 0.2rem;
@@ -81,7 +87,7 @@
 
 .footer-inner {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   justify-content: flex-start;
   gap: 3rem;
   margin-bottom: 1.8rem;
@@ -215,7 +221,7 @@
   }
 
   .footer-logo-wrap img {
-    max-width: 210px;
+    max-width: 260px;
   }
 
   .footer-links-label {
@@ -245,6 +251,6 @@
   }
 
   .footer-logo-wrap img {
-    max-width: 170px;
+    max-width: 220px;
   }
 }

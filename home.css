@@ -252,7 +252,13 @@ body::after {
   text-shadow: 0 8px 28px rgba(61, 43, 31, 0.12);
 }
 
-.panel-2 h2,
+.panel-2 h2 {
+  font-family: "Golden", serif;
+  color: #5c3d2e;
+  max-width: 100%;
+  letter-spacing: 0.02em;
+}
+
 .panel-4 h2 {
   font-family: "Golden", serif;
   color: #5c3d2e;
@@ -329,19 +335,17 @@ body::after {
   padding: 0.82rem 1.4rem;
   margin-top: 20px;
   border-radius: 999px;
-  background: transparent;
-  border: 1px solid rgba(68, 3, 15, 0.5);
-  color: #44030F;
-  box-shadow:
-    0 0 0 1px rgba(68, 3, 15, 0.2) inset,
-    0 0 12px rgba(68, 3, 15, 0.2),
-    0 0 24px rgba(68, 3, 15, 0.12);
+  background: #44030F;
+  border: 1px solid #44030F;
+  color: #f5ede0;
+  box-shadow: none;
 }
 
 .panel-2 {
   background: rgba(237, 220, 200, 0.45);
   overflow: hidden;
   isolation: isolate;
+  z-index: 28;
 }
 
 .panel-2::before {
@@ -461,7 +465,7 @@ body::after {
 }
 
 .benefit-item {
-  width: min(430px, 100%);
+  width: min(600px, 100%);
   padding: 0.9rem 1rem;
   border: 1px solid rgba(101, 67, 33, 0.15);
   border-radius: 22px 22px 22px 8px;
@@ -491,9 +495,10 @@ body::after {
   margin: 0;
   font-family: "Raleway", sans-serif;
   letter-spacing: 0.01em;
-  font-size: 1.04rem;
-  font-weight: 600;
+  font-size: 1.45rem;
+  font-weight: 700;
   color: #3d2b1f;
+  line-height: 1.25;
 }
 
 .benefit-item p {
@@ -518,6 +523,7 @@ body::after {
 }
 
 .modernity-line::before {
+  display: none;
   content: "";
   position: absolute;
   left: 4%;
@@ -947,7 +953,7 @@ body::after {
   margin: 0 0 1rem;
   max-width: 13ch;
   text-transform: uppercase;
-  font-size: clamp(3.63rem, 7.26vw, 7.26rem);
+  font-size: clamp(2.8rem, 5.5vw, 5.5rem);
   line-height: calc(1em + 8px);
   text-wrap: pretty;
 }
@@ -961,13 +967,10 @@ body::after {
   letter-spacing: 0.01em;
   line-height: 1;
   border-radius: 999px;
-  background: transparent;
-  border: 1px solid rgba(68, 3, 15, 0.5);
-  color: #44030F;
-  box-shadow:
-    0 0 0 1px rgba(68, 3, 15, 0.2) inset,
-    0 0 12px rgba(68, 3, 15, 0.2),
-    0 0 24px rgba(68, 3, 15, 0.12);
+  background: #44030F;
+  border: 1px solid #44030F;
+  color: #f5ede0;
+  box-shadow: none;
 }
 
 .kicker {
@@ -1022,6 +1025,7 @@ body::after {
 .star-product:hover {
   transform: translateY(-7.5px);
 }
+
 
 .star-product img {
   width: 100%;
@@ -1152,42 +1156,33 @@ body::after {
   }
 
   .concept-layout {
-    grid-template-columns: 1fr;
-    gap: 0.72rem;
-    margin-top: calc(1.2rem + 130px);
-    width: min(62%, 320px);
-    margin-left: auto;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.72rem 0.85rem;
+    margin-top: 1.4rem;
+    width: 100%;
+    margin-left: 0;
     margin-right: 0;
   }
 
   .benefits-left,
   .benefits-right {
-    justify-items: end;
+    justify-items: stretch;
     width: 100%;
   }
 
   .benefits-left .benefit-item:nth-child(1),
-  .benefits-right .benefit-item:nth-child(1) {
-    transform: translateX(0);
-  }
-
+  .benefits-right .benefit-item:nth-child(1),
   .benefits-left .benefit-item:nth-child(2),
-  .benefits-right .benefit-item:nth-child(2) {
-    transform: translateX(14px);
-  }
-
+  .benefits-right .benefit-item:nth-child(2),
   .benefits-left .benefit-item:nth-child(3),
-  .benefits-right .benefit-item:nth-child(3) {
-    transform: translateX(6px);
-  }
-
+  .benefits-right .benefit-item:nth-child(3),
   .benefits-left .benefit-item:nth-child(4),
   .benefits-right .benefit-item:nth-child(4) {
-    transform: translateX(18px);
+    transform: none;
   }
 
   .benefit-item {
-    width: min(100%, 285px);
+    width: 100%;
     padding: 0.75rem 0.8rem;
     border-radius: 16px;
   }
@@ -1284,9 +1279,22 @@ body::after {
     order: 0;
   }
 
+  .panel-1 {
+    padding-top: 3.5rem;
+  }
+
+  .panel-2 {
+    z-index: 35;
+    background: rgba(237, 220, 200, 0.94);
+  }
+
   .panel-2 h2 {
     white-space: normal;
     margin-top: 0;
+  }
+
+  .modernity-line {
+    margin-top: 2rem;
   }
 
   .splash-grid {
@@ -1478,9 +1486,10 @@ body::after {
 
   .panel {
     min-height: 88vh;
-    padding: 4.5rem 1rem 1.2rem;
+    padding: 3rem 1rem 1.2rem;
   }
 
+  .panel-2,
   .panel-3,
   .panel-4,
   .panel-5 {
@@ -1501,16 +1510,13 @@ body::after {
   }
 
   .concept-layout {
-    gap: 0.56rem;
-    margin-top: calc(1rem + 115px);
-    width: min(64%, 250px);
-    margin-left: auto;
-    margin-right: 0;
+    gap: 0.5rem 0.6rem;
+    margin-top: 1.2rem;
   }
 
   .benefit-item {
-    width: min(100%, 213px);
-    padding: 0.66rem 0.72rem;
+    width: 100%;
+    padding: 0.6rem 0.65rem;
   }
 
   .benefit-item h3 {

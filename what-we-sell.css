@@ -35,10 +35,10 @@
 
 .sell-hero-title {
   font-family: "Golden", serif;
-  font-size: clamp(4rem, 14vw, 13rem);
+  font-size: clamp(4rem, 9vw, 8rem);
   color: #3d2b1f;
-  line-height: 0.88;
-  margin: 0 0 2rem;
+  line-height: 1;
+  margin: 0 0 2.5rem;
 }
 
 .sell-hero-sub {
@@ -118,13 +118,17 @@
 .sb-image-wrap {
   position: relative;
   width: 100%;
-  height: clamp(300px, 62vh, 700px);
+  height: clamp(480px, 78vh, 860px);
   overflow: hidden;
-  margin-top: -0.12em; /* slight overlap so text kisses image edge */
+  margin-top: -0.12em;
+  display: flex;
+  gap: 3px;
 }
 
 .sb-img {
-  width: 100%;
+  flex: 1;
+  width: 0;
+  min-width: 0;
   height: 100%;
   object-fit: cover;
   object-position: center;
@@ -133,6 +137,12 @@
 }
 
 .split-block:hover .sb-img { transform: scale(1.025); }
+
+/* Single-image strips: contain so image isn't cropped */
+.sb-image-wrap--single .sb-img {
+  object-fit: contain;
+  background: #ede0cc;
+}
 
 /* Overlay gradient for readability of on-image text */
 .sb-image-wrap::after {
@@ -273,8 +283,9 @@
 
 .sell-cta-link {
   display: inline-block;
-  background: #8b5a2b;
-  color: #f5ede0;
+  background: #f5ede0;
+  color: #44030F;
+  border: 1px solid #44030F;
   font-family: "Raleway", sans-serif;
   font-size: 0.85rem;
   font-weight: 700;
@@ -283,10 +294,10 @@
   text-decoration: none;
   padding: 0.85rem 2.2rem;
   border-radius: 2rem;
-  transition: background 0.2s;
+  transition: background 0.2s, color 0.2s;
 }
 
-.sell-cta-link:hover { background: #6e4220; }
+.sell-cta-link:hover { background: #44030F; color: #f5ede0; }
 
 /* ── Mobile ────────────────────────────────────────────────── */
 @media (max-width: 860px) {

@@ -73,7 +73,7 @@ const animateHero = () => {
 
   const travelY = progress * Math.max(targetTranslateY, 0);
   const straightenEase = Math.pow(panelTwoProgress, 1.25);
-  let rotation = -8 * (1 - straightenEase);
+  let rotation = window.innerWidth <= MOBILE_BREAKPOINT ? 0 : -8 * (1 - straightenEase);
   const midScale = 0.92;
   const secondSectionScale = 1 - (1 - midScale) * straightenEase;
   const shrinkStart = 0.82;
@@ -119,14 +119,14 @@ const animateHero = () => {
       // Smoothstep easing avoids a visible jump between section 2 -> section 3.
       const easeInLeft = clamp(sectionThreeProgress / 0.24, 0, 1);
       const smoothLeft = easeInLeft * easeInLeft * (3 - 2 * easeInLeft);
-      const leftHold = (isTargetPhone ? -62 : -70) * smoothLeft;
+      const leftHold = (isTargetPhone ? -30 : -25) * smoothLeft;
 
       // Second-half drift to the right, also eased.
       const rightStart = isTargetPhone ? 0.2 : 0.3;
       const rightWindow = isTargetPhone ? 0.36 : 0.45;
       const easeToRight = clamp((sectionThreeProgress - rightStart) / rightWindow, 0, 1);
       const smoothRight = easeToRight * easeToRight * (3 - 2 * easeToRight);
-      const rightTravel = (isTargetPhone ? 285 : 360) * smoothRight;
+      const rightTravel = (isTargetPhone ? 230 : 270) * smoothRight;
 
       xShift += leftHold + rightTravel;
     }
@@ -165,6 +165,10 @@ const animateHero = () => {
     rotation = 0;
     scale = targetScale;
   }
+
+  // Fade out hero-float as it fully merges so the actual product card takes over
+  // (allows hover effects on Spira to work without dual-image artefact)
+  heroFloat.style.opacity = mergeProgress >= 0.92 ? String(Math.max(0, 1 - (mergeProgress - 0.92) / 0.08)) : '1';
 
   heroFloat.style.transform = `translate3d(calc(-50% + ${xShift}px), ${yShift}px, 0) rotate(${rotation}deg) scale(${scale})`;
 };
