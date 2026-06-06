@@ -932,7 +932,7 @@ body::after {
 
 .panel-5 {
   min-height: auto;
-  margin-top: -100px;
+  margin-top: -95px;
   padding-top: 3rem;
   padding-bottom: 3rem;
 }
@@ -1385,6 +1385,7 @@ body::after {
 
   .panel-4 .panel-grid {
     justify-content: center;
+    padding-top: 20px;
   }
 
   .panel-4 .luxury-big {
