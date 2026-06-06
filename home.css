@@ -1263,6 +1263,7 @@ body::after {
     width: min(240px, 38vw);
     transform: translate(110px, -150px);
     order: 1;
+    font-size: clamp(1.3rem, 6.5vw, 3.2rem);
   }
 
   .split-right-wrap .landing-cta {
@@ -1270,6 +1271,8 @@ body::after {
     margin-top: 0.5rem;
     margin-right: 0;
     transform: translate(90px, -150px);
+    font-size: 1rem;
+    padding: 0.6rem 1.1rem;
   }
 
   .split-subheading-mobile {
@@ -1384,6 +1387,12 @@ body::after {
   .panel-4 .luxury-big {
     font-size: clamp(2.5rem, 8vw, 4.2rem);
     line-height: 1.06;
+  }
+
+  .panel-4 .buy-btn.dark {
+    font-size: 1rem;
+    padding: 0.75rem 1.6rem;
+    margin-top: 24px;
   }
 
   .panel-4-seal {
@@ -1553,6 +1562,8 @@ body::after {
   .split-right-wrap .landing-cta {
     margin-top: 0.45rem;
     transform: translate(90px, -150px);
+    font-size: 0.9rem;
+    padding: 0.55rem 1rem;
   }
 
   .split-subheading-mobile {
@@ -1577,7 +1588,7 @@ body::after {
 
   .split-left,
   .split-right {
-    font-size: clamp(1.7rem, 11vw, 3rem);
+    font-size: clamp(1.1rem, 8.5vw, 2.2rem);
   }
 
   .modernity-line {
