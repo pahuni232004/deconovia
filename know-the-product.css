@@ -134,18 +134,7 @@
 
 /* Giant ghost number backdrop */
 .cat-bg-num {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: "Golden", serif;
-  font-size: clamp(8rem, 18vw, 18rem);
-  color: rgba(139, 90, 43, 0.14);
-  line-height: 1;
-  pointer-events: none;
-  user-select: none;
-  z-index: 0;
+  display: none;
 }
 
 /* Floating product image */

@@ -257,6 +257,15 @@
   text-transform: uppercase;
   padding: 0.5rem 1.1rem;
   border-radius: 2rem;
+  text-decoration: none;
+  transition: background 0.2s, border-color 0.2s, color 0.2s;
+  cursor: pointer;
+}
+
+a.sui-tag:hover {
+  background: rgba(232,196,154,0.28);
+  border-color: rgba(232,196,154,0.6);
+  color: #f5ede0;
 }
 
 /* ── CTA Banner ────────────────────────────────────────────── */
@@ -325,6 +334,10 @@
     padding: 3.5rem 5% 1rem;
   }
 
+  .sell-chapter + .split-block .sb-above {
+    padding-top: 3.5rem;
+  }
+
   .sb-above {
     font-size: clamp(2.8rem, 12vw, 7rem);
     padding: 2rem 5% 0;
@@ -340,6 +353,11 @@
 
   .sb-sub {
     padding: 1.2rem 5% 0;
+    max-width: 100%;
+  }
+
+  .sb-sub br {
+    display: none;
   }
 
   .sell-use-intro {
