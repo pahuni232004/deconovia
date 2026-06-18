@@ -12,7 +12,7 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="./site-shared.css?v=4" />
-    <link rel="stylesheet" href="./home.css?v=24" />
+    <link rel="stylesheet" href="./home.css?v=25" />
   </head>
   <body>
     <main class="home-shell">
@@ -34,7 +34,7 @@
             <nav id="site-nav">
               <a href="./know-the-product.html">Products</a>
               <a href="./what-we-sell.html">Aeroponic Living</a>
-              <a href="./aeroponic-spaces.html">Our Spaces</a>
+              <a href="./know-the-product.html">Product Catalogue</a>
               <a href="./contact.html">Contact Us</a>
             </nav>
           </header>
@@ -70,25 +70,81 @@
             </div>
           </section>
 
-          <section class="panel panel-2">
-            <div class="panel-grid">
-              <h2>Nature, Refined.</h2>
-              <div class="concept-layout">
-                <ul class="benefits benefits-left">
-                  <li class="benefit-item"><h3>Soil-free sophistication.</h3></li>
-                  <li class="benefit-item"><h3>Living lungs for your home.</h3></li>
-                  <li class="benefit-item"><h3>3× faster growth.</h3></li>
-                  <li class="benefit-item"><h3>95% water efficiency.</h3></li>
-                </ul>
-                <ul class="benefits benefits-right">
-                  <li class="benefit-item"><h3>Architectural biophilia.</h3></li>
-                  <li class="benefit-item"><h3>365 days of fresh.</h3></li>
-                  <li class="benefit-item"><h3>Silent automation.</h3></li>
-                  <li class="benefit-item"><h3>Zero-mile dining.</h3></li>
-                </ul>
+          <!-- ── Services Section (Panel 2) ── -->
+          <section class="panel panel-2" id="services-section">
+            <!-- Sticky viewport — pins for the full 400 vh scroll -->
+            <div class="services-pin">
+              <div class="services-head">
+                <h2 class="services-heading">Services</h2>
               </div>
-              <p class="modernity-line">Modernity has a new pulse.</p>
+              <div class="services-card-area" id="services-card-area">
+                <!-- Card 1: Terracotta Towers — 3D asset merges here -->
+                <div class="service-card service-card--1 sc-active" id="service-card-1" data-index="0">
+                  <div class="sc-media">
+                    <img class="sc-img" id="service-merge-target"
+                         src="./assets/images/Terracotta towers .png"
+                         alt="Terracotta Towers" />
+                  </div>
+                  <div class="sc-info">
+                    <span class="sc-num">01</span>
+                    <h3 class="sc-title">Terracotta Towers</h3>
+                    <p class="sc-desc">Our signature aeroponic towers crafted in warm terracotta. Sculptural, functional, and alive — a living centrepiece for any home.</p>
+                    <a href="./know-the-product.html" class="sc-link">Explore →</a>
+                  </div>
+                </div>
+                <!-- Card 2: Luxury Towers -->
+                <div class="service-card service-card--2" id="service-card-2" data-index="1">
+                  <div class="sc-media">
+                    <img class="sc-img"
+                         src="./assets/images/luxury towers .png"
+                         alt="Luxury Towers" />
+                  </div>
+                  <div class="sc-info">
+                    <span class="sc-num">02</span>
+                    <h3 class="sc-title">Luxury Towers</h3>
+                    <p class="sc-desc">Premium aeroponic installations crafted for high-end residential and hospitality spaces. Where fine living meets living green.</p>
+                    <a href="./know-the-product.html" class="sc-link">Explore →</a>
+                  </div>
+                </div>
+                <!-- Card 3: Custom Planters -->
+                <div class="service-card service-card--3" id="service-card-3" data-index="2">
+                  <div class="sc-media">
+                    <img class="sc-img"
+                         src="./assets/images/Custom solutions.jpeg"
+                         alt="Custom Planters" />
+                  </div>
+                  <div class="sc-info">
+                    <span class="sc-num">03</span>
+                    <h3 class="sc-title">Custom Planters</h3>
+                    <p class="sc-desc">Bespoke aeroponic planter solutions designed precisely around your space, interior brief, and aesthetic vision.</p>
+                    <a href="./contact.html" class="sc-link">Enquire →</a>
+                  </div>
+                </div>
+                <!-- Card 4: Custom Vertical Gardens -->
+                <div class="service-card service-card--4" id="service-card-4" data-index="3">
+                  <div class="sc-media">
+                    <img class="sc-img"
+                         src="./assets/images/Custom vertical gardens .jpeg"
+                         alt="Custom Vertical Gardens" />
+                  </div>
+                  <div class="sc-info">
+                    <span class="sc-num">04</span>
+                    <h3 class="sc-title">Custom Vertical Gardens</h3>
+                    <p class="sc-desc">Large-scale vertical garden installations that transform blank walls into living architecture — for homes, offices, and hospitality spaces.</p>
+                    <a href="./contact.html" class="sc-link">Enquire →</a>
+                  </div>
+                </div>
+              </div>
+              <!-- Progress dots -->
+              <div class="sc-dots" aria-hidden="true">
+                <span class="sc-dot sc-dot--active"></span>
+                <span class="sc-dot"></span>
+                <span class="sc-dot"></span>
+                <span class="sc-dot"></span>
+              </div>
             </div>
+            <!-- Scroll spacer: 3 extra card transitions on top of the initial sticky height -->
+            <div class="services-scroll-spacer" aria-hidden="true"></div>
           </section>
 
           <section class="panel panel-3">
@@ -141,7 +197,7 @@
                 <a href="./index.html">Home</a>
                 <a href="./know-the-product.html">Products</a>
                 <a href="./what-we-sell.html">Aeroponic Living</a>
-                <a href="./aeroponic-spaces.html">Our Spaces</a>
+                <a href="./know-the-product.html">Product Catalogue</a>
                 <a href="./contact.html">Contact Us</a>
               </nav>
             </div>
@@ -153,6 +209,6 @@
         </div>
       </section>
     </main>
-    <script src="./home.js?v=12"></script>
+    <script src="./home.js?v=13"></script>
   </body>
 </html>
