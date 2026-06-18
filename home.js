@@ -16,7 +16,7 @@ let mobileFreezePoint = null;
 const clamp = (value, min, max) => Math.min(max, Math.max(min, value));
 
 const animateHero = () => {
-  if (!stage || !heroFloat || !starProducts || !panelTwo || !panelThree || !panelFour || !storyFrame) return;
+  if (!stage || !heroFloat || !panelTwo || !panelThree || !panelFour || !storyFrame) return;
 
   const rect = stage.getBoundingClientRect();
   const frameRect = storyFrame.getBoundingClientRect();
@@ -27,16 +27,16 @@ const animateHero = () => {
   const initialTop = window.innerHeight * (HERO_BASE_TOP_VH / 100) + HERO_BASE_TOP_PX_ADJUST;
   const initialLeft = frameRect.width / 2 + HERO_BASE_LEFT_OFFSET;
   const heroHeight = heroFloat.offsetHeight || heroFloat.getBoundingClientRect().height;
-  const mergeTargetImageSelector = ".star-product:nth-child(4) img";
-  const mergeTargetImage = starProducts.querySelector(mergeTargetImageSelector);
-  const rightMostRect = mergeTargetImage
-    ? mergeTargetImage.getBoundingClientRect()
-    : starProducts.getBoundingClientRect();
+  const mergeTargetImage = starProducts
+    ? starProducts.querySelector(".star-product:nth-child(4) img")
+    : null;
+  const anchorEl = mergeTargetImage || (starProducts ? starProducts : panelFour);
+  const rightMostRect = anchorEl.getBoundingClientRect();
   const targetCenterY = rightMostRect.top - frameRect.top + rightMostRect.height / 2;
   const targetCenterX = rightMostRect.left - frameRect.left + rightMostRect.width / 2;
   const targetTranslateY = targetCenterY - (initialTop + heroHeight / 2);
   const targetTranslateX = targetCenterX - initialLeft;
-  const starReferenceImage = starProducts.querySelector(".star-product img");
+  const starReferenceImage = starProducts ? starProducts.querySelector(".star-product img") : null;
   const targetVisualHeight = starReferenceImage
     ? starReferenceImage.getBoundingClientRect().height
     : 135;
@@ -59,7 +59,9 @@ const animateHero = () => {
     1
   );
   const panelFourStart = clamp((panelFour.offsetTop - window.innerHeight * 0.15) / totalScrollable, 0, 1);
-  const starStart = clamp((starProducts.offsetTop - window.innerHeight * 0.35) / totalScrollable, 0, 1);
+  const starStart = starProducts
+    ? clamp((starProducts.offsetTop - window.innerHeight * 0.35) / totalScrollable, 0, 1)
+    : clamp((panelFour.offsetTop + panelFour.offsetHeight * 0.9) / totalScrollable, 0, 1);
   const driftIn = clamp(
     (progress - panelThreeEnd) / Math.max(panelFourMid - panelThreeEnd, 0.001),
     0,
@@ -139,23 +141,20 @@ const animateHero = () => {
       if (!mobileFreezePoint) {
         mobileFreezePoint = { x: xShift, y: yShift, rotation, scale };
       }
-      heroFloat.style.transform = `translate3d(calc(-50% + ${mobileFreezePoint.x}px), ${mobileFreezePoint.y}px, 0) rotate(${mobileFreezePoint.rotation}deg) scale(${mobileFreezePoint.scale})`;
-      return;
-    }
+      const lockedScale = Math.max(mobileFreezePoint.scale, 0.72);
 
-    // Mobile: keep current path through section 3, then stop in section 4 beside the large copy.
-    const panelFourLockStart = panelThreeEnd;
-    if (progress >= panelFourLockStart) {
-      // Mobile lock target tuned to match desired section-4 composition.
-      const desiredPhoneCenterX = frameRect.width * 0.88 - 200;
-      const panelFourTargetCenterX = isTargetPhone ? desiredPhoneCenterX : frameRect.width * 0.78 + 90;
-      const panelFourTargetCenterY = isTargetPhone
-        ? panelFour.offsetTop + panelFour.offsetHeight * 0.55 - 900
-        : panelFour.offsetTop + panelFour.offsetHeight * 0.55 + 500;
-      const lockTargetX = panelFourTargetCenterX - initialLeft;
-      const lockTargetY = panelFourTargetCenterY - (initialTop + heroHeight / 2);
-      const lockedScale = Math.max(scale, 0.72);
-      heroFloat.style.transform = `translate3d(calc(-50% + ${lockTargetX}px), ${lockTargetY}px, 0) rotate(${rotation}deg) scale(${lockedScale})`;
+      // Section 4: move tower to sit beside the bottom of the CTA text block.
+      if (progress >= panelFourStart) {
+        const desiredPhoneCenterX = frameRect.width * 0.88 - 200;
+        const panelFourTargetCenterX = isTargetPhone ? desiredPhoneCenterX : frameRect.width * 0.78 + 90;
+        const panelFourTargetCenterY = panelFour.offsetTop + (isTargetPhone ? 420 : 540);
+        const lockTargetX = panelFourTargetCenterX - initialLeft;
+        const lockTargetY = panelFourTargetCenterY - (initialTop + heroHeight / 2);
+        heroFloat.style.transform = `translate3d(calc(-50% + ${lockTargetX}px), ${lockTargetY}px, 0) rotate(${mobileFreezePoint.rotation}deg) scale(${lockedScale})`;
+        return;
+      }
+
+      heroFloat.style.transform = `translate3d(calc(-50% + ${mobileFreezePoint.x}px), ${mobileFreezePoint.y}px, 0) rotate(${mobileFreezePoint.rotation}deg) scale(${mobileFreezePoint.scale})`;
       return;
     }
   }

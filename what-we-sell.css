@@ -44,7 +44,8 @@
 .sell-hero-sub {
   font-size: clamp(1rem, 2vw, 1.2rem);
   color: #6e4e3a;
-  max-width: 50ch;
+  max-width: none;
+  white-space: nowrap;
   line-height: 1.65;
   margin: 0 auto 3rem;
 }
@@ -189,7 +190,7 @@
 }
 
 .sb-sub {
-  font-size: 0.95rem;
+  font-size: 1.15rem;
   color: #6e4e3a;
   padding: 1.4rem 6% 0;
   margin: 0;
@@ -256,6 +257,15 @@
   text-transform: uppercase;
   padding: 0.5rem 1.1rem;
   border-radius: 2rem;
+  text-decoration: none;
+  transition: background 0.2s, border-color 0.2s, color 0.2s;
+  cursor: pointer;
+}
+
+a.sui-tag:hover {
+  background: rgba(232,196,154,0.28);
+  border-color: rgba(232,196,154,0.6);
+  color: #f5ede0;
 }
 
 /* ── CTA Banner ────────────────────────────────────────────── */
@@ -307,7 +317,13 @@
   }
 
   .sell-hero-title {
-    font-size: clamp(3rem, 14vw, 7rem);
+    font-size: clamp(2rem, 9vw, 7rem);
+    white-space: nowrap;
+  }
+
+  .sell-hero-sub {
+    white-space: normal;
+    max-width: 44ch;
   }
 
   .sell-hero-img-wrap {
@@ -316,6 +332,10 @@
 
   .sell-chapter {
     padding: 3.5rem 5% 1rem;
+  }
+
+  .sell-chapter + .split-block .sb-above {
+    padding-top: 3.5rem;
   }
 
   .sb-above {
@@ -333,6 +353,11 @@
 
   .sb-sub {
     padding: 1.2rem 5% 0;
+    max-width: 100%;
+  }
+
+  .sb-sub br {
+    display: none;
   }
 
   .sell-use-intro {
@@ -355,7 +380,8 @@
   }
 
   .sell-hero-title {
-    font-size: clamp(2.5rem, 16vw, 5rem);
+    font-size: clamp(1.6rem, 10vw, 5rem);
+    white-space: nowrap;
   }
 
   .sell-hero-sub {
