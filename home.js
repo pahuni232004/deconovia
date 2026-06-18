@@ -17,6 +17,7 @@ const HERO_BASE_TOP_VH = 18;
 const HERO_BASE_TOP_PX_ADJUST = -45;
 const MOBILE_BREAKPOINT = 980;
 let mobileFreezePoint = null;
+let desktopFreezePoint = null;
 
 const clamp = (value, min, max) => Math.min(max, Math.max(min, value));
 
@@ -270,6 +271,22 @@ const animateHero = () => {
   if (mergeProgress >= 1) {
     rotation = 0;
     scale = targetScale;
+  }
+
+  // ── Desktop: freeze tower position when section 4 enters (prevents drift to footer) ──
+  if (window.innerWidth > MOBILE_BREAKPOINT) {
+    if (progress < panelFourStart) {
+      desktopFreezePoint = null;
+    } else {
+      if (!desktopFreezePoint) {
+        desktopFreezePoint = { scrollY: scrollYpx, yShift };
+      }
+      // travelY grows at same rate as scrollYpx → visual Y stays constant (viewport-locked)
+      const frozenTravelY = scrollYpx - desktopFreezePoint.scrollY + desktopFreezePoint.yShift;
+      const frozenX = -HERO_BASE_LEFT_OFFSET;
+      heroFloat.style.transform = `translate3d(calc(-50% + ${frozenX}px), ${frozenTravelY}px, 0) rotate(0deg) scale(${targetScale})`;
+      return;
+    }
   }
 
   heroFloat.style.transform = `translate3d(calc(-50% + ${xShift}px), ${yShift}px, 0) rotate(${rotation}deg) scale(${scale})`;
