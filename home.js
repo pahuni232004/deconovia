@@ -12,7 +12,7 @@ const servicesSection = document.getElementById("services-section");
 const serviceCards = document.querySelectorAll(".service-card");
 const scDots = document.querySelectorAll(".sc-dot");
 
-const HERO_BASE_LEFT_OFFSET = 55;
+const HERO_BASE_LEFT_OFFSET = 105;
 const HERO_BASE_TOP_VH = 18;
 const HERO_BASE_TOP_PX_ADJUST = -45;
 const MOBILE_BREAKPOINT = 980;
@@ -24,6 +24,8 @@ const clamp = (value, min, max) => Math.min(max, Math.max(min, value));
 /* ── Service card stack reveal ───────────────────── */
 const updateServiceCards = () => {
   if (!servicesSection || !serviceCards.length) return;
+  // Mobile uses a CSS scroll-snap slider — no JS card stacking needed
+  if (window.innerWidth <= MOBILE_BREAKPOINT) return;
 
   const sRect = servicesSection.getBoundingClientRect();
   // scrolledIn: how many px of the section have scrolled past the top
@@ -167,7 +169,7 @@ const animateHero = () => {
 
     // Section 3 entry: scrollY = panelThree.offsetTop (s3 at top of viewport)
     const s3StartScroll  = panelThree.offsetTop;
-    const vpYAtS3        = window.innerHeight * 0.28 - 270;
+    const vpYAtS3        = window.innerHeight * 0.28 - 370;
     const travelYAtS3    = s3StartScroll + vpYAtS3 - initialTop;
 
     // Section 4 / end of page resting position
@@ -242,13 +244,9 @@ const animateHero = () => {
       const lockedScale = Math.max(mobileFreezePoint.scale, 0.72);
 
       if (progress >= panelFourStart) {
-        // Section 4 on mobile: lock float at a FIXED viewport position so it
-        // doesn't drift as the user scrolls through the section.
-        const desiredPhoneCenterX = frameRect.width * 0.88 - 200;
-        const panelFourTargetCenterX = isTargetPhone ? desiredPhoneCenterX : frameRect.width * 0.78 + 90;
-        const lockTargetX = panelFourTargetCenterX - initialLeft;
-        // Viewport-fixed Y: scrollYpx tracks scroll, so visual stays constant
-        const fixedVpY    = window.innerHeight * (isTargetPhone ? 0.28 : 0.32);
+        // Section 4 on mobile: lock at viewport centre, mid-height
+        const lockTargetX = -HERO_BASE_LEFT_OFFSET; // centres the tower
+        const fixedVpY    = window.innerHeight * 0.30;
         const lockTargetY = scrollYpx + fixedVpY - initialTop;
         heroFloat.style.transform = `translate3d(calc(-50% + ${lockTargetX}px), ${lockTargetY}px, 0) rotate(0deg) scale(${lockedScale})`;
         return;
@@ -256,10 +254,8 @@ const animateHero = () => {
 
       const panelFourLockStart = panelThreeEnd;
       if (progress >= panelFourLockStart) {
-        const desiredPhoneCenterX = frameRect.width * 0.88 - 200;
-        const panelFourTargetCenterX = isTargetPhone ? desiredPhoneCenterX : frameRect.width * 0.78 + 90;
-        const lockTargetX  = panelFourTargetCenterX - initialLeft;
-        const fixedVpY     = window.innerHeight * (isTargetPhone ? 0.28 : 0.32);
+        const lockTargetX  = -HERO_BASE_LEFT_OFFSET;
+        const fixedVpY     = window.innerHeight * 0.30;
         const lockTargetY  = scrollYpx + fixedVpY - initialTop;
         const lockedScaleInner = Math.max(scale, 0.72);
         heroFloat.style.transform = `translate3d(calc(-50% + ${lockTargetX}px), ${lockTargetY}px, 0) rotate(${rotation}deg) scale(${lockedScaleInner})`;
@@ -287,7 +283,7 @@ const animateHero = () => {
       // travelY mirrors scrollYpx growth → visual Y stays constant
       const frozenTravelY = scrollYpx - desktopFreezePoint.scrollY + desktopFreezePoint.yShift;
       const frozenX = -HERO_BASE_LEFT_OFFSET;
-      heroFloat.style.transform = `translate3d(calc(-50% + ${frozenX}px), ${frozenTravelY}px, 0) rotate(0deg) scale(${desktopFreezePoint.scale})`;
+      heroFloat.style.transform = `translate3d(calc(-50% + ${frozenX}px), ${frozenTravelY}px, 0) rotate(0deg) scale(${desktopFreezePoint.scale * 0.85})`;
       return;
     }
   }

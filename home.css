@@ -479,6 +479,12 @@ body::after {
   display: block;
 }
 
+/* Luxury Towers card: slightly zoomed-out so more of the tower is visible */
+.service-card--2 .sc-img {
+  transform: scale(0.82);
+  transform-origin: center center;
+}
+
 /* Dark gradient so text is always readable */
 .sc-media::after {
   content: "";
@@ -1042,7 +1048,7 @@ body::after {
 
 .hero-float {
   position: absolute;
-  left: calc(50% + 55px);
+  left: calc(50% + 105px);
   top: calc(18vh - 45px);
   width: min(460px, 45vw);
   transform: translate3d(-50%, 0, 0) rotate(-8deg);
@@ -1121,7 +1127,9 @@ body::after {
   }
 
   .top-nav {
-    position: relative;
+    position: sticky;
+    top: 0;
+    z-index: 40; /* above services-pin (z-index:30) so burger stays clickable */
     align-items: center;
     justify-content: space-between;
     flex-wrap: nowrap;
@@ -1829,4 +1837,52 @@ body::after {
     bottom: -18%;
     left: -14%;
   }
+
+  /* ── Services: convert stacking cards → simple horizontal swipe slider ── */
+  .services-scroll-spacer { display: none; }
+
+  .services-pin {
+    position: relative;
+    top: auto;
+    height: 88vh;
+    overflow: visible;
+  }
+
+  .services-card-area {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .services-card-area::-webkit-scrollbar { display: none; }
+
+  /* Each card is a full-width slide */
+  .service-card {
+    position: relative;
+    min-width: 100%;
+    flex-shrink: 0;
+    transform: none !important;
+    filter: none !important;
+    transition: none !important;
+    scroll-snap-align: start;
+  }
+
+  /* Restore absolute media fill inside each slide */
+  .sc-media {
+    position: absolute;
+    inset: 0;
+  }
+
+  /* Luxury Towers slide: show right side of image on mobile */
+  .service-card--2 .sc-img {
+    object-position: right center;
+    transform: none; /* remove desktop zoom-out scale */
+  }
+
+  /* Hide JS-driven progress dots (replaced by native scroll) */
+  .sc-dots { display: none; }
 }
