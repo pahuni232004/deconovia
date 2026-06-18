@@ -12,7 +12,7 @@ const servicesSection = document.getElementById("services-section");
 const serviceCards = document.querySelectorAll(".service-card");
 const scDots = document.querySelectorAll(".sc-dot");
 
-const HERO_BASE_LEFT_OFFSET = 55;
+const HERO_BASE_LEFT_OFFSET = 20;
 const HERO_BASE_TOP_VH = 18;
 const HERO_BASE_TOP_PX_ADJUST = -45;
 const MOBILE_BREAKPOINT = 980;
@@ -167,7 +167,7 @@ const animateHero = () => {
 
     // Section 3 entry: scrollY = panelThree.offsetTop (s3 at top of viewport)
     const s3StartScroll  = panelThree.offsetTop;
-    const vpYAtS3        = window.innerHeight * 0.10;
+    const vpYAtS3        = window.innerHeight * 0.28;
     const travelYAtS3    = s3StartScroll + vpYAtS3 - initialTop;
 
     // Section 4 / end of page resting position
@@ -282,12 +282,12 @@ const animateHero = () => {
       desktopFreezePoint = null;
     } else {
       if (!desktopFreezePoint) {
-        desktopFreezePoint = { scrollY: scrollYpx, yShift };
+        desktopFreezePoint = { scrollY: scrollYpx, yShift, scale };
       }
       // travelY mirrors scrollYpx growth → visual Y stays constant
       const frozenTravelY = scrollYpx - desktopFreezePoint.scrollY + desktopFreezePoint.yShift;
       const frozenX = -HERO_BASE_LEFT_OFFSET;
-      heroFloat.style.transform = `translate3d(calc(-50% + ${frozenX}px), ${frozenTravelY}px, 0) rotate(0deg) scale(${targetScale})`;
+      heroFloat.style.transform = `translate3d(calc(-50% + ${frozenX}px), ${frozenTravelY}px, 0) rotate(0deg) scale(${desktopFreezePoint.scale})`;
       return;
     }
   }
