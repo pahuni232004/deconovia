@@ -1,0 +1,280 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Our Spaces — Where Deconovia Towers Belong | Deconovia</title>
+    <meta name="description" content="Zero chemicals, organic living, and a tower for every space. Discover how Deconovia fits your indoor, balcony, kitchen, office, and home decor needs." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./site-shared.css?v=4" />
+    <link rel="stylesheet" href="./what-we-sell.css?v=3" />
+    <style>
+      html { scroll-padding-top: 5rem; }
+
+      /* ── Star Products Section ───────────────────────────── */
+      .spaces-star-products {
+        padding: 5rem 6% 6rem;
+        background: #f5ede0;
+        border-top: 1px solid rgba(101,67,33,0.12);
+      }
+
+      .spaces-star-inner {
+        max-width: 1060px;
+        margin: 0 auto;
+      }
+
+      .star-title {
+        margin: 0 0 1rem;
+        font-family: "Golden", serif;
+        letter-spacing: 0.02em;
+        font-size: clamp(3rem, 7.5vw, 4.5rem);
+        color: #5c3d2e;
+      }
+
+      .star-row {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 1.35rem;
+        align-items: end;
+        justify-items: center;
+      }
+
+      .star-product {
+        text-decoration: none;
+        color: inherit;
+        padding: 0.3rem;
+        transition: transform 0.25s ease;
+        text-align: center;
+      }
+
+      .star-product:hover { transform: translateY(-7.5px); }
+
+      .star-product img {
+        width: 100%;
+        height: 264px;
+        object-fit: contain;
+        filter: drop-shadow(0 15px 30px rgba(61,43,31,0.15));
+      }
+
+      .star-product h3 {
+        margin: 0.975rem 0 0.525rem;
+        font-size: 1.5rem;
+        color: #3d2b1f;
+        font-family: "Raleway", sans-serif;
+        font-weight: 700;
+      }
+
+      @media (max-width: 980px) {
+        .star-row {
+          grid-template-columns: repeat(4, minmax(140px, 1fr));
+          gap: 0.9rem;
+          overflow-x: auto;
+          overflow-y: hidden;
+          scroll-snap-type: x mandatory;
+          -webkit-overflow-scrolling: touch;
+          padding-bottom: 0.5rem;
+          align-items: start;
+        }
+        .star-product {
+          min-width: 140px;
+          scroll-snap-align: start;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+        }
+        .star-title { font-size: clamp(2rem, 5.5vw, 2.8rem); }
+      }
+
+      @media (max-width: 600px) {
+        .star-row {
+          grid-template-columns: repeat(4, minmax(130px, 1fr));
+          gap: 0.75rem;
+        }
+        .star-product { min-width: 130px; }
+        .star-product img { height: 190px; }
+        .star-title { font-size: clamp(1.6rem, 8vw, 2.2rem); }
+        .spaces-star-products { padding: 3.5rem 5% 4rem; }
+      }
+    </style>
+  </head>
+  <body class="sell-body">
+
+    <header class="top-nav">
+      <a class="logo" href="./index.html"><img src="./assets/images/logo_primary logo terracotta.png" alt="Decor Aeroponic" /></a>
+      <button
+        class="nav-toggle"
+        type="button"
+        aria-label="Toggle navigation menu"
+        aria-expanded="false"
+        aria-controls="site-nav"
+      >
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <nav id="site-nav">
+        <a href="./know-the-product.html">Products</a>
+        <a href="./what-we-sell.html">Aeroponic Living</a>
+        <a href="./aeroponic-spaces.html" class="active" aria-current="page">Our Spaces</a>
+        <a href="./contact.html">Contact Us</a>
+      </nav>
+    </header>
+
+    <main>
+
+      <!-- Advantage 4: Zero Chemicals — alt -->
+      <div class="split-block split-block--alt">
+        <span class="sb-above">Zero</span>
+        <div class="sb-image-wrap">
+          <img class="sb-img" src="./assets/images/Boutique Decor Store.png" alt="Chemical-free plants" />
+          <img class="sb-img" src="./assets/images/Spa and Wellness.png" alt="Wellness environment" />
+          <span class="sb-on">Chemicals</span>
+          <span class="sb-stat">No pesticides or fertilizers</span>
+        </div>
+        <p class="sb-sub">The sealed, soil-free environment eliminates pesticides entirely. What you grow is exactly what it appears to be.</p>
+      </div>
+
+      <!-- Advantage 5: Organic Living -->
+      <div class="split-block">
+        <span class="sb-above">Organic</span>
+        <div class="sb-image-wrap">
+          <img class="sb-img" src="./assets/images/organic living.png" alt="Organic living with aeroponic tower" />
+          <img class="sb-img" src="./assets/images/organnic living.png" alt="Fresh organic produce" />
+          <span class="sb-on">Living</span>
+          <span class="sb-stat">From tower to table</span>
+        </div>
+        <p class="sb-sub">Harvest ultra-fresh, chemical-free produce steps from your kitchen. Organic living isn't a purchase — it's a practice.</p>
+      </div>
+
+      <!-- Use case intro dark strip -->
+      <div class="sell-use-intro">
+        <div class="sui-text">
+          <h2>One tower.<br/>Every space.</h2>
+          <p>From kitchen countertops to living room focal points, Decor Aeroponic towers are designed to inhabit and elevate any environment.</p>
+        </div>
+        <div class="sui-tags">
+          <a class="sui-tag" href="#use-indoor">Indoor</a>
+          <a class="sui-tag" href="#use-balcony">Balcony</a>
+          <a class="sui-tag" href="#use-kitchen">Kitchen</a>
+          <a class="sui-tag" href="#use-office">Office Desk</a>
+          <a class="sui-tag" href="#use-home-decor">Home Decor</a>
+        </div>
+      </div>
+
+      <!-- Use 1: Indoor Living Room -->
+      <div class="split-block" id="use-indoor">
+        <span class="sb-above">Indoors</span>
+        <div class="sb-image-wrap">
+          <img class="sb-img" src="./assets/images/indoors.png" alt="Indoor living room" />
+          <img class="sb-img" src="./assets/images/indoors2.PNG" alt="Indoor living space" />
+          <span class="sb-on">Living Room</span>
+        </div>
+        <p class="sb-sub">Spira and Reva become the centrepiece of any living room — a living sculpture that oxygenates and nourishes your home.</p>
+      </div>
+
+      <!-- Use 2: Balcony / Outdoor — alt -->
+      <div class="split-block split-block--alt" id="use-balcony">
+        <span class="sb-above">Balcony</span>
+        <div class="sb-image-wrap">
+          <img class="sb-img" src="./assets/images/outdoor.PNG" alt="Outdoor balcony" />
+          <img class="sb-img" src="./assets/images/Resort.png" alt="Resort outdoor space" />
+          <span class="sb-on">Outdoor</span>
+        </div>
+        <p class="sb-sub">Spira and Reva thrive on sun-bathed balconies and rooftop spaces. Vertical gardens, wherever the light is best.</p>
+      </div>
+
+      <!-- Use 3: Kitchen Counter -->
+      <div class="split-block" id="use-kitchen">
+        <span class="sb-above">Kitchen</span>
+        <div class="sb-image-wrap">
+          <img class="sb-img" src="./assets/images/Kitchen.PNG" alt="Kitchen counter" />
+          <img class="sb-img" src="./assets/images/Island kitchen counter.png" alt="Island kitchen counter" />
+          <span class="sb-on">Counter</span>
+        </div>
+        <p class="sb-sub">Nova and Era sit perfectly on countertops. Fresh herbs always within arm's reach — zero trips to the store.</p>
+      </div>
+
+      <!-- Use 4: Office Desk — alt -->
+      <div class="split-block split-block--alt" id="use-office">
+        <span class="sb-above">Office</span>
+        <div class="sb-image-wrap">
+          <img class="sb-img" src="./assets/images/office.PNG" alt="Office desk" />
+          <img class="sb-img" src="./assets/images/office desk.PNG" alt="Office workspace" />
+          <span class="sb-on">Desk</span>
+        </div>
+        <p class="sb-sub">A compact tower purifies air, reduces stress, and grows food. Your desk becomes a living, breathing workspace.</p>
+      </div>
+
+      <!-- Use 5: Home Decor -->
+      <div class="split-block" id="use-home-decor">
+        <span class="sb-above">Home</span>
+        <div class="sb-image-wrap">
+          <img class="sb-img" src="./assets/images/Bedroom.png" alt="Bedroom" />
+          <img class="sb-img" src="./assets/images/Bookshelf.png" alt="Bookshelf" />
+          <span class="sb-on">D&eacute;cor</span>
+        </div>
+        <p class="sb-sub">Designed first as objects — sculptural, intentional, beautiful. The growing is the bonus. The presence is the point.</p>
+      </div>
+
+      <!-- CTA -->
+      <div class="sell-cta">
+        <h2>Ready to grow?</h2>
+        <p>We're not selling online just yet. Reach out to us directly and we'll help you find the right tower for your space.</p>
+        <a href="./contact.html" class="sell-cta-link">Get In Touch</a>
+      </div>
+
+      <!-- Our Star Products -->
+      <section class="spaces-star-products" id="star-products">
+        <div class="spaces-star-inner">
+          <h2 class="star-title">Our Star Products</h2>
+          <div class="star-row">
+            <a class="star-product" href="./know-the-product.html#product-1">
+              <img src="./assets/images/era.PNG" alt="Tower Era" />
+              <h3>Tower Era</h3>
+            </a>
+            <a class="star-product" href="./know-the-product.html#product-2">
+              <img src="./assets/images/nova.png" alt="Tower Nova" />
+              <h3>Tower Nova</h3>
+            </a>
+            <a class="star-product" href="./know-the-product.html#product-3">
+              <img src="./assets/images/reva.PNG" alt="Tower Reva" />
+              <h3>Tower Reva</h3>
+            </a>
+            <a class="star-product" href="./know-the-product.html#product-4">
+              <img src="./assets/images/spira.png" alt="Tower Spira" />
+              <h3>Tower Spira</h3>
+            </a>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <footer class="site-footer">
+      <div class="footer-inner">
+        <div class="footer-logo-wrap">
+          <img src="./assets/images/logo_tagline logo white.png" alt="Decor Aeroponic" />
+        </div>
+        <nav class="footer-links" aria-label="Footer navigation">
+          <p class="footer-links-label">Quick Links</p>
+          <a href="./index.html">Home</a>
+          <a href="./know-the-product.html">Products</a>
+          <a href="./what-we-sell.html">Aeroponic Living</a>
+          <a href="./aeroponic-spaces.html">Our Spaces</a>
+          <a href="./contact.html">Contact Us</a>
+        </nav>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2025 Decor Aeroponic. All rights reserved.</p>
+        <p>Made by <a href="https://www.etwot.com" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-decoration-color:rgba(245,237,224,0.3);text-underline-offset:3px;">Etwot</a></p>
+      </div>
+    </footer>
+
+    <script src="./what-we-sell.js?v=1"></script>
+  </body>
+</html>
