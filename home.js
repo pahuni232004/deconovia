@@ -273,15 +273,18 @@ const animateHero = () => {
     scale = targetScale;
   }
 
-  // ── Desktop: freeze tower position when section 4 enters (prevents drift to footer) ──
+  // ── Desktop: freeze tower as soon as section 3 reaches viewport top.
+  //    The tower rises into place during the services exit (phase 2), then
+  //    stays viewport-locked through all of sections 3 and 4. ──
   if (window.innerWidth > MOBILE_BREAKPOINT) {
-    if (progress < panelFourStart) {
+    const s3FreezeP = clamp(panelThree.offsetTop / totalScrollable, 0, 1);
+    if (progress < s3FreezeP) {
       desktopFreezePoint = null;
     } else {
       if (!desktopFreezePoint) {
         desktopFreezePoint = { scrollY: scrollYpx, yShift };
       }
-      // travelY grows at same rate as scrollYpx → visual Y stays constant (viewport-locked)
+      // travelY mirrors scrollYpx growth → visual Y stays constant
       const frozenTravelY = scrollYpx - desktopFreezePoint.scrollY + desktopFreezePoint.yShift;
       const frozenX = -HERO_BASE_LEFT_OFFSET;
       heroFloat.style.transform = `translate3d(calc(-50% + ${frozenX}px), ${frozenTravelY}px, 0) rotate(0deg) scale(${targetScale})`;
