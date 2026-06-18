@@ -64,20 +64,10 @@ const animateHero = () => {
   // Current scroll position (px scrolled from page top, equal to -frameRect.top)
   const scrollYpx = Math.max(0, -frameRect.top);
 
-  // Final destination: settle in section 4 just beside the CTA text (right of .cta-copy)
+  // Final destination: tower at 55% of viewport width in section 4 (between text block and seal)
   const finalRect = panelFour.getBoundingClientRect();
   const targetCenterY = finalRect.top - frameRect.top + finalRect.height * 0.45;
-
-  // Measure CTA copy right edge (horizontal only — stays constant regardless of vertical scroll)
-  let targetCenterX;
-  const ctaCopyEl = panelFour.querySelector('.cta-copy');
-  if (ctaCopyEl && window.innerWidth > MOBILE_BREAKPOINT) {
-    const ctaR = ctaCopyEl.getBoundingClientRect().right - frameRect.left;
-    const scaledHalfW = (heroFloat.offsetWidth * 0.52) / 2;
-    targetCenterX = ctaR + scaledHalfW + 24; // 24 px gap after CTA right edge
-  } else {
-    targetCenterX = finalRect.left - frameRect.left + finalRect.width * 0.72;
-  }
+  const targetCenterX = finalRect.left - frameRect.left + finalRect.width * 0.55;
 
   const targetTranslateY = targetCenterY - (initialTop + heroHeight / 2);
   const targetTranslateX = targetCenterX - initialLeft;
@@ -94,9 +84,10 @@ const animateHero = () => {
   // Float fades OUT as it "merges" into service card 1 (approaching panel-2)
   const svcFadeStart   = clamp((panelTwo.offsetTop - window.innerHeight * 0.55) / totalScrollable, 0, 1);
   const svcFadeEnd     = clamp((panelTwo.offsetTop + window.innerHeight * 0.35) / totalScrollable, 0, 1);
-  // Float fades back IN approaching panel-3
-  const svcFadeInStart = clamp((panelThree.offsetTop - window.innerHeight * 0.65) / totalScrollable, 0, 1);
-  const svcFadeInEnd   = clamp((panelThree.offsetTop - window.innerHeight * 0.1) / totalScrollable, 0, 1);
+  // Float fades back IN as services section ends — start early since float is invisible
+  // behind z-index 30 pin during fade, so there is no visual glitch from fading early
+  const svcFadeInStart = clamp((panelThree.offsetTop - window.innerHeight * 1.5) / totalScrollable, 0, 1);
+  const svcFadeInEnd   = clamp((panelThree.offsetTop - window.innerHeight * 0.4) / totalScrollable, 0, 1);
 
   const panelThreeEnd = clamp(
     (panelThree.offsetTop + panelThree.offsetHeight - window.innerHeight * 0.45) / totalScrollable,
@@ -175,7 +166,7 @@ const animateHero = () => {
 
     // Section 3 entry: scrollY = panelThree.offsetTop (s3 at top of viewport)
     const s3StartScroll  = panelThree.offsetTop;
-    const vpYAtS3        = window.innerHeight * 0.30;
+    const vpYAtS3        = window.innerHeight * 0.10;
     const travelYAtS3    = s3StartScroll + vpYAtS3 - initialTop;
 
     // Section 4 / end of page resting position
@@ -202,6 +193,10 @@ const animateHero = () => {
 
   const baseDrift = 92 * Math.pow(driftIn, 1.15) * (1 - Math.pow(driftOut, 1.1));
   let xShift = baseDrift + (targetTranslateX - baseDrift) * easedMerge;
+  // Desktop: section 3 tower appears at viewport center; drifts to 55% by section 4 end
+  if (window.innerWidth > MOBILE_BREAKPOINT) {
+    xShift = -HERO_BASE_LEFT_OFFSET + (targetTranslateX + HERO_BASE_LEFT_OFFSET) * easedMerge;
+  }
 
   // Y is fully handled by travelY; no additional easedMerge blend needed
   const yShift = travelY;
