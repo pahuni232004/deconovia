@@ -495,10 +495,35 @@
   margin: 0 0 0.75rem;
 }
 .cat-kit-sub {
-  font-size: 0.85rem !important;
-  color: rgba(61,43,31,0.55) !important;
+  font-size: 0.9rem !important;
+  color: #6e4e3a !important;
+  margin-bottom: 1.5rem !important;
 }
-.cat-kit-sub a { color: #44030F; }
+
+/* Prominent "Contact Us" CTA inside kit note */
+.cat-kit-cta {
+  display: inline-block;
+  margin-top: 0.25rem;
+  padding: 0.85rem 2.8rem;
+  background: #44030F;
+  color: #f5ede0;
+  font-family: "Raleway", sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-radius: 100px;
+  border: 2px solid #44030F;
+  transition: background 0.22s, color 0.22s, transform 0.18s;
+  box-shadow: 0 4px 18px rgba(68, 3, 15, 0.22);
+}
+.cat-kit-cta:hover {
+  background: transparent;
+  color: #44030F;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 22px rgba(68, 3, 15, 0.18);
+}
 .cat-img-placeholder {
   width: 68%;
   max-width: 380px;
