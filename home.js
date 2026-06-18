@@ -64,10 +64,21 @@ const animateHero = () => {
   // Current scroll position (px scrolled from page top, equal to -frameRect.top)
   const scrollYpx = Math.max(0, -frameRect.top);
 
-  // Final destination: settle in section 4 (right side of cta block)
+  // Final destination: settle in section 4 just beside the CTA text (right of .cta-copy)
   const finalRect = panelFour.getBoundingClientRect();
   const targetCenterY = finalRect.top - frameRect.top + finalRect.height * 0.45;
-  const targetCenterX = finalRect.left - frameRect.left + finalRect.width * 0.72;
+
+  // Measure CTA copy right edge (horizontal only — stays constant regardless of vertical scroll)
+  let targetCenterX;
+  const ctaCopyEl = panelFour.querySelector('.cta-copy');
+  if (ctaCopyEl && window.innerWidth > MOBILE_BREAKPOINT) {
+    const ctaR = ctaCopyEl.getBoundingClientRect().right - frameRect.left;
+    const scaledHalfW = (heroFloat.offsetWidth * 0.52) / 2;
+    targetCenterX = ctaR + scaledHalfW + 24; // 24 px gap after CTA right edge
+  } else {
+    targetCenterX = finalRect.left - frameRect.left + finalRect.width * 0.72;
+  }
+
   const targetTranslateY = targetCenterY - (initialTop + heroHeight / 2);
   const targetTranslateX = targetCenterX - initialLeft;
   const targetScale = 0.52;
@@ -104,24 +115,22 @@ const animateHero = () => {
     0, 1
   );
 
-  // ── Opacity: hide while in services section, re-emerge at section 3 ──
+  // ── Opacity: float hides BEHIND slider via z-index (20 vs pin's 30).
+  //    Opacity is 0 during services as belt-and-suspenders, then fades
+  //    in smoothly as section 3 appears. No early return — transforms
+  //    are always computed so position is correct at re-emergence. ──
   let floatOpacity = 1;
-  if (progress >= svcFadeStart && progress <= svcFadeEnd) {
-    floatOpacity = 1 - clamp(
-      (progress - svcFadeStart) / Math.max(svcFadeEnd - svcFadeStart, 0.001),
-      0, 1
-    );
-  } else if (progress > svcFadeEnd && progress < svcFadeInStart) {
+  if (progress >= svcFadeStart && progress < svcFadeInStart) {
+    // Fully hidden (z-index covers it; opacity=0 prevents any edge bleed)
     floatOpacity = 0;
   } else if (progress >= svcFadeInStart && progress <= svcFadeInEnd) {
+    // Smooth fade-in as section 3 comes into view
     floatOpacity = clamp(
       (progress - svcFadeInStart) / Math.max(svcFadeInEnd - svcFadeInStart, 0.001),
       0, 1
     );
   }
-
   heroFloat.style.opacity = String(floatOpacity);
-  if (floatOpacity === 0) return;   // skip transform while invisible
 
   // ── Transform calculation ──
   const straightenEase = Math.pow(panelTwoProgress, 1.25);
@@ -150,35 +159,52 @@ const animateHero = () => {
   const driftOut = clamp((progress - panelFourMid)  / Math.max(panelFourEnd - panelFourMid,   0.001), 0, 1);
 
   // ── Y travel ──────────────────────────────────────────────────────
-  // Bug: the old formula (progress * targetTranslateY) produced ratio ≈ 0.97
-  // meaning the float drifted to -scrollY * 0.03 ≈ −130 px (nav-bar area) at section 3.
-  // Fix: for sections 3+4 on desktop, use a viewport-anchored trajectory so the
-  // float appears at a proper screen position when it re-emerges.
+  // Three-phase viewport-anchored trajectory (desktop only):
+  //   Phase 1 – Section 1:   gentle original parallax (short range, negligible drift)
+  //   Phase 2 – Services:    smooth hidden interpolation from s1 exit → s3 entry
+  //                          (tower is behind the sticky slider, so position is invisible)
+  //   Phase 3 – S3 + S4:    drift gently from s3 entry position to s4 resting spot
+  // Mobile keeps the original formula (separate mobile block handles it).
   let travelY;
-  if (window.innerWidth <= MOBILE_BREAKPOINT || scrollYpx < svcFadeInEnd * totalScrollable) {
-    // Section 1 (and hidden section 2): original light parallax — negligible drift over ~100vh
+  if (window.innerWidth <= MOBILE_BREAKPOINT) {
     travelY = progress * Math.max(targetTranslateY, 0);
   } else {
-    // Desktop sections 3 + 4: document-anchored trajectory
-    // At re-emergence (svcFadeInEnd), place float at 30 % from viewport top.
-    // By end of page place it at 40 % (gives a gentle downward drift into s4).
-    const s3EndScroll   = svcFadeInEnd * totalScrollable;
-    const vpYAtS3       = window.innerHeight * 0.30;
-    const travelYAtS3   = s3EndScroll + vpYAtS3 - initialTop;
-    const vpYAtEnd      = window.innerHeight * 0.40;
-    const travelYAtEnd  = totalScrollable + vpYAtEnd - initialTop;
-    const s34Range      = Math.max(totalScrollable - s3EndScroll, 1);
-    const s34p          = clamp((scrollYpx - s3EndScroll) / s34Range, 0, 1);
-    const easedS34      = s34p * s34p * (3 - 2 * s34p); // smoothstep
-    travelY             = travelYAtS3 + (travelYAtEnd - travelYAtS3) * easedS34;
+    // Transition boundary: where float starts going behind the slider
+    const s1EndScroll    = svcFadeStart * totalScrollable;
+    const travelYAtS1End = svcFadeStart * Math.max(targetTranslateY, 0);
+
+    // Section 3 entry: scrollY = panelThree.offsetTop (s3 at top of viewport)
+    const s3StartScroll  = panelThree.offsetTop;
+    const vpYAtS3        = window.innerHeight * 0.30;
+    const travelYAtS3    = s3StartScroll + vpYAtS3 - initialTop;
+
+    // Section 4 / end of page resting position
+    const vpYAtEnd       = window.innerHeight * 0.38;
+    const travelYAtEnd   = totalScrollable + vpYAtEnd - initialTop;
+
+    if (scrollYpx <= s1EndScroll) {
+      // Phase 1 – Section 1
+      travelY = progress * Math.max(targetTranslateY, 0);
+    } else if (scrollYpx <= s3StartScroll) {
+      // Phase 2 – Services (hidden behind slider): slow smoothstep interpolation
+      const svcRange = Math.max(s3StartScroll - s1EndScroll, 1);
+      const svcP     = clamp((scrollYpx - s1EndScroll) / svcRange, 0, 1);
+      const easedSvc = svcP * svcP * (3 - 2 * svcP);
+      travelY = travelYAtS1End + (travelYAtS3 - travelYAtS1End) * easedSvc;
+    } else {
+      // Phase 3 – Sections 3 + 4: gentle drift to final resting position
+      const s34Range = Math.max(totalScrollable - s3StartScroll, 1);
+      const s34p     = clamp((scrollYpx - s3StartScroll) / s34Range, 0, 1);
+      const easedS34 = s34p * s34p * (3 - 2 * s34p);
+      travelY = travelYAtS3 + (travelYAtEnd - travelYAtS3) * easedS34;
+    }
   }
 
   const baseDrift = 92 * Math.pow(driftIn, 1.15) * (1 - Math.pow(driftOut, 1.1));
   let xShift = baseDrift + (targetTranslateX - baseDrift) * easedMerge;
 
-  // For desktop s3+4 the travelY already places the float correctly; no extra merge needed.
-  const useSimpleY = window.innerWidth > MOBILE_BREAKPOINT && scrollYpx >= svcFadeInEnd * totalScrollable;
-  const yShift = useSimpleY ? travelY : travelY + (targetTranslateY - travelY) * easedMerge;
+  // Y is fully handled by travelY; no additional easedMerge blend needed
+  const yShift = travelY;
 
   // ── Mobile-specific path ──
   if (window.innerWidth <= MOBILE_BREAKPOINT) {

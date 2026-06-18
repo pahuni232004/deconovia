@@ -1047,9 +1047,9 @@ body::after {
   width: min(460px, 45vw);
   transform: translate3d(-50%, 0, 0) rotate(-8deg);
   transform-origin: center;
-  /* Must be above .services-pin (z-index: 30) so fade-out is visible,
-     not abruptly cut when the sticky panel stacks over it */
-  z-index: 35;
+  /* Below .services-pin (z-index: 30) — tower hides naturally behind the slider
+     and re-emerges once the pin unsticks and scrolls away */
+  z-index: 20;
   pointer-events: none;
   filter: drop-shadow(0 34px 36px rgba(61, 43, 31, 0.2));
   will-change: transform, opacity;
