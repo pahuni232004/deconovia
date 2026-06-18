@@ -150,6 +150,23 @@
 
 /* ── Mobile nav ──────────────────────────────────────────────── */
 
+/* Overlay backdrop — created by JS, styled here */
+.nav-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(61, 43, 31, 0.45);
+  z-index: 48;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.28s ease;
+  display: none;
+}
+.nav-overlay.is-open {
+  opacity: 1;
+  pointer-events: all;
+  display: block;
+}
+
 @media (max-width: 860px) {
   .top-nav {
     position: relative;
@@ -158,23 +175,52 @@
     flex-wrap: nowrap;
   }
 
+  /* ── Sidebar nav — always rendered, hidden via transform ── */
   .top-nav nav {
-    display: none;
-    position: absolute;
-    top: calc(100% + 0.4rem);
-    right: 1rem;
-    flex-direction: row;
-    flex-wrap: wrap;
-    gap: 0.4rem;
-    padding: 0.7rem 0.8rem;
-    background: rgba(245, 237, 224, 0.98);
-    border: 1px solid rgba(101, 67, 33, 0.15);
-    border-radius: 12px;
-    box-shadow: 0 12px 28px rgba(61, 43, 31, 0.18);
-    z-index: 45;
+    display: flex !important;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: min(72vw, 260px);
+    margin-left: 0;
+    padding: 5rem 1.6rem 2rem;
+    background: rgba(245, 237, 224, 0.99);
+    border: none;
+    border-left: 1px solid rgba(101, 67, 33, 0.12);
+    border-radius: 0;
+    box-shadow: -6px 0 28px rgba(61, 43, 31, 0.18);
+    z-index: 50;
+    transform: translateX(100%);
+    transition: transform 0.3s cubic-bezier(0.32, 0, 0.67, 0);
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
   }
 
-  .top-nav.menu-open nav { display: flex; }
+  .top-nav.menu-open nav {
+    transform: translateX(0);
+    transition-timing-function: cubic-bezier(0.33, 1, 0.68, 1);
+  }
+
+  .top-nav nav a {
+    width: 100%;
+    min-height: 2.8rem;
+    display: flex;
+    align-items: center;
+    padding: 0.85rem 0;
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    border-radius: 0;
+    border-bottom: 1px solid rgba(101, 67, 33, 0.1);
+    white-space: nowrap;
+    justify-content: flex-start;
+  }
+
+  .top-nav nav a:last-child { border-bottom: none; }
 
   .nav-toggle {
     display: inline-flex;

@@ -3,14 +3,18 @@ const SHEET_URL = 'https://script.google.com/macros/s/AKfycbwa-MsT4Lo2DLgL0voOQN
 
 document.addEventListener('DOMContentLoaded', () => {
 
-  /* ── Mobile nav toggle ──────────────────────────────────────── */
+  /* ── Mobile nav toggle + sidebar overlay ──────────────────── */
   const toggle = document.querySelector('.nav-toggle');
   const topNav = document.querySelector('.top-nav');
   if (toggle && topNav) {
-    toggle.addEventListener('click', () => {
-      const open = topNav.classList.toggle('menu-open');
-      toggle.setAttribute('aria-expanded', String(open));
-    });
+    const navOverlay = document.createElement('div');
+    navOverlay.className = 'nav-overlay';
+    document.body.appendChild(navOverlay);
+    const closeNav = () => { topNav.classList.remove('menu-open'); toggle.setAttribute('aria-expanded', 'false'); navOverlay.classList.remove('is-open'); document.body.style.overflow = ''; };
+    const openNav  = () => { topNav.classList.add('menu-open');    toggle.setAttribute('aria-expanded', 'true');  navOverlay.classList.add('is-open');    document.body.style.overflow = 'hidden'; };
+    toggle.addEventListener('click', () => topNav.classList.contains('menu-open') ? closeNav() : openNav());
+    navOverlay.addEventListener('click', closeNav);
+    window.addEventListener('resize', () => { if (window.innerWidth > 860) closeNav(); });
   }
 
   /* ── Contact form → Google Sheet ───────────────────────────── */

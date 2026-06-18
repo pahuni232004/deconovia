@@ -61,6 +61,9 @@ const animateHero = () => {
   const initialLeft = frameRect.width / 2 + HERO_BASE_LEFT_OFFSET;
   const heroHeight = heroFloat.offsetHeight || heroFloat.getBoundingClientRect().height;
 
+  // Current scroll position (px scrolled from page top, equal to -frameRect.top)
+  const scrollYpx = Math.max(0, -frameRect.top);
+
   // Final destination: settle in section 4 (right side of cta block)
   const finalRect = panelFour.getBoundingClientRect();
   const targetCenterY = finalRect.top - frameRect.top + finalRect.height * 0.45;
@@ -146,10 +149,36 @@ const animateHero = () => {
   const driftIn  = clamp((progress - panelThreeEnd) / Math.max(panelFourMid - panelThreeEnd, 0.001), 0, 1);
   const driftOut = clamp((progress - panelFourMid)  / Math.max(panelFourEnd - panelFourMid,   0.001), 0, 1);
 
-  const travelY  = progress * Math.max(targetTranslateY, 0);
+  // ── Y travel ──────────────────────────────────────────────────────
+  // Bug: the old formula (progress * targetTranslateY) produced ratio ≈ 0.97
+  // meaning the float drifted to -scrollY * 0.03 ≈ −130 px (nav-bar area) at section 3.
+  // Fix: for sections 3+4 on desktop, use a viewport-anchored trajectory so the
+  // float appears at a proper screen position when it re-emerges.
+  let travelY;
+  if (window.innerWidth <= MOBILE_BREAKPOINT || scrollYpx < svcFadeInEnd * totalScrollable) {
+    // Section 1 (and hidden section 2): original light parallax — negligible drift over ~100vh
+    travelY = progress * Math.max(targetTranslateY, 0);
+  } else {
+    // Desktop sections 3 + 4: document-anchored trajectory
+    // At re-emergence (svcFadeInEnd), place float at 30 % from viewport top.
+    // By end of page place it at 40 % (gives a gentle downward drift into s4).
+    const s3EndScroll   = svcFadeInEnd * totalScrollable;
+    const vpYAtS3       = window.innerHeight * 0.30;
+    const travelYAtS3   = s3EndScroll + vpYAtS3 - initialTop;
+    const vpYAtEnd      = window.innerHeight * 0.40;
+    const travelYAtEnd  = totalScrollable + vpYAtEnd - initialTop;
+    const s34Range      = Math.max(totalScrollable - s3EndScroll, 1);
+    const s34p          = clamp((scrollYpx - s3EndScroll) / s34Range, 0, 1);
+    const easedS34      = s34p * s34p * (3 - 2 * s34p); // smoothstep
+    travelY             = travelYAtS3 + (travelYAtEnd - travelYAtS3) * easedS34;
+  }
+
   const baseDrift = 92 * Math.pow(driftIn, 1.15) * (1 - Math.pow(driftOut, 1.1));
   let xShift = baseDrift + (targetTranslateX - baseDrift) * easedMerge;
-  const yShift = travelY + (targetTranslateY - travelY) * easedMerge;
+
+  // For desktop s3+4 the travelY already places the float correctly; no extra merge needed.
+  const useSimpleY = window.innerWidth > MOBILE_BREAKPOINT && scrollYpx >= svcFadeInEnd * totalScrollable;
+  const yShift = useSimpleY ? travelY : travelY + (targetTranslateY - travelY) * easedMerge;
 
   // ── Mobile-specific path ──
   if (window.innerWidth <= MOBILE_BREAKPOINT) {
@@ -191,12 +220,15 @@ const animateHero = () => {
       const lockedScale = Math.max(mobileFreezePoint.scale, 0.72);
 
       if (progress >= panelFourStart) {
+        // Section 4 on mobile: lock float at a FIXED viewport position so it
+        // doesn't drift as the user scrolls through the section.
         const desiredPhoneCenterX = frameRect.width * 0.88 - 200;
         const panelFourTargetCenterX = isTargetPhone ? desiredPhoneCenterX : frameRect.width * 0.78 + 90;
-        const panelFourTargetCenterY = panelFour.offsetTop + (isTargetPhone ? 420 : 540);
         const lockTargetX = panelFourTargetCenterX - initialLeft;
-        const lockTargetY = panelFourTargetCenterY - (initialTop + heroHeight / 2);
-        heroFloat.style.transform = `translate3d(calc(-50% + ${lockTargetX}px), ${lockTargetY}px, 0) rotate(${mobileFreezePoint.rotation}deg) scale(${lockedScale})`;
+        // Viewport-fixed Y: scrollYpx tracks scroll, so visual stays constant
+        const fixedVpY    = window.innerHeight * (isTargetPhone ? 0.28 : 0.32);
+        const lockTargetY = scrollYpx + fixedVpY - initialTop;
+        heroFloat.style.transform = `translate3d(calc(-50% + ${lockTargetX}px), ${lockTargetY}px, 0) rotate(0deg) scale(${lockedScale})`;
         return;
       }
 
@@ -204,11 +236,9 @@ const animateHero = () => {
       if (progress >= panelFourLockStart) {
         const desiredPhoneCenterX = frameRect.width * 0.88 - 200;
         const panelFourTargetCenterX = isTargetPhone ? desiredPhoneCenterX : frameRect.width * 0.78 + 90;
-        const panelFourTargetCenterY = isTargetPhone
-          ? panelFour.offsetTop + panelFour.offsetHeight * 0.55 - 800
-          : panelFour.offsetTop + panelFour.offsetHeight * 0.55 + 600;
-        const lockTargetX = panelFourTargetCenterX - initialLeft;
-        const lockTargetY = panelFourTargetCenterY - (initialTop + heroHeight / 2);
+        const lockTargetX  = panelFourTargetCenterX - initialLeft;
+        const fixedVpY     = window.innerHeight * (isTargetPhone ? 0.28 : 0.32);
+        const lockTargetY  = scrollYpx + fixedVpY - initialTop;
         const lockedScaleInner = Math.max(scale, 0.72);
         heroFloat.style.transform = `translate3d(calc(-50% + ${lockTargetX}px), ${lockTargetY}px, 0) rotate(${rotation}deg) scale(${lockedScaleInner})`;
         return;
@@ -230,18 +260,33 @@ const onScroll = () => {
   animateHero();
 };
 
-/* ── Nav toggle ──────────────────────────────────── */
+/* ── Nav toggle + sidebar overlay ───────────────────────── */
 if (navToggle && topNav) {
+  // Create overlay backdrop (styled in site-shared.css as .nav-overlay)
+  const navOverlay = document.createElement("div");
+  navOverlay.className = "nav-overlay";
+  document.body.appendChild(navOverlay);
+
+  const openNav = () => {
+    topNav.classList.add("menu-open");
+    navToggle.setAttribute("aria-expanded", "true");
+    navOverlay.classList.add("is-open");
+    document.body.style.overflow = "hidden";
+  };
+  const closeNav = () => {
+    topNav.classList.remove("menu-open");
+    navToggle.setAttribute("aria-expanded", "false");
+    navOverlay.classList.remove("is-open");
+    document.body.style.overflow = "";
+  };
+
   navToggle.addEventListener("click", () => {
-    const isOpen = topNav.classList.toggle("menu-open");
-    navToggle.setAttribute("aria-expanded", String(isOpen));
+    topNav.classList.contains("menu-open") ? closeNav() : openNav();
   });
+  navOverlay.addEventListener("click", closeNav);
 
   window.addEventListener("resize", () => {
-    if (window.innerWidth > MOBILE_BREAKPOINT && topNav.classList.contains("menu-open")) {
-      topNav.classList.remove("menu-open");
-      navToggle.setAttribute("aria-expanded", "false");
-    }
+    if (window.innerWidth > MOBILE_BREAKPOINT) closeNav();
   });
 }
 

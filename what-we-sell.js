@@ -1,14 +1,18 @@
 (function () {
   'use strict';
 
-  // Mobile nav toggle
+  // Mobile nav toggle + sidebar overlay
   const toggle = document.querySelector('.nav-toggle');
   const nav = document.querySelector('.top-nav');
   if (toggle && nav) {
-    toggle.addEventListener('click', () => {
-      const open = nav.classList.toggle('menu-open');
-      toggle.setAttribute('aria-expanded', open);
-    });
+    const navOverlay = document.createElement('div');
+    navOverlay.className = 'nav-overlay';
+    document.body.appendChild(navOverlay);
+    const closeNav = () => { nav.classList.remove('menu-open'); toggle.setAttribute('aria-expanded', 'false'); navOverlay.classList.remove('is-open'); document.body.style.overflow = ''; };
+    const openNav  = () => { nav.classList.add('menu-open');    toggle.setAttribute('aria-expanded', 'true');  navOverlay.classList.add('is-open');    document.body.style.overflow = 'hidden'; };
+    toggle.addEventListener('click', () => nav.classList.contains('menu-open') ? closeNav() : openNav());
+    navOverlay.addEventListener('click', closeNav);
+    window.addEventListener('resize', () => { if (window.innerWidth > 860) closeNav(); });
   }
 
   // Scroll reveal for split blocks
