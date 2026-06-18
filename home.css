@@ -390,8 +390,9 @@ body::after {
   top: 0;
   height: 100vh;
   overflow: hidden;
-  /* Both services-head and services-card-area are position:absolute inside */
-  background: #1a0e07; /* fallback before image loads */
+  display: flex;
+  flex-direction: column;
+  background: #1a0e07;
   z-index: 30;
 }
 
@@ -402,39 +403,32 @@ body::after {
   pointer-events: none;
 }
 
-/* ── Heading bar — centred, large ── */
+/* ── Heading bar — own strip, NOT overlapping cards ── */
 .services-head {
   flex-shrink: 0;
-  padding: 2.5rem 5% 1.5rem;
+  padding: 2.8rem 5% 2.4rem;
+  text-align: center;
+  background: linear-gradient(135deg, #ede0cc 0%, #e8d8c4 100%);
+  border-bottom: 2px solid rgba(101, 67, 33, 0.18);
   position: relative;
   z-index: 20;
-  text-align: center;
-  /* Floats above the card stack via absolute positioning so it doesn't eat height */
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  pointer-events: none;
 }
 
 .services-heading {
   margin: 0;
   font-family: "Golden", serif;
-  font-size: clamp(4rem, 9vw, 8rem);
-  color: #fff;
+  font-size: clamp(3.5rem, 8vw, 7rem);
+  color: #5c3d2e;
   line-height: 1;
   letter-spacing: 0.02em;
-  text-shadow:
-    0 2px 8px rgba(0,0,0,0.45),
-    0 8px 32px rgba(0,0,0,0.25);
-  pointer-events: none;
 }
 
-/* Card stack area fills the pin */
+/* Card stack area — takes all remaining height below heading */
 .services-card-area {
-  position: absolute;
-  inset: 0;
+  flex: 1;
+  position: relative;
   overflow: hidden;
+  min-height: 0; /* allow flex child to shrink properly */
 }
 
 /* Each card is full-bleed; JS toggles .sc-active */
@@ -585,11 +579,11 @@ body::after {
 /* ── Mobile overrides ── */
 @media (max-width: 680px) {
   .services-heading {
-    font-size: clamp(2.8rem, 11vw, 4.5rem);
+    font-size: clamp(2.6rem, 10vw, 4rem);
   }
 
   .services-head {
-    padding: 1.5rem 5% 1rem;
+    padding: 1.6rem 5% 1.4rem;
   }
 
   .sc-overlay {
@@ -690,6 +684,7 @@ body::after {
 .panel-3 {
   overflow: hidden;
   isolation: isolate;
+  margin-top: 6rem; /* breathing room after services slider */
 }
 
 .panel-3::before {
