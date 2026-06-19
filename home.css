@@ -479,9 +479,9 @@ body::after {
   display: block;
 }
 
-/* Luxury Towers card: slightly zoomed-out so more of the tower is visible */
+/* Luxury Towers card: slight zoom-out so more of the tower is visible */
 .service-card--2 .sc-img {
-  transform: scale(0.82);
+  transform: scale(0.91);
   transform-origin: center center;
 }
 
