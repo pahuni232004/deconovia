@@ -12,7 +12,7 @@ const servicesSection = document.getElementById("services-section");
 const serviceCards = document.querySelectorAll(".service-card");
 const scDots = document.querySelectorAll(".sc-dot");
 
-const HERO_BASE_LEFT_OFFSET = 145; // CSS must match: left: calc(50% + 145px)
+const HERO_BASE_LEFT_OFFSET = 165; // CSS must match: left: calc(50% + 165px)
 const HERO_BASE_TOP_VH = 18;
 const HERO_BASE_TOP_PX_ADJUST = -45;
 const MOBILE_BREAKPOINT = 980;
@@ -169,7 +169,7 @@ const animateHero = () => {
 
     // Section 3 entry: scrollY = panelThree.offsetTop (s3 at top of viewport)
     const s3StartScroll  = panelThree.offsetTop;
-    const vpYAtS3        = window.innerHeight * 0.28 - 350; // −350: lock 200px higher than before
+    const vpYAtS3        = window.innerHeight * 0.28 - 450; // −450: lock 100px higher than before
     const travelYAtS3    = s3StartScroll + vpYAtS3 - initialTop;
 
     // Section 4 / end of page resting position
