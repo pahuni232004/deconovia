@@ -11,34 +11,36 @@
       href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="./site-shared.css?v=5" />
-    <link rel="stylesheet" href="./home.css?v=28" />
+    <link rel="stylesheet" href="./site-shared.css?v=6" />
+    <link rel="stylesheet" href="./home.css?v=29" />
   </head>
   <body>
     <main class="home-shell">
       <section class="story-stage" id="story-stage">
-        <div class="story-frame">
-          <header class="top-nav">
-            <a class="logo" href="./index.html"><img src="./assets/images/logo_primary logo terracotta.png" alt="Decor Aeroponic" /></a>
-            <button
-              class="nav-toggle"
-              type="button"
-              aria-label="Toggle navigation menu"
-              aria-expanded="false"
-              aria-controls="site-nav"
-            >
-              <span></span>
-              <span></span>
-              <span></span>
-            </button>
-            <nav id="site-nav">
-              <a href="./know-the-product.html">Products</a>
-              <a href="./what-we-sell.html">Aeroponic Living</a>
-              <a href="./aeroponic-spaces.html">Product Catalogue</a>
-              <a href="./contact.html">Contact Us</a>
-            </nav>
-          </header>
+        <!-- nav lives OUTSIDE story-frame so that overflow:clip on story-frame
+             does not hijack position:fixed on the nav panel (iOS Safari bug) -->
+        <header class="top-nav">
+          <a class="logo" href="./index.html"><img src="./assets/images/logo_primary logo terracotta.png" alt="Decor Aeroponic" /></a>
+          <button
+            class="nav-toggle"
+            type="button"
+            aria-label="Toggle navigation menu"
+            aria-expanded="false"
+            aria-controls="site-nav"
+          >
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+          <nav id="site-nav">
+            <a href="./know-the-product.html">Products</a>
+            <a href="./what-we-sell.html">Aeroponic Living</a>
+            <a href="./aeroponic-spaces.html">Product Catalogue</a>
+            <a href="./contact.html">Contact Us</a>
+          </nav>
+        </header>
 
+        <div class="story-frame">
           <img
             id="hero-float"
             class="hero-float"
@@ -210,6 +212,6 @@
         </div>
       </section>
     </main>
-    <script src="./home.js?v=22"></script>
+    <script src="./home.js?v=23"></script>
   </body>
 </html>

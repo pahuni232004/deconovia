@@ -11,7 +11,7 @@
 .top-nav {
   position: sticky;
   top: 0;
-  z-index: 30;
+  z-index: 52; /* must exceed nav-overlay (48) so the nav panel (inside this stacking context) stays visible */
   display: flex;
   align-items: center;
   gap: 1.2rem;

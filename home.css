@@ -1129,7 +1129,7 @@ body::after {
   .top-nav {
     position: sticky;
     top: 0;
-    z-index: 40; /* above services-pin (z-index:30) so burger stays clickable */
+    z-index: 52; /* must match site-shared (52) — never drop below nav-overlay (48) */
     align-items: center;
     justify-content: space-between;
     flex-wrap: nowrap;

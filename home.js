@@ -244,8 +244,8 @@ const animateHero = () => {
       const lockedScale = Math.max(mobileFreezePoint.scale, 0.72);
 
       if (progress >= panelFourStart) {
-        // Section 4 on mobile: lock at viewport centre, mid-height
-        const lockTargetX = -HERO_BASE_LEFT_OFFSET; // centres the tower
+        // Section 4 on mobile: lock at ~60% of viewport width (right side), mid-height
+        const lockTargetX = Math.round(frameRect.width * 0.60) - initialLeft;
         const fixedVpY    = window.innerHeight * 0.30;
         const lockTargetY = scrollYpx + fixedVpY - initialTop;
         heroFloat.style.transform = `translate3d(calc(-50% + ${lockTargetX}px), ${lockTargetY}px, 0) rotate(0deg) scale(${lockedScale})`;
@@ -254,7 +254,7 @@ const animateHero = () => {
 
       const panelFourLockStart = panelThreeEnd;
       if (progress >= panelFourLockStart) {
-        const lockTargetX  = -HERO_BASE_LEFT_OFFSET;
+        const lockTargetX  = Math.round(frameRect.width * 0.60) - initialLeft;
         const fixedVpY     = window.innerHeight * 0.30;
         const lockTargetY  = scrollYpx + fixedVpY - initialTop;
         const lockedScaleInner = Math.max(scale, 0.72);
