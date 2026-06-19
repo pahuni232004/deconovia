@@ -4,6 +4,7 @@ const panelTwo = document.querySelector(".panel-2");
 const panelThree = document.querySelector(".panel-3");
 const panelFour = document.querySelector(".panel-4");
 const storyFrame = document.querySelector(".story-frame");
+const siteFooter = document.querySelector('.site-footer');
 const navToggle = document.querySelector(".nav-toggle");
 const topNav = document.querySelector(".top-nav");
 
@@ -108,20 +109,18 @@ const animateHero = () => {
     0, 1
   );
 
-  // ── Opacity: float hides BEHIND slider via z-index (20 vs pin's 30).
-  //    Opacity is 0 during services as belt-and-suspenders, then fades
-  //    in smoothly as section 3 appears. No early return — transforms
-  //    are always computed so position is correct at re-emergence. ──
+  // ── Opacity: tower visible throughout — slides into section 2 and glides to section 4.
+  //    Fades out gently as footer enters the viewport. ──
   let floatOpacity = 1;
-  if (progress >= svcFadeStart && progress < svcFadeInStart) {
-    // Fully hidden (z-index covers it; opacity=0 prevents any edge bleed)
-    floatOpacity = 0;
-  } else if (progress >= svcFadeInStart && progress <= svcFadeInEnd) {
-    // Smooth fade-in as section 3 comes into view
-    floatOpacity = clamp(
-      (progress - svcFadeInStart) / Math.max(svcFadeInEnd - svcFadeInStart, 0.001),
-      0, 1
-    );
+  if (siteFooter) {
+    const footerRelP     = clamp((siteFooter.offsetTop - window.innerHeight * 0.8) / totalScrollable, 0, 1);
+    const footerFadeEndP = clamp((siteFooter.offsetTop - window.innerHeight * 0.3) / totalScrollable, 0, 1);
+    if (progress > footerRelP) {
+      floatOpacity = 1 - clamp(
+        (progress - footerRelP) / Math.max(footerFadeEndP - footerRelP, 0.001),
+        0, 1
+      );
+    }
   }
   heroFloat.style.opacity = String(floatOpacity);
 
@@ -153,36 +152,36 @@ const animateHero = () => {
 
   // ── Y travel ──────────────────────────────────────────────────────
   // Three-phase viewport-anchored trajectory (desktop only):
-  //   Phase 1 – Section 1:   gentle original parallax (short range, negligible drift)
-  //   Phase 2 – Services:    smooth hidden interpolation from s1 exit → s3 entry
-  //                          (tower is behind the sticky slider, so position is invisible)
-  //   Phase 3 – S3 + S4:    drift gently from s3 entry position to s4 resting spot
+  //   Phase 1 – Section 1:    gentle parallax
+  //   Phase 2 – Sections 2–4: smooth smoothstep slide toward the section-4 lock position
+  //                            (tower slides visibly through section 2, section 3, into s4)
+  //   Phase 3 – After lock:   travelY constant → tower scrolls with page (exits above footer)
   // Mobile keeps the original formula (separate mobile block handles it).
   let travelY;
   if (window.innerWidth <= MOBILE_BREAKPOINT) {
     travelY = progress * Math.max(targetTranslateY, 0);
   } else {
-    // Transition boundary: where float starts going behind the slider
-    const s1EndScroll    = svcFadeStart * totalScrollable;
-    const travelYAtS1End = svcFadeStart * Math.max(targetTranslateY, 0);
+    const navH            = topNav ? topNav.offsetHeight : 68;
+    const s1EndScroll     = svcFadeStart * totalScrollable;
+    const travelYAtS1End  = svcFadeStart * Math.max(targetTranslateY, 0);
 
-    // Section 3 entry: scrollY = panelThree.offsetTop (s3 at top of viewport)
-    const s3StartScroll  = panelThree.offsetTop;
-    const vpYAtS3        = window.innerHeight * 0.28 - 282; // top edge ~70px below nav bar (fully visible)
-    const travelYAtS3    = s3StartScroll + vpYAtS3 - initialTop;
+    // Lock position: 40 % into section 4, same viewport-Y formula
+    const vpYAtLock        = window.innerHeight * 0.28 - 282;
+    const s4LockScrollYpx  = panelFour.offsetTop + panelFour.offsetHeight * 0.4 - navH;
+    const travelYAtLock    = navH + vpYAtLock + s4LockScrollYpx - initialTop;
 
     if (scrollYpx <= s1EndScroll) {
       // Phase 1 – Section 1
       travelY = progress * Math.max(targetTranslateY, 0);
-    } else if (scrollYpx <= s3StartScroll) {
-      // Phase 2 – Services (hidden behind slider): smooth interpolation to vpYAtS3
-      const svcRange = Math.max(s3StartScroll - s1EndScroll, 1);
-      const svcP     = clamp((scrollYpx - s1EndScroll) / svcRange, 0, 1);
-      const easedSvc = svcP * svcP * (3 - 2 * svcP);
-      travelY = travelYAtS1End + (travelYAtS3 - travelYAtS1End) * easedSvc;
+    } else if (scrollYpx <= s4LockScrollYpx) {
+      // Phase 2 – Slide: tower glides from s1-exit position to lock position
+      const slideRange = Math.max(s4LockScrollYpx - s1EndScroll, 1);
+      const slideP     = clamp((scrollYpx - s1EndScroll) / slideRange, 0, 1);
+      const easedSlide = slideP * slideP * (3 - 2 * slideP);
+      travelY = travelYAtS1End + (travelYAtLock - travelYAtS1End) * easedSlide;
     } else {
-      // Phase 3 – Sections 3 + 4 + footer: hold at vpYAtS3 (freeze block locks it here)
-      travelY = travelYAtS3;
+      // Phase 3 – After lock: constant travelY → tower scrolls naturally with page
+      travelY = travelYAtLock;
     }
   }
 
@@ -269,20 +268,28 @@ const animateHero = () => {
     scale = targetScale;
   }
 
-  // ── Desktop: lock tower viewport position the moment section 3 enters view.
-  //    Direct formula — no capture point needed:
-  //      frozenTravelY = (navH + vpYAtS3) + scrollYpx - initialTop
-  //    Proof: visual_top = frameRect.top + initialTop + frozenTravelY
-  //         = (navH - S) + initialTop + (navH + vpYAtS3 + S - navH - initialTop)
-  //         = navH + vpYAtS3   ← constant for all S ──
+  // ── Desktop: viewport-lock tower from section 4 middle until footer approaches.
+  //    Lock: direct formula keeps visual top = navH + vpYAtLock constant.
+  //    Release: when footer is ~80 vh away, drop the lock — tower scrolls with page. ──
   if (window.innerWidth > MOBILE_BREAKPOINT) {
-    const s3FreezeP = clamp(panelThree.offsetTop / totalScrollable, 0, 1);
-    if (progress >= s3FreezeP) {
-      const frozenNavH    = topNav ? topNav.offsetHeight : 68;
-      const vpYAtS3lock   = window.innerHeight * 0.28 - 282;
-      const frozenTravelY = (frozenNavH + vpYAtS3lock) + scrollYpx - initialTop;
-      const frozenScale   = isTabletViewport ? midScale * 0.7 : midScale;
+    const navH       = topNav ? topNav.offsetHeight : 68;
+    const vpYAtLock  = window.innerHeight * 0.28 - 282;
+    const s4LockP    = clamp((panelFour.offsetTop + panelFour.offsetHeight * 0.4) / totalScrollable, 0, 1);
+    const footerRelP = siteFooter
+      ? clamp((siteFooter.offsetTop - window.innerHeight * 0.8) / totalScrollable, 0, 1)
+      : 1;
+    const frozenScale = isTabletViewport ? midScale * 0.7 : midScale;
+
+    if (progress >= s4LockP && progress < footerRelP) {
+      // Viewport-fixed: frozenTravelY grows 1:1 with scroll → visual Y constant
+      const frozenTravelY = (navH + vpYAtLock) + scrollYpx - initialTop;
       heroFloat.style.transform = `translate3d(calc(-50% + ${-HERO_BASE_LEFT_OFFSET}px), ${frozenTravelY}px, 0) rotate(0deg) scale(${frozenScale})`;
+      return;
+    }
+
+    if (progress >= footerRelP) {
+      // Footer incoming: release viewport-lock, travelY constant → tower scrolls off naturally
+      heroFloat.style.transform = `translate3d(calc(-50% + ${-HERO_BASE_LEFT_OFFSET}px), ${yShift}px, 0) rotate(0deg) scale(${frozenScale})`;
       return;
     }
   }
