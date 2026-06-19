@@ -1048,7 +1048,7 @@ body::after {
 
 .hero-float {
   position: absolute;
-  left: calc(50% + 165px); /* must match HERO_BASE_LEFT_OFFSET = 165 */
+  left: calc(50% + 210px); /* must match HERO_BASE_LEFT_OFFSET = 210 */
   top: calc(18vh - 45px);
   width: min(460px, 45vw);
   transform: translate3d(-50%, 0, 0) rotate(-8deg);
