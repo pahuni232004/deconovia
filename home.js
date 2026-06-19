@@ -130,7 +130,7 @@ const animateHero = () => {
   const straightenEase = Math.pow(panelTwoProgress, 1.25);
   let rotation = window.innerWidth <= MOBILE_BREAKPOINT ? 0 : -8 * (1 - straightenEase);
 
-  const midScale = 0.60; // tower smoothly reduces to this scale through section 2
+  const midScale = 0.75; // tower reduces to this scale through section 2; freeze holds it here
   const secondSectionScale = 1 - (1 - midScale) * straightenEase;
   const shrinkStart = 0.82;
   const shrinkProgress = clamp((progress - shrinkStart) / (1 - shrinkStart), 0, 1);
@@ -169,7 +169,7 @@ const animateHero = () => {
 
     // Section 3 entry: scrollY = panelThree.offsetTop (s3 at top of viewport)
     const s3StartScroll  = panelThree.offsetTop;
-    const vpYAtS3        = window.innerHeight * 0.28 - 400; // top edge ~13px inside viewport at 900px screen
+    const vpYAtS3        = window.innerHeight * 0.28 - 264; // top edge ~88px below nav, bottom ~688px (fully visible)
     const travelYAtS3    = s3StartScroll + vpYAtS3 - initialTop;
 
     // Section 4 / end of page resting position
@@ -196,12 +196,17 @@ const animateHero = () => {
 
   const baseDrift = 92 * Math.pow(driftIn, 1.15) * (1 - Math.pow(driftOut, 1.1));
   let xShift = baseDrift + (targetTranslateX - baseDrift) * easedMerge;
-  // Desktop: tower starts 120px right of viewport centre in landing, eases to section-3 target
-  // (starting at exactly -HERO_BASE_LEFT_OFFSET always centred the tower in landing regardless
-  //  of how large the constant was, because the formula cancelled the CSS offset)
+  // Desktop: X eases from landing offset (120px right of centre) to viewport centre,
+  // completing exactly at section 3 entry so the freeze picks up at centre with no jump.
+  // Any position change happens during section 2 (hidden behind the services slider).
   if (window.innerWidth > MOBILE_BREAKPOINT) {
-    const desktopStartX = -HERO_BASE_LEFT_OFFSET + 120; // 120px right of centre at landing
-    xShift = desktopStartX + (targetTranslateX - desktopStartX) * easedMerge;
+    const xMergeEnd = Math.max(panelThree.offsetTop / totalScrollable, panelTwoStart + 0.001);
+    const xMergeRaw = clamp((progress - panelTwoStart) / Math.max(xMergeEnd - panelTwoStart, 0.001), 0, 1);
+    const easedXMerge = xMergeRaw * xMergeRaw * (3 - 2 * xMergeRaw); // smoothstep
+    const desktopStartX = -HERO_BASE_LEFT_OFFSET + 120; // 120px right of centre in landing
+    xShift = desktopStartX + (-HERO_BASE_LEFT_OFFSET - desktopStartX) * easedXMerge;
+    // easedXMerge=0 → xShift=desktopStartX (right side, landing)
+    // easedXMerge=1 → xShift=-HERO_BASE_LEFT_OFFSET (centre, matches frozenX → no jump at s3)
   }
 
   // Y is fully handled by travelY; no additional easedMerge blend needed
