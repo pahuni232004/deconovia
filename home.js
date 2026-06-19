@@ -244,7 +244,8 @@ const animateHero = () => {
 
       if (progress >= panelFourStart) {
         // Section 4 on mobile: lock at ~60% of viewport width (right side), mid-height
-        const lockTargetX = Math.round(frameRect.width * 0.60) - initialLeft;
+        // +400 shifts the tower further right so text in section 4 is unobstructed
+        const lockTargetX = Math.round(frameRect.width * 0.60) - initialLeft + 400;
         const fixedVpY    = window.innerHeight * 0.30;
         const lockTargetY = scrollYpx + fixedVpY - initialTop;
         heroFloat.style.transform = `translate3d(calc(-50% + ${lockTargetX}px), ${lockTargetY}px, 0) rotate(0deg) scale(${lockedScale})`;
@@ -308,7 +309,7 @@ if (navToggle && topNav) {
   // Create overlay backdrop (styled in site-shared.css as .nav-overlay)
   const navOverlay = document.createElement("div");
   navOverlay.className = "nav-overlay";
-  document.body.appendChild(navOverlay);
+  (stage || document.body).appendChild(navOverlay);
 
   const openNav = () => {
     topNav.classList.add("menu-open");
@@ -338,6 +339,51 @@ if (heroFloat) {
     heroFloat.src = "./IMG_8376.PNG";
   });
 }
+
+/* ── Mobile services swipe arrows ────────────────────────────── */
+(function () {
+  const servicesPin = document.querySelector(".services-pin");
+  const cardArea    = document.getElementById("services-card-area");
+  if (!servicesPin || !cardArea) return;
+
+  const arrowWrap = document.createElement("div");
+  arrowWrap.className = "sc-arrows";
+
+  const prevBtn = document.createElement("button");
+  prevBtn.type = "button";
+  prevBtn.className = "sc-swipe-arrow sc-swipe-arrow--prev";
+  prevBtn.setAttribute("aria-label", "Previous service");
+  prevBtn.innerHTML = "&#8592;";
+
+  const nextBtn = document.createElement("button");
+  nextBtn.type = "button";
+  nextBtn.className = "sc-swipe-arrow sc-swipe-arrow--next";
+  nextBtn.setAttribute("aria-label", "Next service");
+  nextBtn.innerHTML = "&#8594;";
+
+  arrowWrap.appendChild(prevBtn);
+  arrowWrap.appendChild(nextBtn);
+  servicesPin.appendChild(arrowWrap);
+
+  const scrollByCard = (dir) => {
+    cardArea.scrollBy({ left: dir * cardArea.offsetWidth, behavior: "smooth" });
+  };
+
+  prevBtn.addEventListener("click", () => scrollByCard(-1));
+  nextBtn.addEventListener("click", () => scrollByCard(1));
+
+  const syncArrows = () => {
+    const sl       = cardArea.scrollLeft;
+    const maxScroll = cardArea.scrollWidth - cardArea.offsetWidth;
+    prevBtn.classList.toggle("sc-swipe-arrow--faded", sl <= 2);
+    nextBtn.classList.toggle("sc-swipe-arrow--faded", sl >= maxScroll - 2);
+  };
+
+  cardArea.addEventListener("scroll", syncArrows, { passive: true });
+  // Also sync on resize (card widths can change)
+  window.addEventListener("resize", syncArrows);
+  syncArrows();
+})();
 
 window.addEventListener("scroll", onScroll, { passive: true });
 window.addEventListener("resize", onScroll);
