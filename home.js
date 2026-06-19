@@ -153,8 +153,10 @@ const animateHero = () => {
     const s1EndScroll     = svcFadeStart * totalScrollable;
     const travelYAtS1End  = svcFadeStart * Math.max(targetTranslateY, 0);
 
-    // Lock position: 40 % into section 4, same viewport-Y formula
-    const vpYAtLock        = window.innerHeight * 0.28 - 282;
+    // Lock position: 40% into section 4.
+    // vpYAtLock is the distance below the nav bar where the tower head sits.
+    // Must stay positive so the tower head is never hidden behind the nav.
+    const vpYAtLock        = window.innerHeight * 0.15;
     const s4LockScrollYpx  = panelFour.offsetTop + panelFour.offsetHeight * 0.4 - navH;
     const travelYAtLock    = navH + vpYAtLock + s4LockScrollYpx - initialTop;
 
@@ -253,18 +255,28 @@ const animateHero = () => {
     scale = targetScale;
   }
 
-  // ── Desktop: viewport-lock tower at 40% of section 4. Stays frozen there forever —
-  //    page scrolls past it, footer scrolls over it. No release, no fade. ──
+  // ── Desktop: lock at 40% of section 4, scroll off naturally before footer. ──
   if (window.innerWidth > MOBILE_BREAKPOINT) {
     const navH        = topNav ? topNav.offsetHeight : 68;
-    const vpYAtLock   = window.innerHeight * 0.28 - 282;
+    const vpYAtLock   = window.innerHeight * 0.15;   // always positive → head always below nav
     const s4LockP     = clamp((panelFour.offsetTop + panelFour.offsetHeight * 0.4) / totalScrollable, 0, 1);
+    // Release 1 viewport-height before footer so tower scrolls off the top before footer arrives
+    const footerRelP  = siteFooter
+      ? clamp((siteFooter.offsetTop - window.innerHeight) / totalScrollable, 0, 1)
+      : 1;
     const frozenScale = isTabletViewport ? midScale * 0.7 : midScale;
 
-    if (progress >= s4LockP) {
-      // frozenTravelY grows 1:1 with scroll → visual top stays constant at navH + vpYAtLock
+    if (progress >= s4LockP && progress < footerRelP) {
+      // frozenTravelY grows 1:1 with scroll → visual top = navH + vpYAtLock (constant)
       const frozenTravelY = (navH + vpYAtLock) + scrollYpx - initialTop;
       heroFloat.style.transform = `translate3d(calc(-50% + ${-HERO_BASE_LEFT_OFFSET}px), ${frozenTravelY}px, 0) rotate(0deg) scale(${frozenScale})`;
+      return;
+    }
+
+    if (progress >= footerRelP) {
+      // Lock released: travelY is now constant (= travelYAtLock), so as frameRect.top
+      // drops with scroll, visual position moves up — tower exits off the top naturally.
+      heroFloat.style.transform = `translate3d(calc(-50% + ${-HERO_BASE_LEFT_OFFSET}px), ${yShift}px, 0) rotate(0deg) scale(${frozenScale})`;
       return;
     }
   }
