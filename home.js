@@ -130,7 +130,7 @@ const animateHero = () => {
   const straightenEase = Math.pow(panelTwoProgress, 1.25);
   let rotation = window.innerWidth <= MOBILE_BREAKPOINT ? 0 : -8 * (1 - straightenEase);
 
-  const midScale = 0.92;
+  const midScale = 0.60; // tower smoothly reduces to this scale through section 2
   const secondSectionScale = 1 - (1 - midScale) * straightenEase;
   const shrinkStart = 0.82;
   const shrinkProgress = clamp((progress - shrinkStart) / (1 - shrinkStart), 0, 1);
@@ -286,7 +286,7 @@ const animateHero = () => {
       // travelY mirrors scrollYpx growth → visual Y stays constant
       const frozenTravelY = scrollYpx - desktopFreezePoint.scrollY + desktopFreezePoint.yShift;
       const frozenX = -HERO_BASE_LEFT_OFFSET;
-      heroFloat.style.transform = `translate3d(calc(-50% + ${frozenX}px), ${frozenTravelY}px, 0) rotate(0deg) scale(${desktopFreezePoint.scale * 0.65})`;
+      heroFloat.style.transform = `translate3d(calc(-50% + ${frozenX}px), ${frozenTravelY}px, 0) rotate(0deg) scale(${desktopFreezePoint.scale})`;
       return;
     }
   }
