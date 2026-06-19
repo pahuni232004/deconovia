@@ -169,7 +169,7 @@ const animateHero = () => {
 
     // Section 3 entry: scrollY = panelThree.offsetTop (s3 at top of viewport)
     const s3StartScroll  = panelThree.offsetTop;
-    const vpYAtS3        = window.innerHeight * 0.28 - 470; // 250px higher lock position
+    const vpYAtS3        = window.innerHeight * 0.28 - 400; // top edge ~13px inside viewport at 900px screen
     const travelYAtS3    = s3StartScroll + vpYAtS3 - initialTop;
 
     // Section 4 / end of page resting position
@@ -286,7 +286,7 @@ const animateHero = () => {
       // travelY mirrors scrollYpx growth → visual Y stays constant
       const frozenTravelY = scrollYpx - desktopFreezePoint.scrollY + desktopFreezePoint.yShift;
       const frozenX = -HERO_BASE_LEFT_OFFSET;
-      heroFloat.style.transform = `translate3d(calc(-50% + ${frozenX}px), ${frozenTravelY}px, 0) rotate(0deg) scale(${desktopFreezePoint.scale * 0.85})`;
+      heroFloat.style.transform = `translate3d(calc(-50% + ${frozenX}px), ${frozenTravelY}px, 0) rotate(0deg) scale(${desktopFreezePoint.scale * 0.65})`;
       return;
     }
   }
