@@ -175,7 +175,7 @@
     flex-wrap: nowrap;
   }
 
-  /* ── Sidebar nav — always rendered, hidden via transform ── */
+  /* ── Sidebar nav — full-height drawer ── */
   .top-nav nav {
     display: flex !important;
     flex-direction: column;
@@ -185,17 +185,18 @@
     top: 0;
     right: 0;
     bottom: 0;
-    width: min(72vw, 260px);
+    width: min(82vw, 300px);
     margin-left: 0;
-    padding: 3rem 1.4rem 1.5rem;
-    background: rgba(245, 237, 224, 0.99);
+    /* top padding clears the burger button; justify links with generous breathing room */
+    padding: 5rem 2rem 2.5rem;
+    background: #f5ede0;
     border: none;
-    border-left: 1px solid rgba(101, 67, 33, 0.12);
+    border-left: 2px solid rgba(101, 67, 33, 0.1);
     border-radius: 0;
-    box-shadow: -6px 0 28px rgba(61, 43, 31, 0.18);
+    box-shadow: -8px 0 40px rgba(61, 43, 31, 0.22);
     z-index: 50;
     transform: translateX(100%);
-    transition: transform 0.3s cubic-bezier(0.32, 0, 0.67, 0);
+    transition: transform 0.32s cubic-bezier(0.32, 0, 0.67, 0);
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
   }
@@ -207,32 +208,33 @@
 
   .top-nav nav a {
     width: 100%;
-    min-height: 2.4rem;
     display: flex;
     align-items: center;
-    padding: 0.6rem 0;
-    font-size: 0.95rem;
-    font-weight: 600;
-    letter-spacing: 0.02em;
+    padding: 1rem 0;
+    font-size: 1.05rem;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    color: #5c3d2e;
     border-radius: 0;
-    border-bottom: 1px solid rgba(101, 67, 33, 0.1);
-    white-space: nowrap;
+    border-bottom: 1px solid rgba(101, 67, 33, 0.12);
+    white-space: normal;           /* allow wrap on very narrow phones */
     justify-content: flex-start;
   }
 
   .top-nav nav a:last-child { border-bottom: none; }
+  .top-nav nav a:hover { color: #3d2b1f; }
 
   .nav-toggle {
     display: inline-flex;
     flex-direction: column;
     justify-content: center;
     gap: 5px;
-    width: 40px;
-    height: 40px;
+    width: 44px;
+    height: 44px;
     border-radius: 10px;
-    border: 1px solid rgba(101, 67, 33, 0.2);
-    background: rgba(245, 237, 224, 0.8);
-    padding: 0 10px;
+    border: 1px solid rgba(101, 67, 33, 0.22);
+    background: rgba(245, 237, 224, 0.9);
+    padding: 0 11px;
     cursor: pointer;
     flex-shrink: 0;
   }
