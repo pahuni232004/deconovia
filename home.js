@@ -340,49 +340,31 @@ if (heroFloat) {
   });
 }
 
-/* ── Mobile services swipe arrows ────────────────────────────── */
+/* ── Mobile services swipe arrow (right only) ───────────────── */
 (function () {
   const servicesPin = document.querySelector(".services-pin");
   const cardArea    = document.getElementById("services-card-area");
   if (!servicesPin || !cardArea) return;
 
-  const arrowWrap = document.createElement("div");
-  arrowWrap.className = "sc-arrows";
-
-  const prevBtn = document.createElement("button");
-  prevBtn.type = "button";
-  prevBtn.className = "sc-swipe-arrow sc-swipe-arrow--prev";
-  prevBtn.setAttribute("aria-label", "Previous service");
-  prevBtn.innerHTML = "&#8592;";
-
   const nextBtn = document.createElement("button");
   nextBtn.type = "button";
-  nextBtn.className = "sc-swipe-arrow sc-swipe-arrow--next";
+  nextBtn.className = "sc-swipe-arrow";
   nextBtn.setAttribute("aria-label", "Next service");
-  nextBtn.innerHTML = "&#8594;";
+  nextBtn.innerHTML = "&#8250;"; /* › single right chevron */
+  servicesPin.appendChild(nextBtn);
 
-  arrowWrap.appendChild(prevBtn);
-  arrowWrap.appendChild(nextBtn);
-  servicesPin.appendChild(arrowWrap);
+  nextBtn.addEventListener("click", () => {
+    cardArea.scrollBy({ left: cardArea.offsetWidth, behavior: "smooth" });
+  });
 
-  const scrollByCard = (dir) => {
-    cardArea.scrollBy({ left: dir * cardArea.offsetWidth, behavior: "smooth" });
-  };
-
-  prevBtn.addEventListener("click", () => scrollByCard(-1));
-  nextBtn.addEventListener("click", () => scrollByCard(1));
-
-  const syncArrows = () => {
-    const sl       = cardArea.scrollLeft;
+  const syncArrow = () => {
     const maxScroll = cardArea.scrollWidth - cardArea.offsetWidth;
-    prevBtn.classList.toggle("sc-swipe-arrow--faded", sl <= 2);
-    nextBtn.classList.toggle("sc-swipe-arrow--faded", sl >= maxScroll - 2);
+    nextBtn.style.display = cardArea.scrollLeft >= maxScroll - 2 ? "none" : "flex";
   };
 
-  cardArea.addEventListener("scroll", syncArrows, { passive: true });
-  // Also sync on resize (card widths can change)
-  window.addEventListener("resize", syncArrows);
-  syncArrows();
+  cardArea.addEventListener("scroll", syncArrow, { passive: true });
+  window.addEventListener("resize", syncArrow);
+  syncArrow();
 })();
 
 window.addEventListener("scroll", onScroll, { passive: true });

@@ -187,7 +187,7 @@
     bottom: 0;
     width: min(72vw, 260px);
     margin-left: 0;
-    padding: 5rem 1.6rem 2rem;
+    padding: 3rem 1.4rem 1.5rem;
     background: rgba(245, 237, 224, 0.99);
     border: none;
     border-left: 1px solid rgba(101, 67, 33, 0.12);
@@ -207,11 +207,11 @@
 
   .top-nav nav a {
     width: 100%;
-    min-height: 2.8rem;
+    min-height: 2.4rem;
     display: flex;
     align-items: center;
-    padding: 0.85rem 0;
-    font-size: 1rem;
+    padding: 0.6rem 0;
+    font-size: 0.95rem;
     font-weight: 600;
     letter-spacing: 0.02em;
     border-radius: 0;
