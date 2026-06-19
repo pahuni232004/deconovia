@@ -169,7 +169,7 @@ const animateHero = () => {
 
     // Section 3 entry: scrollY = panelThree.offsetTop (s3 at top of viewport)
     const s3StartScroll  = panelThree.offsetTop;
-    const vpYAtS3        = window.innerHeight * 0.28 - 220; // keeps top edge just inside viewport
+    const vpYAtS3        = window.innerHeight * 0.28 - 470; // 250px higher lock position
     const travelYAtS3    = s3StartScroll + vpYAtS3 - initialTop;
 
     // Section 4 / end of page resting position
@@ -196,9 +196,12 @@ const animateHero = () => {
 
   const baseDrift = 92 * Math.pow(driftIn, 1.15) * (1 - Math.pow(driftOut, 1.1));
   let xShift = baseDrift + (targetTranslateX - baseDrift) * easedMerge;
-  // Desktop: section 3 tower appears at viewport center; drifts to 55% by section 4 end
+  // Desktop: tower starts 120px right of viewport centre in landing, eases to section-3 target
+  // (starting at exactly -HERO_BASE_LEFT_OFFSET always centred the tower in landing regardless
+  //  of how large the constant was, because the formula cancelled the CSS offset)
   if (window.innerWidth > MOBILE_BREAKPOINT) {
-    xShift = -HERO_BASE_LEFT_OFFSET + (targetTranslateX + HERO_BASE_LEFT_OFFSET) * easedMerge;
+    const desktopStartX = -HERO_BASE_LEFT_OFFSET + 120; // 120px right of centre at landing
+    xShift = desktopStartX + (targetTranslateX - desktopStartX) * easedMerge;
   }
 
   // Y is fully handled by travelY; no additional easedMerge blend needed
