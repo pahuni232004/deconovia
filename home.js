@@ -169,7 +169,7 @@ const animateHero = () => {
 
     // Section 3 entry: scrollY = panelThree.offsetTop (s3 at top of viewport)
     const s3StartScroll  = panelThree.offsetTop;
-    const vpYAtS3        = window.innerHeight * 0.28 - 464; // 200px higher lock position
+    const vpYAtS3        = window.innerHeight * 0.28 - 282; // top edge ~70px below nav bar (fully visible)
     const travelYAtS3    = s3StartScroll + vpYAtS3 - initialTop;
 
     // Section 4 / end of page resting position
