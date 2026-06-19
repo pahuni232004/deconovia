@@ -109,20 +109,8 @@ const animateHero = () => {
     0, 1
   );
 
-  // ── Opacity: tower visible throughout — slides into section 2 and glides to section 4.
-  //    Fades out gently as footer enters the viewport. ──
-  let floatOpacity = 1;
-  if (siteFooter) {
-    const footerRelP     = clamp((siteFooter.offsetTop - window.innerHeight * 0.8) / totalScrollable, 0, 1);
-    const footerFadeEndP = clamp((siteFooter.offsetTop - window.innerHeight * 0.3) / totalScrollable, 0, 1);
-    if (progress > footerRelP) {
-      floatOpacity = 1 - clamp(
-        (progress - footerRelP) / Math.max(footerFadeEndP - footerRelP, 0.001),
-        0, 1
-      );
-    }
-  }
-  heroFloat.style.opacity = String(floatOpacity);
+  // Tower stays fully visible — locked at section 4, page scrolls past it.
+  heroFloat.style.opacity = "1";
 
   // ── Transform calculation ──
   const straightenEase = Math.pow(panelTwoProgress, 1.25);
@@ -243,8 +231,7 @@ const animateHero = () => {
       const lockedScale = Math.max(mobileFreezePoint.scale, 0.72);
 
       if (progress >= panelFourStart) {
-        // Section 4 on mobile: lock at ~60% of viewport width (right side), mid-height
-        // +400 shifts the tower further right so text in section 4 is unobstructed
+        // Section 4 mobile: frozen viewport position — stays here, page scrolls past
         const lockTargetX = Math.round(frameRect.width * 0.60) - initialLeft + 400;
         const fixedVpY    = window.innerHeight * 0.30;
         const lockTargetY = scrollYpx + fixedVpY - initialTop;
@@ -252,15 +239,12 @@ const animateHero = () => {
         return;
       }
 
-      const panelFourLockStart = panelThreeEnd;
-      if (progress >= panelFourLockStart) {
-        const lockTargetX  = Math.round(frameRect.width * 0.60) - initialLeft;
-        const fixedVpY     = window.innerHeight * 0.30;
-        const lockTargetY  = scrollYpx + fixedVpY - initialTop;
-        const lockedScaleInner = Math.max(scale, 0.72);
-        heroFloat.style.transform = `translate3d(calc(-50% + ${lockTargetX}px), ${lockTargetY}px, 0) rotate(${rotation}deg) scale(${lockedScaleInner})`;
-        return;
-      }
+      // Between panelThreeEnd and panelFourStart: glide toward lock position
+      const lockTargetX  = Math.round(frameRect.width * 0.60) - initialLeft;
+      const fixedVpY     = window.innerHeight * 0.30;
+      const lockTargetY  = scrollYpx + fixedVpY - initialTop;
+      heroFloat.style.transform = `translate3d(calc(-50% + ${lockTargetX}px), ${lockTargetY}px, 0) rotate(${rotation}deg) scale(${lockedScale})`;
+      return;
     }
   }
 
@@ -269,28 +253,18 @@ const animateHero = () => {
     scale = targetScale;
   }
 
-  // ── Desktop: viewport-lock tower from section 4 middle until footer approaches.
-  //    Lock: direct formula keeps visual top = navH + vpYAtLock constant.
-  //    Release: when footer is ~80 vh away, drop the lock — tower scrolls with page. ──
+  // ── Desktop: viewport-lock tower at 40% of section 4. Stays frozen there forever —
+  //    page scrolls past it, footer scrolls over it. No release, no fade. ──
   if (window.innerWidth > MOBILE_BREAKPOINT) {
-    const navH       = topNav ? topNav.offsetHeight : 68;
-    const vpYAtLock  = window.innerHeight * 0.28 - 282;
-    const s4LockP    = clamp((panelFour.offsetTop + panelFour.offsetHeight * 0.4) / totalScrollable, 0, 1);
-    const footerRelP = siteFooter
-      ? clamp((siteFooter.offsetTop - window.innerHeight * 0.8) / totalScrollable, 0, 1)
-      : 1;
+    const navH        = topNav ? topNav.offsetHeight : 68;
+    const vpYAtLock   = window.innerHeight * 0.28 - 282;
+    const s4LockP     = clamp((panelFour.offsetTop + panelFour.offsetHeight * 0.4) / totalScrollable, 0, 1);
     const frozenScale = isTabletViewport ? midScale * 0.7 : midScale;
 
-    if (progress >= s4LockP && progress < footerRelP) {
-      // Viewport-fixed: frozenTravelY grows 1:1 with scroll → visual Y constant
+    if (progress >= s4LockP) {
+      // frozenTravelY grows 1:1 with scroll → visual top stays constant at navH + vpYAtLock
       const frozenTravelY = (navH + vpYAtLock) + scrollYpx - initialTop;
       heroFloat.style.transform = `translate3d(calc(-50% + ${-HERO_BASE_LEFT_OFFSET}px), ${frozenTravelY}px, 0) rotate(0deg) scale(${frozenScale})`;
-      return;
-    }
-
-    if (progress >= footerRelP) {
-      // Footer incoming: release viewport-lock, travelY constant → tower scrolls off naturally
-      heroFloat.style.transform = `translate3d(calc(-50% + ${-HERO_BASE_LEFT_OFFSET}px), ${yShift}px, 0) rotate(0deg) scale(${frozenScale})`;
       return;
     }
   }
