@@ -172,25 +172,18 @@ const animateHero = () => {
     const vpYAtS3        = window.innerHeight * 0.28 - 282; // top edge ~70px below nav bar (fully visible)
     const travelYAtS3    = s3StartScroll + vpYAtS3 - initialTop;
 
-    // Section 4 / end of page resting position
-    const vpYAtEnd       = window.innerHeight * 0.38;
-    const travelYAtEnd   = totalScrollable + vpYAtEnd - initialTop;
-
     if (scrollYpx <= s1EndScroll) {
       // Phase 1 – Section 1
       travelY = progress * Math.max(targetTranslateY, 0);
     } else if (scrollYpx <= s3StartScroll) {
-      // Phase 2 – Services (hidden behind slider): slow smoothstep interpolation
+      // Phase 2 – Services (hidden behind slider): smooth interpolation to vpYAtS3
       const svcRange = Math.max(s3StartScroll - s1EndScroll, 1);
       const svcP     = clamp((scrollYpx - s1EndScroll) / svcRange, 0, 1);
       const easedSvc = svcP * svcP * (3 - 2 * svcP);
       travelY = travelYAtS1End + (travelYAtS3 - travelYAtS1End) * easedSvc;
     } else {
-      // Phase 3 – Sections 3 + 4: gentle drift to final resting position
-      const s34Range = Math.max(totalScrollable - s3StartScroll, 1);
-      const s34p     = clamp((scrollYpx - s3StartScroll) / s34Range, 0, 1);
-      const easedS34 = s34p * s34p * (3 - 2 * s34p);
-      travelY = travelYAtS3 + (travelYAtEnd - travelYAtS3) * easedS34;
+      // Phase 3 – Sections 3 + 4 + footer: hold at vpYAtS3 (freeze block locks it here)
+      travelY = travelYAtS3;
     }
   }
 
