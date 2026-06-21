@@ -255,28 +255,18 @@ const animateHero = () => {
     scale = targetScale;
   }
 
-  // ── Desktop: lock at 40% of section 4, scroll off naturally before footer. ──
+  // ── Desktop: lock at 40% of section 4 and stay there forever. ──
+  //    frozenTravelY grows 1:1 with scrollYpx so the visual position
+  //    (frameRect.top + initialTop + frozenTravelY) stays constant = navH + vpYAtLock.
   if (window.innerWidth > MOBILE_BREAKPOINT) {
     const navH        = topNav ? topNav.offsetHeight : 68;
-    const vpYAtLock   = window.innerHeight * 0.15;   // always positive → head always below nav
+    const vpYAtLock   = window.innerHeight * 0.15;
     const s4LockP     = clamp((panelFour.offsetTop + panelFour.offsetHeight * 0.4) / totalScrollable, 0, 1);
-    // Release 1 viewport-height before footer so tower scrolls off the top before footer arrives
-    const footerRelP  = siteFooter
-      ? clamp((siteFooter.offsetTop - window.innerHeight) / totalScrollable, 0, 1)
-      : 1;
     const frozenScale = isTabletViewport ? midScale * 0.7 : midScale;
 
-    if (progress >= s4LockP && progress < footerRelP) {
-      // frozenTravelY grows 1:1 with scroll → visual top = navH + vpYAtLock (constant)
+    if (progress >= s4LockP) {
       const frozenTravelY = (navH + vpYAtLock) + scrollYpx - initialTop;
       heroFloat.style.transform = `translate3d(calc(-50% + ${-HERO_BASE_LEFT_OFFSET}px), ${frozenTravelY}px, 0) rotate(0deg) scale(${frozenScale})`;
-      return;
-    }
-
-    if (progress >= footerRelP) {
-      // Lock released: travelY is now constant (= travelYAtLock), so as frameRect.top
-      // drops with scroll, visual position moves up — tower exits off the top naturally.
-      heroFloat.style.transform = `translate3d(calc(-50% + ${-HERO_BASE_LEFT_OFFSET}px), ${yShift}px, 0) rotate(0deg) scale(${frozenScale})`;
       return;
     }
   }
