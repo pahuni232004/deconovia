@@ -1050,7 +1050,9 @@ body::after {
   position: absolute;
   left: calc(50% + 210px); /* must match HERO_BASE_LEFT_OFFSET = 210 */
   top: calc(18vh - 45px);
-  width: min(460px, 45vw);
+  width: auto;
+  max-width: min(460px, 45vw);
+  max-height: calc(92vh - 90px); /* cap CSS height so vpYAtLock formula keeps tower in viewport */
   transform: translate3d(-50%, 0, 0) rotate(-8deg);
   transform-origin: center;
   /* Below .services-pin (z-index: 30) — tower hides naturally behind the slider

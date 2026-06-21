@@ -74,7 +74,7 @@ const animateHero = () => {
 
   const targetTranslateY = targetCenterY - (initialTop + heroHeight / 2);
   const targetTranslateX = targetCenterX - initialLeft;
-  const targetScale = 0.43; // match midScale so scale stays constant through sections 3-4
+  const targetScale = 0.58; // match midScale so scale stays constant through sections 3-4
 
   // ── Progress landmarks ──
   const panelTwoStart = clamp((panelTwo.offsetTop - window.innerHeight * 0.6) / totalScrollable, 0, 1);
@@ -116,7 +116,7 @@ const animateHero = () => {
   const straightenEase = Math.pow(panelTwoProgress, 1.25);
   let rotation = window.innerWidth <= MOBILE_BREAKPOINT ? 0 : -8 * (1 - straightenEase);
 
-  const midScale = 0.43; // tower reduces to this scale through section 2; freeze holds it here
+  const midScale = 0.58; // tower reduces to this scale through section 2; freeze holds it here
   const secondSectionScale = 1 - (1 - midScale) * straightenEase;
   const shrinkStart = 0.82;
   const shrinkProgress = clamp((progress - shrinkStart) / (1 - shrinkStart), 0, 1);
