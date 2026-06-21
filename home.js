@@ -74,7 +74,7 @@ const animateHero = () => {
 
   const targetTranslateY = targetCenterY - (initialTop + heroHeight / 2);
   const targetTranslateX = targetCenterX - initialLeft;
-  const targetScale = 0.48; // match midScale so scale stays constant through sections 3-4
+  const targetScale = 0.43; // match midScale so scale stays constant through sections 3-4
 
   // ── Progress landmarks ──
   const panelTwoStart = clamp((panelTwo.offsetTop - window.innerHeight * 0.6) / totalScrollable, 0, 1);
@@ -116,7 +116,7 @@ const animateHero = () => {
   const straightenEase = Math.pow(panelTwoProgress, 1.25);
   let rotation = window.innerWidth <= MOBILE_BREAKPOINT ? 0 : -8 * (1 - straightenEase);
 
-  const midScale = 0.48; // tower reduces to this scale through section 2; freeze holds it here
+  const midScale = 0.43; // tower reduces to this scale through section 2; freeze holds it here
   const secondSectionScale = 1 - (1 - midScale) * straightenEase;
   const shrinkStart = 0.82;
   const shrinkProgress = clamp((progress - shrinkStart) / (1 - shrinkStart), 0, 1);
@@ -154,8 +154,11 @@ const animateHero = () => {
     const travelYAtS1End  = svcFadeStart * Math.max(targetTranslateY, 0);
 
     // Lock position: 40% into section 4.
-    // vpYAtLock = gap below nav where tower head pins — must match freeze block.
-    const vpYAtLock        = window.innerHeight * 0.02;
+    // vpYAtLock cancels the transform-origin:center offset so the tower's visual top
+    // pins just below the nav: visual_top = navH + 10  (constant, independent of scroll).
+    // Formula: visual_top = navH + vpYAtLock + (1 - scale) * cssH / 2  → solve for vpYAtLock.
+    const _heroH_traj      = heroFloat.offsetHeight || 900;
+    const vpYAtLock        = 10 - (1 - midScale) * _heroH_traj / 2;
     const s4LockScrollYpx  = panelFour.offsetTop + panelFour.offsetHeight * 0.4 - navH;
     const travelYAtLock    = navH + vpYAtLock + s4LockScrollYpx - initialTop;
 
@@ -259,11 +262,12 @@ const animateHero = () => {
   //    (frameRect.top + initialTop + frozenTravelY) stays constant = navH + vpYAtLock.
   if (window.innerWidth > MOBILE_BREAKPOINT) {
     const navH        = topNav ? topNav.offsetHeight : 68;
-    // vpYAtLock = gap below nav bottom where tower head pins.
-    // 0.02*vh keeps head just below nav; smaller scale ensures full tower is visible.
-    const vpYAtLock   = window.innerHeight * 0.02;
-    const s4LockP     = clamp((panelFour.offsetTop + panelFour.offsetHeight * 0.4) / totalScrollable, 0, 1);
     const frozenScale = isTabletViewport ? midScale * 0.7 : midScale;
+    // vpYAtLock cancels the transform-origin:center offset so visual_top = navH + 10:
+    //   visual_top = navH + vpYAtLock + (1 - frozenScale) * cssH / 2  → vpYAtLock = 10 - offset
+    const _heroH_frz  = heroFloat.offsetHeight || 900;
+    const vpYAtLock   = 10 - (1 - frozenScale) * _heroH_frz / 2;
+    const s4LockP     = clamp((panelFour.offsetTop + panelFour.offsetHeight * 0.4) / totalScrollable, 0, 1);
 
     if (progress >= s4LockP) {
       const frozenTravelY = (navH + vpYAtLock) + scrollYpx - initialTop;
