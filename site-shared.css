@@ -83,6 +83,10 @@
   background: #44030F;
   color: #f5ede0;
   padding: 3rem 6% 1.8rem;
+  /* Must sit above the hero-float (z-20) so the footer slides over the
+     locked 3D asset as the user scrolls into it, hiding it cleanly. */
+  position: relative;
+  z-index: 25;
 }
 
 .footer-inner {

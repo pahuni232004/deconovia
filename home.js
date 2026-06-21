@@ -154,9 +154,8 @@ const animateHero = () => {
     const travelYAtS1End  = svcFadeStart * Math.max(targetTranslateY, 0);
 
     // Lock position: 40% into section 4.
-    // vpYAtLock is the distance below the nav bar where the tower head sits.
-    // Must stay positive so the tower head is never hidden behind the nav.
-    const vpYAtLock        = window.innerHeight * 0.15;
+    // vpYAtLock = distance below nav where tower head pins — must match freeze block.
+    const vpYAtLock        = window.innerHeight * 0.08;
     const s4LockScrollYpx  = panelFour.offsetTop + panelFour.offsetHeight * 0.4 - navH;
     const travelYAtLock    = navH + vpYAtLock + s4LockScrollYpx - initialTop;
 
@@ -260,7 +259,9 @@ const animateHero = () => {
   //    (frameRect.top + initialTop + frozenTravelY) stays constant = navH + vpYAtLock.
   if (window.innerWidth > MOBILE_BREAKPOINT) {
     const navH        = topNav ? topNav.offsetHeight : 68;
-    const vpYAtLock   = window.innerHeight * 0.15;
+    // vpYAtLock = distance below nav where tower head locks.
+    // 0.08*vh keeps it in the upper half of the viewport, well above the footer.
+    const vpYAtLock   = window.innerHeight * 0.08;
     const s4LockP     = clamp((panelFour.offsetTop + panelFour.offsetHeight * 0.4) / totalScrollable, 0, 1);
     const frozenScale = isTabletViewport ? midScale * 0.7 : midScale;
 
