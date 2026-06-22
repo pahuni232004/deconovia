@@ -160,7 +160,7 @@ const animateHero = () => {
     const _heroH_traj      = heroFloat.offsetHeight || 900;
     const vpYAtLock        = 10 - (1 - midScale) * _heroH_traj / 2;
     // Lock 500px earlier in scroll than the raw 40%-of-s4 point.
-    const s4LockScrollYpx  = panelFour.offsetTop + panelFour.offsetHeight * 0.4 - navH - 500;
+    const s4LockScrollYpx  = panelFour.offsetTop + panelFour.offsetHeight * 0.4 - navH - 800;
     const travelYAtLock    = navH + vpYAtLock + s4LockScrollYpx - initialTop;
 
     if (scrollYpx <= s1EndScroll) {
@@ -271,7 +271,7 @@ const animateHero = () => {
     //   visual_top = navH + vpYAtLock + (1 - frozenScale) * cssH / 2  → vpYAtLock = 10 - offset
     const _heroH_frz  = heroFloat.offsetHeight || 900;
     const vpYAtLock   = 10 - (1 - frozenScale) * _heroH_frz / 2;
-    const s4LockP     = clamp((panelFour.offsetTop + panelFour.offsetHeight * 0.4 - 500) / totalScrollable, 0, 1);
+    const s4LockP     = clamp((panelFour.offsetTop + panelFour.offsetHeight * 0.4 - 800) / totalScrollable, 0, 1);
 
     if (progress >= s4LockP) {
       const frozenTravelY = (navH + vpYAtLock) + scrollYpx - initialTop;
