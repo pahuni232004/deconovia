@@ -159,24 +159,29 @@ const animateHero = () => {
     // Formula: visual_top = navH + vpYAtLock + (1 - scale) * cssH / 2  → solve for vpYAtLock.
     const _heroH_traj      = heroFloat.offsetHeight || 900;
     const vpYAtLock        = 10 - (1 - midScale) * _heroH_traj / 2;
-    // Lock 500px earlier in scroll than the raw 40%-of-s4 point.
     const s4LockScrollYpx  = panelFour.offsetTop + panelFour.offsetHeight * 0.4 - navH - 800;
-    const travelYAtLock    = navH + vpYAtLock + s4LockScrollYpx - initialTop;
+    // travelYAtLock: travelY value that produces visual_top = navH+10 at the lock scroll point.
+    // Derived: visual_top = (navH-scrollYpx)+initialTop+(1-s)*heroH/2+travelY → solve for travelY.
+    const travelYAtLock    = vpYAtLock + s4LockScrollYpx - initialTop;
 
     if (scrollYpx <= s1EndScroll) {
-      // Phase 1 – Section 1
+      // Phase 1 – Section 1: gentle parallax
       travelY = progress * Math.max(targetTranslateY, 0);
     } else if (scrollYpx <= s4LockScrollYpx) {
-      // Phase 2 – Slide: tower glides from s1-exit position to lock position
-      const slideRange = Math.max(s4LockScrollYpx - s1EndScroll, 1);
-      const slideP     = clamp((scrollYpx - s1EndScroll) / slideRange, 0, 1);
-      const easedSlide = slideP * slideP * (3 - 2 * slideP);
-      travelY = travelYAtS1End + (travelYAtLock - travelYAtS1End) * easedSlide;
-      // Clamp bottom to viewport so tower is always fully visible during section 3 glide.
-      const maxTravelY = window.innerHeight - navH + scrollYpx - initialTop - _heroH_traj * (1 + midScale) / 2;
-      if (travelY > maxTravelY) travelY = maxTravelY;
+      // Phase 2 – interpolate visual_top (not travelY) so the tower moves monotonically
+      // from its Phase-1 exit position down toward the lock position (navH+10).
+      // Interpolating travelY directly causes the tower to overshoot off both ends of the
+      // viewport and fall back down — the "comes down" artifact.
+      const slideRange  = Math.max(s4LockScrollYpx - s1EndScroll, 1);
+      const slideP      = clamp((scrollYpx - s1EndScroll) / slideRange, 0, 1);
+      const easedSlide  = slideP * slideP * (3 - 2 * slideP);
+      const heroOffset  = (navH - scrollYpx) + initialTop + (1 - midScale) * _heroH_traj / 2;
+      const vStart      = heroOffset + travelYAtS1End; // visual_top at Phase-1 exit
+      const vEnd        = navH + 10;                   // visual_top at lock
+      const vTarget     = vStart + (vEnd - vStart) * easedSlide;
+      travelY = vTarget - heroOffset;                  // back-solve for travelY
     } else {
-      // Phase 3 – After lock: constant travelY → tower scrolls naturally with page
+      // Phase 3 – constant travelY; freeze block takes over when progress >= s4LockP
       travelY = travelYAtLock;
     }
   }
@@ -274,7 +279,7 @@ const animateHero = () => {
     const s4LockP     = clamp((panelFour.offsetTop + panelFour.offsetHeight * 0.4 - 800) / totalScrollable, 0, 1);
 
     if (progress >= s4LockP) {
-      const frozenTravelY = (navH + vpYAtLock) + scrollYpx - initialTop;
+      const frozenTravelY = vpYAtLock + scrollYpx - initialTop;
       heroFloat.style.transform = `translate3d(calc(-50% + ${-HERO_BASE_LEFT_OFFSET}px), ${frozenTravelY}px, 0) rotate(0deg) scale(${frozenScale})`;
       return;
     }
