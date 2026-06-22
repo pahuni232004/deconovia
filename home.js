@@ -158,7 +158,7 @@ const animateHero = () => {
     // pins just below the nav: visual_top = navH + 10  (constant, independent of scroll).
     // Formula: visual_top = navH + vpYAtLock + (1 - scale) * cssH / 2  → solve for vpYAtLock.
     const _heroH_traj      = heroFloat.offsetHeight || 900;
-    const vpYAtLock        = 60 - (1 - midScale) * _heroH_traj / 2;
+    const vpYAtLock        = 110 - (1 - midScale) * _heroH_traj / 2;
     const s4LockScrollYpx  = panelFour.offsetTop + panelFour.offsetHeight * 0.4 - navH - 800;
     // travelYAtLock: travelY value that produces visual_top = navH+10 at the lock scroll point.
     // Derived: visual_top = (navH-scrollYpx)+initialTop+(1-s)*heroH/2+travelY → solve for travelY.
@@ -177,7 +177,7 @@ const animateHero = () => {
       const easedSlide  = slideP * slideP * (3 - 2 * slideP);
       const heroOffset  = (navH - scrollYpx) + initialTop + (1 - midScale) * _heroH_traj / 2;
       const vStart      = heroOffset + travelYAtS1End; // visual_top at Phase-1 exit
-      const vEnd        = navH + 60;                   // visual_top at lock
+      const vEnd        = navH + 110;                  // visual_top at lock
       const vTarget     = vStart + (vEnd - vStart) * easedSlide;
       travelY = vTarget - heroOffset;                  // back-solve for travelY
     } else {
@@ -275,7 +275,7 @@ const animateHero = () => {
     // vpYAtLock cancels the transform-origin:center offset so visual_top = navH + 10:
     //   visual_top = navH + vpYAtLock + (1 - frozenScale) * cssH / 2  → vpYAtLock = 10 - offset
     const _heroH_frz  = heroFloat.offsetHeight || 900;
-    const vpYAtLock   = 60 - (1 - frozenScale) * _heroH_frz / 2;
+    const vpYAtLock   = 110 - (1 - frozenScale) * _heroH_frz / 2;
     const s4LockP     = clamp((panelFour.offsetTop + panelFour.offsetHeight * 0.4 - 800) / totalScrollable, 0, 1);
 
     if (progress >= s4LockP) {
