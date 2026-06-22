@@ -151,11 +151,14 @@ const animateHero = () => {
   } else {
     const navH            = topNav ? topNav.offsetHeight : 68;
     const s1EndScroll     = svcFadeStart * totalScrollable;
-    const travelYAtS1End  = svcFadeStart * Math.max(targetTranslateY, 0);
 
     const _heroH_traj = heroFloat.offsetHeight || 900;
-    // vLock: actual visual_top at the Phase-1 exit. Tower locks here immediately
-    // and never moves again through sections 2, 3, 4.
+    // Use panelFour.offsetTop (static) — targetTranslateY collapses in section 4
+    // because finalRect.top → 0, which drags vLock down on every frame.
+    const travelYAtS1End  = svcFadeStart * Math.max(
+      panelFour.offsetTop + panelFour.offsetHeight * 0.45 - initialTop - _heroH_traj / 2, 0
+    );
+    // vLock: Phase-1 exit visual_top — now constant regardless of current scroll.
     const vLock = (navH - s1EndScroll) + initialTop + travelYAtS1End;
     // vpYAtLock: chosen so the freeze formula also produces visual_top = vLock.
     const vpYAtLock = vLock - navH - (1 - midScale) * _heroH_traj / 2;
@@ -260,9 +263,11 @@ const animateHero = () => {
     const navH        = topNav ? topNav.offsetHeight : 68;
     const frozenScale = isTabletViewport ? midScale * 0.7 : midScale;
     const _heroH_frz  = heroFloat.offsetHeight || 900;
-    // vLock_frz: same Phase-1 exit position used by the trajectory block above.
+    // vLock_frz: stable Phase-1 exit position — uses offsetTop not live BoundingClientRect.
     const _s1End_frz  = svcFadeStart * totalScrollable;
-    const _s1TY_frz   = svcFadeStart * Math.max(targetTranslateY, 0);
+    const _s1TY_frz   = svcFadeStart * Math.max(
+      panelFour.offsetTop + panelFour.offsetHeight * 0.45 - initialTop - _heroH_frz / 2, 0
+    );
     const vLock_frz   = (navH - _s1End_frz) + initialTop + _s1TY_frz;
     const vpYAtLock   = vLock_frz - navH - (1 - frozenScale) * _heroH_frz / 2;
     const s4LockP     = clamp((panelFour.offsetTop + panelFour.offsetHeight * 0.4 - navH - 800) / totalScrollable, 0, 1);
