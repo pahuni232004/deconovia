@@ -158,8 +158,8 @@ const animateHero = () => {
     const travelYAtS1End  = svcFadeStart * Math.max(
       panelFour.offsetTop + panelFour.offsetHeight * 0.45 - initialTop - _heroH_traj / 2, 0
     );
-    // vLock: Phase-1 exit visual_top — now constant regardless of current scroll.
-    const vLock = (navH - s1EndScroll) + initialTop + travelYAtS1End;
+    // vLock: Phase-1 exit visual_top, capped so the tower never sits lower than navH+160.
+    const vLock = Math.min((navH - s1EndScroll) + initialTop + travelYAtS1End, navH + 160);
     // vpYAtLock: chosen so the freeze formula also produces visual_top = vLock.
     const vpYAtLock = vLock - navH - (1 - midScale) * _heroH_traj / 2;
     const s4LockScrollYpx = panelFour.offsetTop + panelFour.offsetHeight * 0.4 - navH - 800;
@@ -268,9 +268,9 @@ const animateHero = () => {
     const _s1TY_frz   = svcFadeStart * Math.max(
       panelFour.offsetTop + panelFour.offsetHeight * 0.45 - initialTop - _heroH_frz / 2, 0
     );
-    const vLock_frz   = (navH - _s1End_frz) + initialTop + _s1TY_frz;
+    const vLock_frz   = Math.min((navH - _s1End_frz) + initialTop + _s1TY_frz, navH + 160);
     const vpYAtLock   = vLock_frz - navH - (1 - frozenScale) * _heroH_frz / 2;
-    const s4LockP     = clamp((panelFour.offsetTop + panelFour.offsetHeight * 0.4 - navH - 800) / totalScrollable, 0, 1);
+    const s4LockP     = clamp((panelFour.offsetTop + panelFour.offsetHeight * 0.4) / totalScrollable, 0, 1);
 
     if (progress >= s4LockP) {
       const frozenTravelY = vpYAtLock + scrollYpx - initialTop;
