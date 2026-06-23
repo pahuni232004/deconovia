@@ -114,7 +114,7 @@ const animateHero = () => {
 
   // ── Transform calculation ──
   const straightenEase = Math.pow(panelTwoProgress, 1.25);
-  let rotation = window.innerWidth <= MOBILE_BREAKPOINT ? 0 : -8 * (1 - straightenEase);
+  let rotation = 0;
 
   const midScale = 0.78; // tower reduces to this scale through section 2; freeze holds it here
   const secondSectionScale = 1 - (1 - midScale) * straightenEase;
@@ -212,30 +212,35 @@ const animateHero = () => {
       xShift += leftHold + rightTravel;
     }
 
+    // Lock at 40 % of section 4 (clamped to 1 if section 4 is short on mobile)
+    const s4LockP         = clamp((panelFour.offsetTop + panelFour.offsetHeight * 0.4) / totalScrollable, 0, 1);
+    const s4LockScrollYpx = s4LockP * totalScrollable;
+
     if (progress < panelThreeEnd) {
       mobileFreezePoint = null;
     }
 
     if (progress >= panelThreeEnd) {
+      // Capture x, y, and scroll amount at section 3 exit so we can viewport-anchor from here.
       if (!mobileFreezePoint) {
-        mobileFreezePoint = { x: xShift, y: yShift, rotation, scale };
+        mobileFreezePoint = { x: xShift, y: yShift, scrollY: scrollYpx };
       }
-      const lockedScale = Math.max(mobileFreezePoint.scale, 0.72);
 
-      if (progress >= panelFourStart) {
-        // Section 4 mobile: frozen viewport position — stays here, page scrolls past
-        const lockTargetX = Math.round(frameRect.width * 0.60) - initialLeft + 400;
-        const fixedVpY    = window.innerHeight * 0.30;
-        const lockTargetY = scrollYpx + fixedVpY - initialTop;
-        heroFloat.style.transform = `translate3d(calc(-50% + ${lockTargetX}px), ${lockTargetY}px, 0) rotate(0deg) scale(${lockedScale})`;
+      const lockedScale = scale > 0 ? Math.max(scale, 0.72) : 0.72;
+
+      if (progress >= s4LockP) {
+        // Hard lock at 40 % of section 4: travelY frozen at that exact scroll position,
+        // then grows 1:1 with scroll so visual position stays constant.
+        const travelYAtS4Lock = mobileFreezePoint.y + (s4LockScrollYpx - mobileFreezePoint.scrollY);
+        const frozenY = travelYAtS4Lock + (scrollYpx - s4LockScrollYpx);
+        heroFloat.style.transform = `translate3d(calc(-50% + ${mobileFreezePoint.x}px), ${frozenY}px, 0) rotate(0deg) scale(${lockedScale})`;
         return;
       }
 
-      // Between panelThreeEnd and panelFourStart: glide toward lock position
-      const lockTargetX  = Math.round(frameRect.width * 0.60) - initialLeft;
-      const fixedVpY     = window.innerHeight * 0.30;
-      const lockTargetY  = scrollYpx + fixedVpY - initialTop;
-      heroFloat.style.transform = `translate3d(calc(-50% + ${lockTargetX}px), ${lockTargetY}px, 0) rotate(${rotation}deg) scale(${lockedScale})`;
+      // Between panelThreeEnd and s4LockP: viewport-anchor at section-3 exit position.
+      // Tower stays visually still while the page scrolls.
+      const frozenY = mobileFreezePoint.y + (scrollYpx - mobileFreezePoint.scrollY);
+      heroFloat.style.transform = `translate3d(calc(-50% + ${mobileFreezePoint.x}px), ${frozenY}px, 0) rotate(0deg) scale(${lockedScale})`;
       return;
     }
   }
