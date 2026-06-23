@@ -204,13 +204,12 @@ const animateHero = () => {
       const rightWindow = isTargetPhone ? 0.36 : 0.45;
       const easeToRight = clamp((sectionThreeProgress - rightStart) / rightWindow, 0, 1);
       const smoothRight = easeToRight * easeToRight * (3 - 2 * easeToRight);
-      const rightTravel = (isTargetPhone ? 230 : 270) * smoothRight;  // +20 to keep row 2 & exit x unchanged
-      xShift += leftHold + rightTravel + 50;
+      // +50 absorbed into rightTravel so it eases in from 0 (no instant jump at section start)
+      const rightTravel = (isTargetPhone ? 280 : 320) * smoothRight;
+      xShift += leftHold + rightTravel;
     }
 
-    // After section 3 ends, pin x to section-3 exit value so the tower slides
-    // straight down into section 4 without baseDrift pulling it sideways.
-    // Pin = finalLeftHold + finalRightTrav + 50 (matches sectionThreeProgress=1 above)
+    // Pin = finalLeftHold + finalRightTrav = (-110+280)=170 / (-105+320)=215
     if (progress >= panelThreeEnd) {
       xShift = isTargetPhone ? 170 : 215;
     }
