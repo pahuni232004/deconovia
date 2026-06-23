@@ -196,14 +196,25 @@ const animateHero = () => {
       0, 1
     );
 
-    if (sectionThreeProgress > 0) {
-      // Single smooth rightward drift — no left/right zigzag, direct path to final position.
-      const easeToRight = clamp(sectionThreeProgress / 0.75, 0, 1);
-      const smoothRight = easeToRight * easeToRight * (3 - 2 * easeToRight);
-      xShift += (isTargetPhone ? 170 : 215) * smoothRight;
+    if (progress < mobilePanelThreeStart) {
+      xShift -= isTargetPhone ? 35 : 20;
     }
 
-    // Pin x after section 3 so the tower slides straight down into section 4.
+    if (sectionThreeProgress > 0) {
+      const easeInLeft  = clamp(sectionThreeProgress / 0.24, 0, 1);
+      const smoothLeft  = easeInLeft * easeInLeft * (3 - 2 * easeInLeft);
+      const leftHold    = (isTargetPhone ? -110 : -105) * smoothLeft; // row 1: 20px further left
+      const rightStart  = isTargetPhone ? 0.2 : 0.3;
+      const rightWindow = isTargetPhone ? 0.36 : 0.45;
+      const easeToRight = clamp((sectionThreeProgress - rightStart) / rightWindow, 0, 1);
+      const smoothRight = easeToRight * easeToRight * (3 - 2 * easeToRight);
+      const rightTravel = (isTargetPhone ? 230 : 270) * smoothRight;  // +20 to keep row 2 & exit x unchanged
+      xShift += leftHold + rightTravel + 50;
+    }
+
+    // After section 3 ends, pin x to section-3 exit value so the tower slides
+    // straight down into section 4 without baseDrift pulling it sideways.
+    // Pin = finalLeftHold + finalRightTrav + 50 (matches sectionThreeProgress=1 above)
     if (progress >= panelThreeEnd) {
       xShift = isTargetPhone ? 170 : 215;
     }
