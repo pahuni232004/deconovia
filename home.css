@@ -696,7 +696,7 @@ body::after {
 .panel-3 {
   overflow: hidden;
   isolation: isolate;
-  margin-top: calc(6rem + 200px); /* breathing room after services slider */
+  margin-top: calc(6rem + 100px); /* breathing room after services slider */
 }
 
 .panel-3::before {
@@ -1054,10 +1054,10 @@ body::after {
 
 .hero-float {
   position: absolute;
-  left: calc(50% + 210px); /* must match HERO_BASE_LEFT_OFFSET = 210 */
+  left: calc(50% + 200px); /* must match HERO_BASE_LEFT_OFFSET = 200 */
   top: calc(18vh + 15px);
   width: auto;
-  max-width: min(460px, 45vw);
+  max-width: min(400px, 40vw);
   max-height: calc(92vh - 90px); /* cap CSS height so vpYAtLock formula keeps tower in viewport */
   transform: translate3d(-50%, 0, 0) rotate(-8deg);
   transform-origin: center;
