@@ -209,7 +209,13 @@ const animateHero = () => {
       const easeToRight = clamp((sectionThreeProgress - rightStart) / rightWindow, 0, 1);
       const smoothRight = easeToRight * easeToRight * (3 - 2 * easeToRight);
       const rightTravel = (isTargetPhone ? 230 : 270) * smoothRight;
-      xShift += leftHold + rightTravel;
+      xShift += leftHold + rightTravel + 50;
+    }
+
+    // After section 3 ends, pin x to section-3 exit value so the tower slides
+    // straight down into section 4 without baseDrift pulling it sideways.
+    if (progress >= panelThreeEnd) {
+      xShift = isTargetPhone ? 250 : 295;
     }
 
     // Tower glides naturally until halfway through section 4, then viewport-locks.
