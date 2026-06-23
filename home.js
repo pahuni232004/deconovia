@@ -149,29 +149,18 @@ const animateHero = () => {
   if (window.innerWidth <= MOBILE_BREAKPOINT) {
     travelY = progress * Math.max(targetTranslateY, 0);
   } else {
-    const navH            = topNav ? topNav.offsetHeight : 68;
-    const s1EndScroll     = svcFadeStart * totalScrollable;
-
-    const _heroH_traj = heroFloat.offsetHeight || 900;
-    // Use panelFour.offsetTop (static) — targetTranslateY collapses in section 4
-    // because finalRect.top → 0, which drags vLock down on every frame.
-    const travelYAtS1End  = svcFadeStart * Math.max(
-      panelFour.offsetTop + panelFour.offsetHeight * 0.45 - initialTop - _heroH_traj / 2, 0
+    const navH        = topNav ? topNav.offsetHeight : 68;
+    const s1EndScroll = svcFadeStart * totalScrollable;
+    const _heroH      = heroFloat.offsetHeight || 900;
+    const travelYAtS1End = svcFadeStart * Math.max(
+      panelFour.offsetTop + panelFour.offsetHeight * 0.45 - initialTop - _heroH / 2, 0
     );
-    // vLock: Phase-1 exit visual_top, capped then shifted 400px higher.
     const vLock = Math.min((navH - s1EndScroll) + initialTop + travelYAtS1End, navH + 160) - 400;
-    // vpYAtLock: chosen so the freeze formula also produces visual_top = vLock.
-    const vpYAtLock = vLock - navH - (1 - midScale) * _heroH_traj / 2;
-    const s4LockScrollYpx = panelFour.offsetTop + panelFour.offsetHeight * 0.4 - navH - 800;
 
     if (scrollYpx <= s1EndScroll) {
-      // Phase 1 – Section 1: gentle parallax
       travelY = progress * Math.max(targetTranslateY, 0);
     } else {
-      // Phase 2+ – tower locked: back-solve travelY from vLock each frame.
-      // Using actual `scale` (not midScale) means the formula compensates correctly
-      // as the tower scales from 1→midScale through section 2, with zero visual movement.
-      const heroOffset = (navH - scrollYpx) + initialTop + (1 - scale) * _heroH_traj / 2;
+      const heroOffset = (navH - scrollYpx) + initialTop + (1 - scale) * _heroH / 2;
       travelY = vLock - heroOffset;
     }
   }

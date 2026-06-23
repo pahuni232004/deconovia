@@ -17,6 +17,12 @@
   box-sizing: border-box;
 }
 
+/* Home page: nav scrolls with page so the 3D tower is never hidden behind it */
+.top-nav {
+  position: relative !important;
+  top: auto !important;
+}
+
 body {
   margin: 0;
   font-family: "Raleway", sans-serif;
@@ -1129,9 +1135,8 @@ body::after {
   }
 
   .top-nav {
-    position: sticky;
-    top: 0;
-    z-index: 52; /* must match site-shared (52) — never drop below nav-overlay (48) */
+    position: relative !important;
+    top: auto !important;
     align-items: center;
     justify-content: space-between;
     flex-wrap: nowrap;
