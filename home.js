@@ -186,7 +186,7 @@ const animateHero = () => {
   // ── Mobile-specific path ──
   if (window.innerWidth <= MOBILE_BREAKPOINT) {
     const isTargetPhone = window.innerWidth <= 430 && window.innerHeight >= 700 && window.innerHeight <= 980;
-    const mobilePanelThreeStart = clamp((panelThree.offsetTop - window.innerHeight * 0.9) / totalScrollable, 0, 1);
+    const mobilePanelThreeStart = clamp((panelThree.offsetTop - window.innerHeight * 0.6) / totalScrollable, 0, 1);
     const panelThreeFinish = clamp(
       (panelThree.offsetTop + panelThree.offsetHeight - window.innerHeight * 0.05) / totalScrollable,
       0, 1
@@ -227,7 +227,7 @@ const animateHero = () => {
       mobileFreezePoint = null;
     } else {
       if (!mobileFreezePoint) {
-        mobileFreezePoint = { x: xShift, y: yShift - 50, scrollY: scrollYpx };
+        mobileFreezePoint = { x: xShift, y: yShift, scrollY: scrollYpx };
       }
       // frozenY grows 1:1 with scroll so the tower stays at the same viewport position.
       const frozenY     = mobileFreezePoint.y + (scrollYpx - mobileFreezePoint.scrollY);
