@@ -219,22 +219,8 @@ const animateHero = () => {
       xShift = isTargetPhone ? 170 : 215;
     }
 
-    // Tower glides naturally until halfway through section 4, then viewport-locks.
-    const s4MidP         = clamp((panelFour.offsetTop + panelFour.offsetHeight * 0.5) / totalScrollable, 0, 1);
-    const s4MidScrollYpx = s4MidP * totalScrollable;
-
-    if (progress < s4MidP) {
-      mobileFreezePoint = null;
-    } else {
-      if (!mobileFreezePoint) {
-        mobileFreezePoint = { x: xShift, y: yShift, scrollY: scrollYpx };
-      }
-      // frozenY grows 1:1 with scroll so the tower stays at the same viewport position.
-      const frozenY     = mobileFreezePoint.y + (scrollYpx - mobileFreezePoint.scrollY);
-      const lockedScale = scale > 0 ? Math.max(scale, 0.72) : 0.72;
-      heroFloat.style.transform = `translate3d(calc(-50% + ${mobileFreezePoint.x}px), ${frozenY}px, 0) rotate(0deg) scale(${lockedScale})`;
-      return;
-    }
+    // No section-4 freeze — tower follows the natural yShift path so the
+    // animation is identical whether scrolling forward or back.
   }
 
   if (mergeProgress >= 1) {
