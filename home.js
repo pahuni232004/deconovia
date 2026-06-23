@@ -155,7 +155,7 @@ const animateHero = () => {
     const travelYAtS1End = svcFadeStart * Math.max(
       panelFour.offsetTop + panelFour.offsetHeight * 0.45 - initialTop - _heroH / 2, 0
     );
-    const vLock = Math.min((navH - s1EndScroll) + initialTop + travelYAtS1End, navH + 160) - 400;
+    const vLock = Math.max(10, Math.min((navH - s1EndScroll) + initialTop + travelYAtS1End, navH + 160) - 400);
 
     if (scrollYpx <= s1EndScroll) {
       travelY = progress * Math.max(targetTranslateY, 0);
@@ -257,7 +257,7 @@ const animateHero = () => {
     const _s1TY_frz   = svcFadeStart * Math.max(
       panelFour.offsetTop + panelFour.offsetHeight * 0.45 - initialTop - _heroH_frz / 2, 0
     );
-    const vLock_frz   = Math.min((navH - _s1End_frz) + initialTop + _s1TY_frz, navH + 160) - 400;
+    const vLock_frz   = Math.max(10, Math.min((navH - _s1End_frz) + initialTop + _s1TY_frz, navH + 160) - 400);
     const vpYAtLock   = vLock_frz - navH - (1 - frozenScale) * _heroH_frz / 2;
     const s4LockP     = clamp((panelFour.offsetTop + panelFour.offsetHeight * 0.4) / totalScrollable, 0, 1);
 
