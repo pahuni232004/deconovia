@@ -223,7 +223,7 @@ const animateHero = () => {
     if (progress >= panelThreeEnd) {
       // Capture x, y, and scroll amount at section 3 exit so we can viewport-anchor from here.
       if (!mobileFreezePoint) {
-        mobileFreezePoint = { x: xShift, y: yShift, scrollY: scrollYpx };
+        mobileFreezePoint = { x: xShift, y: yShift - 400, scrollY: scrollYpx };
       }
 
       const lockedScale = scale > 0 ? Math.max(scale, 0.72) : 0.72;

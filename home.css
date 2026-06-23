@@ -696,7 +696,7 @@ body::after {
 .panel-3 {
   overflow: hidden;
   isolation: isolate;
-  margin-top: 6rem; /* breathing room after services slider */
+  margin-top: calc(6rem + 150px); /* breathing room after services slider */
 }
 
 .panel-3::before {
