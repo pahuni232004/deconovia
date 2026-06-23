@@ -203,12 +203,12 @@ const animateHero = () => {
     if (sectionThreeProgress > 0) {
       const easeInLeft  = clamp(sectionThreeProgress / 0.24, 0, 1);
       const smoothLeft  = easeInLeft * easeInLeft * (3 - 2 * easeInLeft);
-      const leftHold    = (isTargetPhone ? -90 : -85) * smoothLeft;  // row 1: 60px further left
+      const leftHold    = (isTargetPhone ? -110 : -105) * smoothLeft; // row 1: 20px further left
       const rightStart  = isTargetPhone ? 0.2 : 0.3;
       const rightWindow = isTargetPhone ? 0.36 : 0.45;
       const easeToRight = clamp((sectionThreeProgress - rightStart) / rightWindow, 0, 1);
       const smoothRight = easeToRight * easeToRight * (3 - 2 * easeToRight);
-      const rightTravel = (isTargetPhone ? 210 : 250) * smoothRight;  // row 2: 20px further left
+      const rightTravel = (isTargetPhone ? 230 : 270) * smoothRight;  // +20 to keep row 2 & exit x unchanged
       xShift += leftHold + rightTravel + 50;
     }
 
