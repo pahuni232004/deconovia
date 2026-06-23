@@ -1496,6 +1496,7 @@ body::after {
 
   .panel-3 {
     min-height: auto;
+    margin-top: 6rem; /* 100px less than desktop */
   }
 
   .panel-5 {

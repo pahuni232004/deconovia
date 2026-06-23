@@ -197,7 +197,7 @@ const animateHero = () => {
     );
 
     if (progress < mobilePanelThreeStart) {
-      xShift -= isTargetPhone ? 35 : 20;
+      xShift -= isTargetPhone ? 85 : 70;  // row 1: 50px further left
     }
 
     if (sectionThreeProgress > 0) {
@@ -208,14 +208,15 @@ const animateHero = () => {
       const rightWindow = isTargetPhone ? 0.36 : 0.45;
       const easeToRight = clamp((sectionThreeProgress - rightStart) / rightWindow, 0, 1);
       const smoothRight = easeToRight * easeToRight * (3 - 2 * easeToRight);
-      const rightTravel = (isTargetPhone ? 230 : 270) * smoothRight;
+      const rightTravel = (isTargetPhone ? 190 : 230) * smoothRight;  // row 2: 40px less right
       xShift += leftHold + rightTravel + 50;
     }
 
     // After section 3 ends, pin x to section-3 exit value so the tower slides
     // straight down into section 4 without baseDrift pulling it sideways.
+    // Pin = finalLeftHold + finalRightTrav + 50 (matches sectionThreeProgress=1 above)
     if (progress >= panelThreeEnd) {
-      xShift = isTargetPhone ? 250 : 295;
+      xShift = isTargetPhone ? 210 : 255;
     }
 
     // Tower glides naturally until halfway through section 4, then viewport-locks.
@@ -226,7 +227,7 @@ const animateHero = () => {
       mobileFreezePoint = null;
     } else {
       if (!mobileFreezePoint) {
-        mobileFreezePoint = { x: xShift, y: yShift, scrollY: scrollYpx };
+        mobileFreezePoint = { x: xShift, y: yShift - 50, scrollY: scrollYpx };
       }
       // frozenY grows 1:1 with scroll so the tower stays at the same viewport position.
       const frozenY     = mobileFreezePoint.y + (scrollYpx - mobileFreezePoint.scrollY);
