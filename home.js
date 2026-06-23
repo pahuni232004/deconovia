@@ -196,10 +196,6 @@ const animateHero = () => {
       0, 1
     );
 
-    if (progress < mobilePanelThreeStart) {
-      xShift -= isTargetPhone ? 35 : 20;
-    }
-
     if (sectionThreeProgress > 0) {
       const easeInLeft  = clamp(sectionThreeProgress / 0.24, 0, 1);
       const smoothLeft  = easeInLeft * easeInLeft * (3 - 2 * easeInLeft);
