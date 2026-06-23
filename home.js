@@ -15,7 +15,7 @@ const scDots = document.querySelectorAll(".sc-dot");
 
 const HERO_BASE_LEFT_OFFSET = 210; // CSS must match: left: calc(50% + 210px)
 const HERO_BASE_TOP_VH = 18;
-const HERO_BASE_TOP_PX_ADJUST = -45;
+const HERO_BASE_TOP_PX_ADJUST = 15;
 const MOBILE_BREAKPOINT = 980;
 let mobileFreezePoint = null;
 
