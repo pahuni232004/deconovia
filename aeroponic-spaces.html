@@ -38,7 +38,8 @@
 
       .star-row {
         display: grid;
-        grid-template-columns: repeat(4, minmax(0, 1fr));
+        grid-template-columns: repeat(2, minmax(0, 300px));
+        justify-content: center;
         gap: 1.35rem;
         align-items: end;
         justify-items: center;
@@ -71,7 +72,7 @@
 
       @media (max-width: 980px) {
         .star-row {
-          grid-template-columns: repeat(4, minmax(140px, 1fr));
+          grid-template-columns: repeat(2, minmax(140px, 1fr));
           gap: 0.9rem;
           overflow-x: auto;
           overflow-y: hidden;
@@ -92,7 +93,7 @@
 
       @media (max-width: 600px) {
         .star-row {
-          grid-template-columns: repeat(4, minmax(130px, 1fr));
+          grid-template-columns: repeat(2, minmax(130px, 1fr));
           gap: 0.75rem;
         }
         .star-product { min-width: 130px; }
@@ -118,9 +119,10 @@
         <span></span>
       </button>
       <nav id="site-nav">
-        <a href="./know-the-product.html">Products</a>
         <a href="./what-we-sell.html">Aeroponic Living</a>
         <a href="./aeroponic-spaces.html" class="active" aria-current="page">Product Catalogue</a>
+        <a href="./know-the-product.html">Miniature Towers</a>
+        <a href="./luxury.html">Luxury Collection</a>
         <a href="./contact.html">Contact Us</a>
       </nav>
     </header>
@@ -131,8 +133,8 @@
       <div class="split-block split-block--alt">
         <span class="sb-above">Zero</span>
         <div class="sb-image-wrap">
-          <img class="sb-img" src="./assets/images/Boutique Decor Store.png" alt="Chemical-free plants" />
-          <img class="sb-img" src="./assets/images/Spa and Wellness.png" alt="Wellness environment" />
+          <img class="sb-img" src="./assets/images/catalogue-spira-herbs-closeup.webp" alt="Fresh herbs growing in a Spira tower" loading="lazy" decoding="async" />
+          <img class="sb-img" src="./assets/images/catalogue-reva-herbs-closeup.webp" alt="Herbs growing in a Reva tower" loading="lazy" decoding="async" />
           <span class="sb-on">Chemicals</span>
           <span class="sb-stat">No pesticides or fertilizers</span>
         </div>
@@ -143,8 +145,8 @@
       <div class="split-block">
         <span class="sb-above">Organic</span>
         <div class="sb-image-wrap">
-          <img class="sb-img" src="./assets/images/organic living.png" alt="Organic living with aeroponic tower" />
-          <img class="sb-img" src="./assets/images/organnic living.png" alt="Fresh organic produce" />
+          <img class="sb-img" src="./assets/images/catalogue-handcrafted-terracotta.webp" alt="Handcrafted terracotta being stamped with the Deconovia mark" loading="lazy" decoding="async" />
+          <img class="sb-img" src="./assets/images/catalogue-reva-detail.webp" alt="Reva tower detail with fresh herbs" loading="lazy" decoding="async" />
           <span class="sb-on">Living</span>
           <span class="sb-stat">From tower to table</span>
         </div>
@@ -170,8 +172,8 @@
       <div class="split-block" id="use-indoor">
         <span class="sb-above">Indoors</span>
         <div class="sb-image-wrap">
-          <img class="sb-img" src="./assets/images/indoors.png" alt="Indoor living room" />
-          <img class="sb-img" src="./assets/images/indoors2.PNG" alt="Indoor living space" />
+          <img class="sb-img" src="./assets/images/catalogue-reva-living-room.webp" alt="Reva tower on a side table in a living room" loading="lazy" decoding="async" />
+          <img class="sb-img" src="./assets/images/catalogue-reva-side-table.webp" alt="Reva tabletop tower with coffee and notebook" loading="lazy" decoding="async" />
           <span class="sb-on">Living Room</span>
         </div>
         <p class="sb-sub">Spira and Reva become the centrepiece of any living room — a living sculpture that oxygenates and nourishes your home.</p>
@@ -181,8 +183,8 @@
       <div class="split-block split-block--alt" id="use-balcony">
         <span class="sb-above">Balcony</span>
         <div class="sb-image-wrap">
-          <img class="sb-img" src="./assets/images/outdoor.PNG" alt="Outdoor balcony" />
-          <img class="sb-img" src="./assets/images/lobby2.png" alt="Resort outdoor space" />
+          <img class="sb-img" src="./assets/images/catalogue-spira-balcony.webp" alt="Spira tower on a sunlit balcony" loading="lazy" decoding="async" />
+          <img class="sb-img" src="./assets/images/catalogue-spira-terrace.webp" alt="Spira tower on a terrace" loading="lazy" decoding="async" />
           <span class="sb-on">Outdoor</span>
         </div>
         <p class="sb-sub">Spira and Reva thrive on sun-bathed balconies and rooftop spaces. Vertical gardens, wherever the light is best.</p>
@@ -192,19 +194,19 @@
       <div class="split-block" id="use-kitchen">
         <span class="sb-above">Kitchen</span>
         <div class="sb-image-wrap">
-          <img class="sb-img" src="./assets/images/Kitchen.PNG" alt="Kitchen counter" />
-          <img class="sb-img" src="./assets/images/Island kitchen counter.png" alt="Island kitchen counter" />
+          <img class="sb-img" src="./assets/images/catalogue-spira-kitchen.webp" alt="Spira tower on a kitchen counter" loading="lazy" decoding="async" />
+          <img class="sb-img" src="./assets/images/catalogue-spira-herbs-closeup.webp" alt="Spira tower with fresh herbs" loading="lazy" decoding="async" />
           <span class="sb-on">Counter</span>
         </div>
-        <p class="sb-sub">Nova and Era sit perfectly on countertops. Fresh herbs always within arm's reach — zero trips to the store.</p>
+        <p class="sb-sub">Spira sits perfectly on a countertop. Fresh herbs always within arm's reach — zero trips to the store.</p>
       </div>
 
       <!-- Use 4: Office Desk — alt -->
       <div class="split-block split-block--alt" id="use-office">
         <span class="sb-above">Office</span>
         <div class="sb-image-wrap">
-          <img class="sb-img" src="./assets/images/office.PNG" alt="Office desk" />
-          <img class="sb-img" src="./assets/images/office desk.PNG" alt="Office workspace" />
+          <img class="sb-img" src="./assets/images/catalogue-spira-office.webp" alt="Spira tower on an office desk" loading="lazy" decoding="async" />
+          <img class="sb-img" src="./assets/images/catalogue-lid-detail.webp" alt="Tabletop and light detail" loading="lazy" decoding="async" />
           <span class="sb-on">Desk</span>
         </div>
         <p class="sb-sub">A compact tower purifies air, reduces stress, and grows food. Your desk becomes a living, breathing workspace.</p>
@@ -214,8 +216,8 @@
       <div class="split-block" id="use-home-decor">
         <span class="sb-above">Home</span>
         <div class="sb-image-wrap">
-          <img class="sb-img" src="./assets/images/Dining Table.png" alt="Home decor" />
-          <img class="sb-img" src="./assets/images/Bookshelf.png" alt="Bookshelf" />
+          <img class="sb-img" src="./assets/images/catalogue-reva-console.webp" alt="Reva tower on a console table" style="object-position:center 38%" loading="lazy" decoding="async" />
+          <img class="sb-img" src="./assets/images/catalogue-reva-dining.webp" alt="Reva tower as a dining table centrepiece" style="object-position:center 22%" loading="lazy" decoding="async" />
           <span class="sb-on">D&eacute;cor</span>
         </div>
         <p class="sb-sub">Designed first as objects — sculptural, intentional, beautiful. The growing is the bonus. The presence is the point.</p>
@@ -234,19 +236,11 @@
           <h2 class="star-title">Our Star Products</h2>
           <div class="star-row">
             <a class="star-product" href="./know-the-product.html#product-1">
-              <img src="./assets/images/era.PNG" alt="Tower Era" />
-              <h3>Tower Era</h3>
-            </a>
-            <a class="star-product" href="./know-the-product.html#product-2">
-              <img src="./assets/images/nova.png" alt="Tower Nova" />
-              <h3>Tower Nova</h3>
-            </a>
-            <a class="star-product" href="./know-the-product.html#product-3">
-              <img src="./assets/images/reva.PNG" alt="Tower Reva" />
+              <img src="./assets/images/reva-tabletop.webp" alt="Tower Reva" />
               <h3>Tower Reva</h3>
             </a>
-            <a class="star-product" href="./know-the-product.html#product-4">
-              <img src="./assets/images/spira.png" alt="Tower Spira" />
+            <a class="star-product" href="./know-the-product.html#product-2">
+              <img src="./assets/images/spira-tabletop.webp" alt="Tower Spira" />
               <h3>Tower Spira</h3>
             </a>
           </div>
@@ -263,7 +257,7 @@
         <nav class="footer-links" aria-label="Footer navigation">
           <p class="footer-links-label">Quick Links</p>
           <a href="./index.html">Home</a>
-          <a href="./know-the-product.html">Products</a>
+          <a href="./know-the-product.html">Miniature Towers</a>
           <a href="./what-we-sell.html">Aeroponic Living</a>
           <a href="./aeroponic-spaces.html">Product Catalogue</a>
           <a href="./contact.html">Contact Us</a>

@@ -110,7 +110,7 @@ const animateHero = () => {
   );
 
   // Tower stays fully visible — locked at section 4, page scrolls past it.
-  heroFloat.style.opacity = "1";
+  heroFloat.style.opacity = (heroFloat.complete && heroFloat.naturalWidth) ? "1" : "0";
 
   // ── Transform calculation ──
   const straightenEase = Math.pow(panelTwoProgress, 1.25);
@@ -322,3 +322,9 @@ if (heroFloat) {
 window.addEventListener("scroll", onScroll, { passive: true });
 window.addEventListener("resize", onScroll);
 window.addEventListener("load", onScroll);
+// Position the tower immediately (don't wait for full page load) so it never shows in its un-animated tilted pose
+onScroll();
+if (heroFloat) {
+  if (!heroFloat.complete) heroFloat.addEventListener("load", onScroll);
+  if (heroFloat.decode) heroFloat.decode().then(onScroll).catch(() => {});
+}

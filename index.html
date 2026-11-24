@@ -12,6 +12,7 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="./site-shared.css?v=10" />
+    <link rel="preload" as="image" href="./assets/images/spira-tabletop.webp" fetchpriority="high" />
     <link rel="stylesheet" href="./home.css?v=44" />
   </head>
   <body>
@@ -33,9 +34,10 @@
             <span></span>
           </button>
           <nav id="site-nav">
-            <a href="./know-the-product.html">Products</a>
             <a href="./what-we-sell.html">Aeroponic Living</a>
             <a href="./aeroponic-spaces.html">Product Catalogue</a>
+            <a href="./know-the-product.html">Miniature Towers</a>
+            <a href="./luxury.html">Luxury Collection</a>
             <a href="./contact.html">Contact Us</a>
           </nav>
         </header>
@@ -44,8 +46,11 @@
           <img
             id="hero-float"
             class="hero-float"
-            src="./assets/images/spira.png"
-            alt="3D product render"
+            style="opacity:0"
+            src="./assets/images/spira-tabletop.webp"
+            fetchpriority="high"
+            decoding="async"
+            alt="Spira tabletop aeroponic tower"
           />
 
           <section class="panel panel-1">
@@ -85,7 +90,7 @@
                 <div class="service-card service-card--1 sc-active" id="service-card-1" data-index="0">
                   <div class="sc-media">
                     <img class="sc-img" id="service-merge-target"
-                         src="./assets/images/Terracotta towers .png"
+                         src="./assets/images/terracotta-towers.webp"
                          alt="Terracotta Towers" />
                   </div>
                   <div class="sc-overlay">
@@ -99,14 +104,14 @@
                 <div class="service-card service-card--2" id="service-card-2" data-index="1">
                   <div class="sc-media">
                     <img class="sc-img"
-                         src="./assets/images/Luxury towers 2 .png"
+                         src="./assets/images/luxury-towers.webp"
                          alt="Luxury Towers" />
                   </div>
                   <div class="sc-overlay">
                     <span class="sc-num">02</span>
                     <h3 class="sc-title">Luxury Towers</h3>
                     <p class="sc-desc">Premium aeroponic installations crafted for high-end residential and hospitality spaces. Where fine living meets living green.</p>
-                    <a href="./contact.html" class="sc-link">Enquire →</a>
+                    <a href="./luxury.html" class="sc-link">Explore →</a>
                   </div>
                 </div>
                 <!-- Card 3: Custom Planters -->
@@ -127,7 +132,7 @@
                 <div class="service-card service-card--4" id="service-card-4" data-index="3">
                   <div class="sc-media">
                     <img class="sc-img"
-                         src="./assets/images/custom verticle garden 2.png"
+                         src="./assets/images/custom-vertical-garden-2.webp"
                          alt="Custom Vertical Gardens" />
                   </div>
                   <div class="sc-overlay">
@@ -198,7 +203,7 @@
               <nav class="footer-links" aria-label="Footer navigation">
                 <p class="footer-links-label">Quick Links</p>
                 <a href="./index.html">Home</a>
-                <a href="./know-the-product.html">Products</a>
+                <a href="./know-the-product.html">Miniature Towers</a>
                 <a href="./what-we-sell.html">Aeroponic Living</a>
                 <a href="./aeroponic-spaces.html">Product Catalogue</a>
                 <a href="./contact.html">Contact Us</a>
