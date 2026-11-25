@@ -16,8 +16,8 @@
   align-items: center;
   gap: 1.2rem;
   padding: 0.25rem 1.5rem;
-  background: rgba(245, 237, 224, 0.96);
-  border-bottom: 1px solid rgba(101, 67, 33, 0.12);
+  background: rgba(255,249,243, 0.96);
+  border-bottom: 1px solid rgba(54,10,11, 0.12);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   min-height: 68px;
@@ -55,7 +55,7 @@
 
 .top-nav nav a {
   text-decoration: none;
-  color: #6e4e3a;
+  color: #6b4a47;
   font-weight: 600;
   font-size: 0.82rem;
   letter-spacing: 0.04em;
@@ -68,20 +68,20 @@
 }
 
 .top-nav nav a:hover {
-  background: rgba(139, 90, 43, 0.1);
-  color: #3d2b1f;
+  background: rgba(106,105,67, 0.1);
+  color: #360a0b;
 }
 
 .top-nav nav a.active {
-  background: #3d2b1f;
-  color: #f5ede0;
+  background: #360a0b;
+  color: #fff9f3;
 }
 
 /* ── Footer ──────────────────────────────────────────────────── */
 
 .site-footer {
-  background: #44030F;
-  color: #f5ede0;
+  background: #360a0b;
+  color: #fff9f3;
   padding: 3rem 6% 1.8rem;
   /* Must sit above the hero-float (z-20) so the footer slides over the
      locked 3D asset as the user scrolls into it, hiding it cleanly. */
@@ -121,24 +121,24 @@
   font-weight: 700;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: rgba(245, 237, 224, 0.38);
+  color: rgba(255,249,243, 0.38);
 }
 
 .footer-links a {
   text-decoration: none;
-  color: rgba(245, 237, 224, 0.62);
+  color: rgba(255,249,243, 0.62);
   font-size: 0.85rem;
   font-weight: 500;
   transition: color 0.18s ease;
 }
 
 .footer-links a:hover {
-  color: #f5ede0;
+  color: #fff9f3;
 }
 
 .footer-bottom {
   padding-top: 1.2rem;
-  border-top: 1px solid rgba(245, 237, 224, 0.1);
+  border-top: 1px solid rgba(255,249,243, 0.1);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -149,7 +149,7 @@
 .footer-bottom p {
   margin: 0;
   font-size: 0.75rem;
-  color: rgba(245, 237, 224, 0.4);
+  color: rgba(255,249,243, 0.4);
 }
 
 /* ── Mobile nav ──────────────────────────────────────────────── */
@@ -158,7 +158,7 @@
 .nav-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(61, 43, 31, 0.45);
+  background: rgba(54,10,11, 0.45);
   z-index: 48;
   opacity: 0;
   pointer-events: none;
@@ -194,11 +194,11 @@
     margin-left: 0;
     /* top padding clears the burger button; justify links with generous breathing room */
     padding: 5rem 2rem 2.5rem;
-    background: #f5ede0;
+    background: #fff9f3;
     border: none;
-    border-left: 2px solid rgba(101, 67, 33, 0.1);
+    border-left: 2px solid rgba(54,10,11, 0.1);
     border-radius: 0;
-    box-shadow: -8px 0 40px rgba(61, 43, 31, 0.22);
+    box-shadow: -8px 0 40px rgba(54,10,11, 0.22);
     z-index: 50;
     transform: translateX(100%);
     transition: transform 0.32s cubic-bezier(0.32, 0, 0.67, 0);
@@ -219,15 +219,15 @@
     font-size: 1.05rem;
     font-weight: 700;
     letter-spacing: 0.03em;
-    color: #5c3d2e;
+    color: #360a0b;
     border-radius: 0;
-    border-bottom: 1px solid rgba(101, 67, 33, 0.12);
+    border-bottom: 1px solid rgba(54,10,11, 0.12);
     white-space: normal;           /* allow wrap on very narrow phones */
     justify-content: flex-start;
   }
 
   .top-nav nav a:last-child { border-bottom: none; }
-  .top-nav nav a:hover { color: #3d2b1f; }
+  .top-nav nav a:hover { color: #360a0b; }
 
   .nav-toggle {
     display: inline-flex;
@@ -237,8 +237,8 @@
     width: 44px;
     height: 44px;
     border-radius: 10px;
-    border: 1px solid rgba(101, 67, 33, 0.22);
-    background: rgba(245, 237, 224, 0.9);
+    border: 1px solid rgba(54,10,11, 0.22);
+    background: rgba(255,249,243, 0.9);
     padding: 0 11px;
     cursor: pointer;
     flex-shrink: 0;
@@ -248,7 +248,7 @@
     width: 100%;
     height: 2px;
     border-radius: 999px;
-    background: #6e4e3a;
+    background: #6b4a47;
     transition: transform 0.2s ease, opacity 0.2s ease;
   }
 

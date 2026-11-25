@@ -1,0 +1,388 @@
+/* ═══════════════════════════════════════════════════════════
+   DECONOVIA — brand layer
+   Palette from the brand guidelines:
+   Terracotta #360A0B · Sand #D3AF88 · Forest #6A6943
+   Blush #C18385 · Ivory #FFF9F3 · Pistachio #BCBC96
+   Type: Golden (headings) + Raleway (body, max 2 weights)
+   Rule: no rounded corners, no soft shadows, minimal ornament
+   ═══════════════════════════════════════════════════════════ */
+:root{
+  --terracotta:#360a0b; --sand:#d3af88; --forest:#6a6943;
+  --blush:#c18385; --ivory:#fff9f3; --pistachio:#bcbc96;
+  --sand-tint:#f6ebdd;
+  --warm-bg:var(--ivory); --warm-alt:var(--sand-tint); --warm-deep:#f1e2cf;
+  --text:var(--terracotta); --muted:#6b4a47; --accent:var(--forest);
+  --amber:var(--forest); --gold:var(--sand);
+  --border:rgba(54,10,11,.16); --shadow:rgba(54,10,11,.08);
+}
+
+/* ── Sharp edges, flat surfaces ───────────────────────────── */
+body *,body *::before,body *::after{border-radius:0 !important}
+body *:not(.hero-float):not(.hero-float *){box-shadow:none !important}
+html{background:var(--ivory)}
+body{background:var(--ivory);color:var(--terracotta)}
+
+/* ── Navigation ───────────────────────────────────────────── */
+.top-nav{
+  background:rgba(255,249,243,.97) !important;
+  border-bottom:1px solid rgba(54,10,11,.18) !important;
+  backdrop-filter:none !important;-webkit-backdrop-filter:none !important;
+}
+.top-nav nav a{
+  font-family:"Raleway",sans-serif;font-weight:500;
+  font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--terracotta) !important;background:none !important;
+  padding:.55rem .95rem;position:relative;
+}
+.top-nav nav a::after{
+  content:"";position:absolute;left:.95rem;right:.95rem;bottom:.2rem;height:1px;
+  background:var(--terracotta);transform:scaleX(0);transform-origin:left;
+  transition:transform .35s ease;
+}
+.top-nav nav a:hover::after,.top-nav nav a.active::after{transform:scaleX(1)}
+.top-nav nav a.active{background:none !important;color:var(--terracotta) !important}
+@media (max-width:860px){
+  .top-nav nav{background:var(--ivory) !important;border-left:1px solid rgba(54,10,11,.2) !important}
+  .top-nav nav a{font-size:.8rem;border-bottom:1px solid rgba(54,10,11,.12) !important}
+  .top-nav nav a::after{display:none}
+  .top-nav nav a.active{color:var(--forest) !important}
+  .nav-toggle{background:var(--ivory) !important;border:1px solid rgba(54,10,11,.3) !important}
+  .nav-toggle span{background:var(--terracotta) !important}
+}
+
+/* ── Buttons: flat, uppercase, quiet ──────────────────────── */
+.buy-btn,.landing-cta,.cat-cta,.cat-kit-cta,.cat-cta-btn,.sell-cta-link,.sell-cta-link,.auth-btn,.brand-btn{
+  font-family:"Raleway",sans-serif !important;font-weight:500 !important;
+  font-size:.72rem !important;letter-spacing:.2em !important;text-transform:uppercase !important;
+  background:var(--terracotta) !important;color:var(--ivory) !important;
+  border:1px solid var(--terracotta) !important;padding:1rem 2.1rem !important;
+  text-decoration:none;transition:background .3s ease,color .3s ease !important;
+}
+.buy-btn:hover,.landing-cta:hover,.cat-cta:hover,.cat-kit-cta:hover,.cat-cta-btn:hover,.sell-cta-link:hover,.sell-cta-link:hover,.auth-btn:hover,.brand-btn:hover{
+  background:transparent !important;color:var(--terracotta) !important;
+}
+
+/* ── Labels, tags, eyebrows ───────────────────────────────── */
+.cat-tag,.sui-tag,.cat-space-tag{
+  background:transparent !important;border:1px solid rgba(54,10,11,.3) !important;
+  color:var(--terracotta) !important;letter-spacing:.14em;text-transform:uppercase;font-size:.62rem !important;
+}
+[class*="eyebrow"],[class*="kicker"],.cat-product-tagline{color:var(--forest) !important}
+
+/* ── Hairline cards instead of soft panels ────────────────── */
+.cat-kit,.cat-spec-grid,.cat-specs,.sell-card,.cat-cta-strip{border:1px solid rgba(54,10,11,.2) !important;background:transparent !important}
+
+/* ── Brand elements ───────────────────────────────────────── */
+.brand-divider{
+  height:22px;width:min(420px,70%);margin:2rem auto;
+  background:var(--terracotta);opacity:.85;
+  -webkit-mask:url("./assets/brand/divider.png") center/contain no-repeat;
+          mask:url("./assets/brand/divider.png") center/contain no-repeat;
+}
+.brand-divider.left{margin-left:0}
+.brand-divider.sand{background:var(--sand)}
+.brand-divider.ivory{background:var(--ivory)}
+.brand-plants{
+  height:80px;width:min(720px,90%);margin:0 auto;
+  background:var(--forest);opacity:.9;
+  -webkit-mask:url("./assets/brand/plants-row.png") center bottom/contain no-repeat;
+          mask:url("./assets/brand/plants-row.png") center bottom/contain no-repeat;
+}
+.brand-icon{
+  display:inline-block;width:56px;height:56px;background:var(--terracotta);
+  -webkit-mask:var(--ic) center/contain no-repeat;mask:var(--ic) center/contain no-repeat;
+}
+.brand-pattern{
+  height:84px;background:var(--sand);opacity:.55;
+  -webkit-mask:url("./assets/brand/pattern-top.png") 0 0/auto 100% repeat-x;
+          mask:url("./assets/brand/pattern-top.png") 0 0/auto 100% repeat-x;
+}
+
+/* ── Footer: terracotta with a quiet pattern band ─────────── */
+.site-footer{background:var(--terracotta) !important;position:relative}
+.site-footer::before{
+  content:"";display:block;height:64px;margin:0 0 2.2rem;
+  background:var(--ivory);opacity:.2;
+  -webkit-mask:url("./assets/brand/pattern-top.png") 0 0/auto 100% repeat-x;
+          mask:url("./assets/brand/pattern-top.png") 0 0/auto 100% repeat-x;
+}
+
+.brand-plants-band{background:var(--ivory);padding:3.5rem 0 0;line-height:0;border-bottom:1px solid rgba(54,10,11,.25)}
+.brand-plants{height:84px;width:min(760px,88%);background:var(--forest)}
+
+/* ── Footer pattern band: sits at the very bottom of the footer ── */
+.site-footer{padding-top:3rem !important;padding-bottom:0 !important}
+.site-footer::before{display:none !important}
+.site-footer::after{
+  content:"";display:block;height:60px;margin:2rem -6.5% 0;background:var(--ivory);opacity:.22;
+  -webkit-mask:url("./assets/brand/pattern-top.png") 0 0/auto 100% repeat-x;
+          mask:url("./assets/brand/pattern-top.png") 0 0/auto 100% repeat-x;
+}
+.brand-plants-band.dark{background:transparent;border-bottom:1px solid rgba(211,175,136,.5)}
+.brand-plants-band.dark .brand-plants{background:var(--sand)}
+
+/* ── Home: the two cards the tower drifts between ── */
+.flow-row-top::before,.flow-row-top::after,.flow-row-bottom::before{display:none !important}
+.flow-text-card{
+  padding:2.4rem 2.6rem !important;min-height:0 !important;border:1px solid var(--terracotta) !important;
+  background:var(--terracotta) !important;overflow:hidden;
+  width:min(40%,520px) !important;
+}
+.flow-text-card::before,.flow-text-card::after{display:none !important}
+.flow-row-bottom .flow-text-card{width:min(40%,520px) !important;margin-left:auto}
+.flow-text-card.flow-light{background:var(--ivory) !important}
+.flow-text-card h3{color:var(--ivory) !important;font-weight:400 !important;font-size:clamp(1.8rem,2.6vw,2.6rem) !important;line-height:1.08 !important;max-width:100% !important}
+.flow-text-card p{color:rgba(255,249,243,.82) !important;font-size:.92rem !important;line-height:1.9 !important;letter-spacing:.02em;max-width:100% !important;margin-top:.4rem}
+.flow-text-card.flow-light h3,.flow-text-card.flow-light p{color:var(--terracotta) !important}
+.flow-text-card.flow-light p{font-weight:400}
+.flow-head{display:flex;align-items:center;justify-content:space-between;gap:1rem;margin-bottom:1.4rem;width:100%}
+.flow-text-left .flow-head{flex-direction:row-reverse}
+.flow-no{font-family:"Golden",serif;font-size:1rem;letter-spacing:.22em;color:var(--ivory)}
+.flow-light .flow-no{color:var(--terracotta)}
+.flow-ic{width:58px;height:58px;background:var(--ivory);-webkit-mask:var(--ic) center/contain no-repeat;mask:var(--ic) center/contain no-repeat}
+.flow-light .flow-ic{background:var(--terracotta)}
+.flow-text-card .brand-divider{margin:1.1rem 0 .9rem;width:190px;height:16px;background:var(--ivory);opacity:.9}
+.flow-text-card .brand-divider.right{margin-left:auto}
+.flow-text-card.flow-light .brand-divider{background:var(--terracotta)}
+@media (max-width:860px){
+  .flow-text-card,.flow-row-bottom .flow-text-card{width:100% !important;padding:1.8rem 1.5rem !important}
+  .flow-ic{width:46px;height:46px}
+}
+
+.brand-plants-band{position:relative;z-index:25}
+
+/* ── Buttons with character: chamfered corners, inner frame, brand diamond-and-line ── */
+.buy-btn,.landing-cta,.sell-cta-link,.cat-cta-btn,.brand-btn{
+  display:inline-flex !important;align-items:center;gap:.9rem;position:relative;
+  --cut:12px;
+  clip-path:polygon(var(--cut) 0,calc(100% - var(--cut)) 0,100% var(--cut),100% calc(100% - var(--cut)),calc(100% - var(--cut)) 100%,var(--cut) 100%,0 calc(100% - var(--cut)),0 var(--cut));
+  padding:1.05rem 2.1rem 1.05rem 2.3rem !important;border:none !important;
+}
+.buy-btn::before,.landing-cta::before,.sell-cta-link::before,.cat-cta-btn::before,.brand-btn::before{
+  content:"";position:absolute;inset:4px;border:1px solid rgba(255,249,243,.4);pointer-events:none;
+  clip-path:polygon(9px 0,calc(100% - 9px) 0,100% 9px,100% calc(100% - 9px),calc(100% - 9px) 100%,9px 100%,0 calc(100% - 9px),0 9px);
+  -webkit-clip-path:polygon(9px 0,calc(100% - 9px) 0,100% 9px,100% calc(100% - 9px),calc(100% - 9px) 100%,9px 100%,0 calc(100% - 9px),0 9px);
+}
+.buy-btn::after,.landing-cta::after,.sell-cta-link::after,.cat-cta-btn::after,.brand-btn::after{
+  content:"";width:36px;height:9px;background:currentColor;flex:none;transition:transform .35s ease;
+  -webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 36 9'%3E%3Cpath d='M0 4.5H27M31.5 .8L35.2 4.5L31.5 8.2L27.8 4.5Z' fill='none' stroke='black' stroke-width='1'/%3E%3C/svg%3E") center/contain no-repeat;
+          mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 36 9'%3E%3Cpath d='M0 4.5H27M31.5 .8L35.2 4.5L31.5 8.2L27.8 4.5Z' fill='none' stroke='black' stroke-width='1'/%3E%3C/svg%3E") center/contain no-repeat;
+}
+.buy-btn:hover,.landing-cta:hover,.sell-cta-link:hover,.cat-cta-btn:hover,.brand-btn:hover{background:var(--forest) !important;color:var(--ivory) !important}
+.buy-btn:hover::after,.landing-cta:hover::after,.sell-cta-link:hover::after,.cat-cta-btn:hover::after,.brand-btn:hover::after{transform:translateX(6px)}
+
+/* ── Miniature Towers: 3-photo grid ── */
+.cat-gallery{
+  position:relative;z-index:1;width:min(86%,580px);height:calc(100% - 3.5rem);max-height:820px;
+  display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1.3fr 1fr;gap:10px;
+}
+.cg{margin:0;overflow:hidden;background:var(--sand-tint);border:1px solid rgba(54,10,11,.14)}
+.cg img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .9s ease}
+.cg-main{grid-column:1 / -1}
+.cg-main img{object-position:center 38%}
+.cg:hover img{transform:scale(1.04)}
+@media (max-width:860px){
+  .cat-visual-col{height:auto !important;padding:1.5rem 1.1rem !important}
+  .cat-gallery{width:100%;height:auto;aspect-ratio:4/4.6}
+}
+
+/* ── Home hero: button never reaches the tower on small screens ── */
+@media (max-width:860px){
+  .landing-cta{padding:.8rem 1.2rem .8rem 1.4rem !important;font-size:.62rem !important;gap:.55rem !important;white-space:nowrap;--cut:9px}
+  .landing-cta::before{inset:3px}
+  .landing-cta::after{width:22px;height:8px}
+  .split-right-wrap .landing-cta{margin-left:auto}
+}
+
+/* ── Home cards always sit in front of the tower ── */
+
+/* ── Tiny brand details on the home page ── */
+.split-left-wrap .split-subheading::before{
+  content:"";display:block;width:132px;height:14px;margin:0 0 1.1rem;background:var(--terracotta);opacity:.7;
+  -webkit-mask:url("./assets/brand/divider.png") left center/contain no-repeat;mask:url("./assets/brand/divider.png") left center/contain no-repeat;
+}
+.luxury-small::after{
+  content:"";display:block;width:120px;height:13px;margin:.9rem 0 .4rem;background:var(--forest);opacity:.85;
+  -webkit-mask:url("./assets/brand/divider.png") left center/contain no-repeat;mask:url("./assets/brand/divider.png") left center/contain no-repeat;
+}
+.services-head{position:relative}
+.services-head::after{
+  content:"";position:absolute;left:50%;bottom:9px;width:150px;height:12px;transform:translateX(-50%);background:var(--terracotta);opacity:.55;
+  -webkit-mask:url("./assets/brand/divider.png") center/contain no-repeat;mask:url("./assets/brand/divider.png") center/contain no-repeat;pointer-events:none;
+}
+.cat-gallery{height:min(calc(100vh - 68px - 3.5rem),780px) !important;max-height:none !important;grid-template-rows:minmax(0,1.3fr) minmax(0,1fr)}
+.cg{position:relative;min-height:0}
+.cg img{position:absolute;inset:0}
+@media (max-width:860px){.cat-gallery{height:auto !important}}
+@media (min-width:861px){
+  .cat-visual-col{align-items:flex-start !important;padding-top:1.9rem}
+  .cat-gallery{height:clamp(430px,calc(100vh - 290px),760px) !important}
+}
+.cg-main img{object-position:center 18% !important}
+
+/* ── Services slider: brand arrow + diamond dots ── */
+.sc-dot{width:9px !important;height:9px !important;transform:rotate(45deg) !important;background:rgba(255,249,243,.35) !important;border:1px solid rgba(255,249,243,.6)}
+.sc-dot--active{background:var(--ivory) !important;transform:rotate(45deg) scale(1.15) !important}
+.sc-swipe-arrow{
+  width:48px !important;height:48px !important;border:none !important;background:var(--terracotta) !important;color:var(--ivory) !important;
+  font-size:0 !important;box-shadow:none !important;backdrop-filter:none !important;-webkit-backdrop-filter:none !important;
+  clip-path:polygon(10px 0,calc(100% - 10px) 0,100% 10px,100% calc(100% - 10px),calc(100% - 10px) 100%,10px 100%,0 calc(100% - 10px),0 10px);
+  animation:scNudge 2.4s ease-in-out infinite;
+}
+.sc-swipe-arrow::before{
+  content:"";position:absolute;inset:4px;border:1px solid rgba(255,249,243,.4);pointer-events:none;
+  clip-path:polygon(7px 0,calc(100% - 7px) 0,100% 7px,100% calc(100% - 7px),calc(100% - 7px) 100%,7px 100%,0 calc(100% - 7px),0 7px);
+}
+.sc-swipe-arrow::after{
+  content:"";width:26px;height:9px;background:var(--ivory);
+  -webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 36 9'%3E%3Cpath d='M0 4.5H27M31.5 .8L35.2 4.5L31.5 8.2L27.8 4.5Z' fill='none' stroke='black' stroke-width='1.2'/%3E%3C/svg%3E") center/contain no-repeat;
+          mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 36 9'%3E%3Cpath d='M0 4.5H27M31.5 .8L35.2 4.5L31.5 8.2L27.8 4.5Z' fill='none' stroke='black' stroke-width='1.2'/%3E%3C/svg%3E") center/contain no-repeat;
+}
+.sc-swipe-arrow:active{background:var(--forest) !important}
+@keyframes scNudge{0%,100%{transform:translateY(-50%) translateX(0)}50%{transform:translateY(-50%) translateX(-5px)}}
+@media (prefers-reduced-motion:reduce){.sc-swipe-arrow{animation:none}}
+
+/* ── Cards: text on the left, narrower so the tower path stays clear ── */
+.flow-text-card,.flow-text-card.flow-text-left,.flow-text-card.flow-text-right{text-align:left !important}
+.flow-text-card h3,.flow-text-card p{margin-left:0 !important;margin-right:0 !important;text-align:left !important}
+.flow-text-left .flow-head{flex-direction:row !important}
+.flow-text-card .brand-divider,.flow-text-card .brand-divider.right{margin-left:0 !important;margin-right:auto !important}
+@media (min-width:861px){
+  .flow-text-card,.flow-row-bottom .flow-text-card{width:min(34%,470px) !important}
+}
+
+/* ── Nav fits mid-size screens ── */
+@media (min-width:861px) and (max-width:1240px){
+  .top-nav{gap:.6rem;padding-left:1rem;padding-right:1rem}
+  .top-nav nav a{font-size:.62rem;letter-spacing:.1em;padding:.5rem .55rem}
+  .top-nav nav a::after{left:.55rem;right:.55rem}
+}
+@media (min-width:1241px) and (max-width:1400px){
+  .top-nav nav a{letter-spacing:.14em;padding:.55rem .75rem}
+}
+html,body{overflow-x:clip}
+
+/* ── Luxury page: dark navigation ── */
+.luxury-body .top-nav{background:#2a0809 !important;border-bottom:1px solid rgba(211,175,136,.28) !important}
+.luxury-body .top-nav nav a{color:#f3e6d6 !important}
+.luxury-body .top-nav nav a.active{color:var(--sand) !important}
+.luxury-body .top-nav nav a::after{background:var(--sand) !important}
+.luxury-body .nav-toggle span{background:#f3e6d6 !important}
+@media (max-width:860px){
+  .luxury-body .top-nav nav{background:#2a0809 !important;border-left:1px solid rgba(211,175,136,.3) !important}
+  .luxury-body .top-nav nav a{border-bottom:1px solid rgba(211,175,136,.18) !important}
+  .luxury-body .top-nav nav a.active{color:var(--sand) !important}
+}
+
+/* ── No glass effects anywhere: solid surfaces ── */
+*,*::before,*::after{backdrop-filter:none !important;-webkit-backdrop-filter:none !important}
+[class*="product-glass"]{background:var(--ivory) !important;box-shadow:none !important}
+
+/* ── Miniature Towers: portrait photos shown in full (large tall photo + two stacked) ── */
+.cat-gallery{grid-template-columns:1.5fr 1fr !important;grid-template-rows:1fr 1fr !important}
+.cg-main{grid-column:1 !important;grid-row:1 / span 2}
+.cg-main img{object-position:center center !important}
+@media (max-width:860px){
+  .cat-gallery{height:auto !important;aspect-ratio:1/.92 !important;width:100%}
+}
+@media (min-width:861px){
+  .cat-gallery{width:min(86%,620px);height:clamp(430px,calc(100vh - 290px),760px) !important}
+}
+@media (max-width:860px){.luxury-body .nav-toggle{background:#2a0809 !important;border:1px solid rgba(211,175,136,.4) !important}}
+
+/* ── Cards follow the tower: card 01 content on the right half, card 02 on the left half ── */
+.flow-row-top{justify-content:flex-end !important}
+.flow-row-bottom .flow-text-card{margin-left:0 !important;margin-right:auto !important}
+@media (max-width:860px){
+  .flow-text-card{width:100% !important;box-sizing:border-box}
+  .flow-text-card.flow-dark{padding:1.6rem 1.2rem 1.6rem 47% !important}
+  .flow-text-card.flow-light{padding:1.6rem 47% 1.6rem 1.2rem !important}
+  .flow-text-card h3{font-size:1.45rem !important}
+  .flow-text-card p{font-size:.8rem !important;line-height:1.75 !important}
+  .flow-text-card .brand-divider{width:100% !important;max-width:120px}
+  .flow-text-card .flow-ic{width:34px !important;height:34px !important}
+  .flow-text-card .flow-head{gap:.5rem}
+}
+
+/* ── Phone: shorter cards; tower passes in front of the empty half ── */
+@media (max-width:860px){
+  .flow-text-card.flow-dark{padding:1rem 1rem 1.05rem 47% !important}
+  .flow-text-card.flow-light{padding:1rem 47% 1.05rem 1rem !important}
+  .flow-text-card{min-height:0 !important}
+  .flow-text-card h3{font-size:1.3rem !important;line-height:1.05 !important}
+  .flow-text-card p{font-size:.76rem !important;line-height:1.55 !important;margin-top:.1rem !important}
+  .flow-text-card .brand-divider{margin:.55rem 0 .5rem !important}
+  .flow-text-card .flow-head{margin-bottom:.35rem !important}
+}
+
+/* ── Phone: lift card 01 so the tower sits inside its empty half (transform only: layout and tower path unchanged) ── */
+@media (max-width:860px){
+  .flow-row-top{transform:translateY(-130px)}
+}
+
+/* ── Phone: roomier dark card, white card closer ── */
+@media (max-width:860px){
+  .flow-row-top{transform:translateY(-140px)}
+  .flow-text-card.flow-dark{padding:1.9rem 1rem 2rem 47% !important}
+  .flow-row-bottom{transform:translateY(-40px)}
+}
+
+/* ── Phone: taller dark card (grows evenly around the same centre) ── */
+@media (max-width:860px){
+  .flow-text-card.flow-dark{padding:3.2rem 1rem 3.4rem 47% !important}
+  .flow-row-top{transform:translateY(-160px)}
+}
+@media (max-width:860px){ .flow-row-top{margin-bottom:-2.7rem} }
+
+/* ── Phone: both cards identical in size, padding and frame ── */
+@media (max-width:860px){
+  .flow-text-card{min-height:268px !important;display:flex !important;flex-direction:column;justify-content:center;border:1px solid var(--terracotta) !important}
+  .flow-text-card.flow-dark{padding:1.6rem 1rem 1.6rem 47% !important}
+  .flow-text-card.flow-light{padding:1.6rem 47% 1.6rem 1rem !important}
+  .flow-row-top{margin-bottom:0 !important}
+}
+@media (max-width:860px){ .panel-3{overflow:visible !important} }
+@media (max-width:860px){ .flow-text-card{min-height:285px !important} .flow-row-top{transform:translateY(-168px)} }
+@media (max-width:860px){ .flow-row-top{transform:translateY(-148px)} .flow-row-bottom{transform:translateY(-60px)} }
+.flow-text-card.flow-dark{border:1px solid var(--sand) !important;outline:1px solid rgba(211,175,136,.35);outline-offset:-7px}
+@media (max-width:860px){ .flow-row-bottom{transform:translateY(-80px)} }
+@media (min-width:861px){ .flow-row-bottom{transform:translateY(-50px)} }
+
+/* ── Desktop: wide cards, content on one half, tower passes through the empty half ── */
+@media (min-width:861px){
+  .flow-text-card,.flow-row-bottom .flow-text-card{width:min(66%,900px) !important;box-sizing:border-box;min-height:270px !important;display:flex !important;flex-direction:column;justify-content:center}
+  .flow-text-card.flow-dark{padding:2.2rem 2.6rem 2.2rem 50% !important}
+  .flow-text-card.flow-light{padding:2.2rem 50% 2.2rem 2.6rem !important}
+  .flow-row-top{justify-content:flex-end !important}
+  .flow-row-bottom{transform:none}
+}
+@media (min-width:861px){
+  .flow-text-card,.flow-row-bottom .flow-text-card{width:min(72%,1040px) !important}
+  .flow-text-card.flow-dark{padding:2.2rem 2.6rem 2.2rem 52% !important}
+  .flow-text-card.flow-light{padding:2.2rem 52% 2.2rem 2.6rem !important}
+}
+@media (min-width:861px){ .flow-row-bottom{transform:translateY(-80px)} }
+@media (min-width:861px) and (max-width:1280px){
+  .flow-text-card,.flow-row-bottom .flow-text-card{width:min(84%,1040px) !important}
+  .flow-text-card.flow-dark{padding:2rem 1.8rem 2rem 46% !important}
+  .flow-text-card.flow-light{padding:2rem 46% 2rem 1.8rem !important}
+  .flow-text-card h3{font-size:clamp(1.5rem,2.4vw,2rem) !important}
+}
+@media (min-width:861px){ .flow-row-bottom{transform:translateY(-30px)} }
+@media (min-width:861px){
+  .flow-text-card h3{font-size:clamp(2.1rem,3.2vw,3.2rem) !important}
+  .flow-text-card p{font-size:clamp(1rem,1.15vw,1.15rem) !important;line-height:1.85 !important}
+  .flow-text-card.flow-dark{padding:2.6rem 2.6rem 2.6rem 49% !important}
+  .flow-text-card.flow-light{padding:2.6rem 49% 2.6rem 2.6rem !important}
+  .flow-text-card .flow-no{font-size:1.1rem}
+  .flow-text-card .brand-divider{width:240px}
+}
+@media (min-width:861px) and (max-width:1280px){
+  .flow-text-card h3{font-size:clamp(1.8rem,2.8vw,2.3rem) !important}
+  .flow-text-card.flow-dark{padding:2.2rem 1.8rem 2.2rem 45% !important}
+  .flow-text-card.flow-light{padding:2.2rem 45% 2.2rem 1.8rem !important}
+}
+@media (min-width:1281px){
+  .flow-text-card.flow-dark{padding:2.6rem 2.4rem 2.6rem 45% !important}
+  .flow-text-card.flow-light{padding:2.6rem 45% 2.6rem 2.4rem !important}
+}

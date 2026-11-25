@@ -4,8 +4,8 @@
 
 .sell-body {
   margin: 0;
-  background: #f5ede0;
-  color: #3d2b1f;
+  background: #fff9f3;
+  color: #360a0b;
   font-family: "Raleway", sans-serif;
   overflow-x: hidden;
 }
@@ -28,7 +28,7 @@
   font-weight: 700;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: #8b5a2b;
+  color: #6a6943;
   margin: 0 0 1.2rem;
   display: block;
 }
@@ -36,14 +36,14 @@
 .sell-hero-title {
   font-family: "Golden", serif;
   font-size: clamp(4rem, 9vw, 8rem);
-  color: #3d2b1f;
+  color: #360a0b;
   line-height: 1;
   margin: 0 0 2.5rem;
 }
 
 .sell-hero-sub {
   font-size: clamp(1rem, 2vw, 1.2rem);
-  color: #6e4e3a;
+  color: #6b4a47;
   max-width: none;
   white-space: nowrap;
   line-height: 1.65;
@@ -58,7 +58,7 @@
 .sell-hero-img {
   width: 100%;
   object-fit: contain;
-  filter: drop-shadow(0 28px 64px rgba(101,67,33,0.22));
+  filter: drop-shadow(0 28px 64px rgba(54,10,11,0.22));
   animation: heroFloat 5s ease-in-out infinite;
 }
 
@@ -78,7 +78,7 @@
   font-weight: 700;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: #8b5a2b;
+  color: #6a6943;
   display: block;
   margin-bottom: 0.5rem;
 }
@@ -86,7 +86,7 @@
 .sell-chapter-title {
   font-family: "Golden", serif;
   font-size: clamp(2rem, 5vw, 4rem);
-  color: #3d2b1f;
+  color: #360a0b;
   margin: 0;
   line-height: 1.05;
 }
@@ -107,7 +107,7 @@
 .sb-above {
   font-family: "Golden", serif;
   font-size: clamp(3.5rem, 10vw, 10rem);
-  color: #3d2b1f;
+  color: #360a0b;
   line-height: 0.88;
   margin: 0;
   padding: 2.5rem 6% 0;
@@ -142,7 +142,7 @@
 /* Single-image strips: contain so image isn't cropped */
 .sb-image-wrap--single .sb-img {
   object-fit: contain;
-  background: #ede0cc;
+  background: #f6ebdd;
 }
 
 /* Overlay gradient for readability of on-image text */
@@ -152,9 +152,9 @@
   inset: 0;
   background: linear-gradient(
     to bottom,
-    rgba(61,43,31,0.08) 0%,
+    rgba(54,10,11,0.08) 0%,
     transparent 40%,
-    rgba(61,43,31,0.35) 100%
+    rgba(54,10,11,0.35) 100%
   );
   pointer-events: none;
 }
@@ -179,7 +179,7 @@
   right: 6%;
   font-family: "Golden", serif;
   font-size: clamp(1.5rem, 3.5vw, 3rem);
-  color: rgba(232,196,154,0.95);
+  color: rgba(211,175,136,0.95);
   text-shadow: 0 2px 12px rgba(0,0,0,0.4);
   z-index: 2;
   background: rgba(42,28,18,0.55);
@@ -191,7 +191,7 @@
 
 .sb-sub {
   font-size: 1.15rem;
-  color: #6e4e3a;
+  color: #6b4a47;
   padding: 1.4rem 6% 0;
   margin: 0;
   max-width: 52ch;
@@ -205,19 +205,19 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, #e8d8c4, #d4b896);
+  background: linear-gradient(135deg, #f1e2cf, #d3af88);
 }
 
 .sb-placeholder span {
   font-family: "Golden", serif;
   font-size: 1.2rem;
-  color: rgba(139,90,43,0.4);
+  color: rgba(106,105,67,0.4);
   letter-spacing: 0.1em;
 }
 
 /* ── Use case intro strip ──────────────────────────────────── */
 .sell-use-intro {
-  background: #3d2b1f;
+  background: #360a0b;
   padding: 5rem 6%;
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -228,13 +228,13 @@
 .sui-text h2 {
   font-family: "Golden", serif;
   font-size: clamp(2rem, 5vw, 4rem);
-  color: #e8c49a;
+  color: #d3af88;
   margin: 0 0 1rem;
   line-height: 1.05;
 }
 
 .sui-text p {
-  color: rgba(245,237,224,0.65);
+  color: rgba(255,249,243,0.65);
   font-size: 1rem;
   line-height: 1.7;
   margin: 0;
@@ -248,9 +248,9 @@
 }
 
 .sui-tag {
-  background: rgba(232,196,154,0.12);
-  border: 1px solid rgba(232,196,154,0.25);
-  color: #e8c49a;
+  background: rgba(211,175,136,0.12);
+  border: 1px solid rgba(211,175,136,0.25);
+  color: #d3af88;
   font-size: 0.78rem;
   font-weight: 700;
   letter-spacing: 0.08em;
@@ -263,28 +263,28 @@
 }
 
 a.sui-tag:hover {
-  background: rgba(232,196,154,0.28);
-  border-color: rgba(232,196,154,0.6);
-  color: #f5ede0;
+  background: rgba(211,175,136,0.28);
+  border-color: rgba(211,175,136,0.6);
+  color: #fff9f3;
 }
 
 /* ── CTA Banner ────────────────────────────────────────────── */
 .sell-cta {
-  background: #f5ede0;
+  background: #fff9f3;
   padding: 5rem 6%;
   text-align: center;
-  border-top: 1px solid rgba(101,67,33,0.12);
+  border-top: 1px solid rgba(54,10,11,0.12);
 }
 
 .sell-cta h2 {
   font-family: "Golden", serif;
   font-size: clamp(1.8rem, 4vw, 3.2rem);
-  color: #3d2b1f;
+  color: #360a0b;
   margin: 0 0 1rem;
 }
 
 .sell-cta p {
-  color: #6e4e3a;
+  color: #6b4a47;
   font-size: 0.95rem;
   max-width: 50ch;
   margin: 0 auto 2rem;
@@ -293,9 +293,9 @@ a.sui-tag:hover {
 
 .sell-cta-link {
   display: inline-block;
-  background: #f5ede0;
-  color: #44030F;
-  border: 1px solid #44030F;
+  background: #fff9f3;
+  color: #360a0b;
+  border: 1px solid #360a0b;
   font-family: "Raleway", sans-serif;
   font-size: 0.85rem;
   font-weight: 700;
@@ -307,7 +307,7 @@ a.sui-tag:hover {
   transition: background 0.2s, color 0.2s;
 }
 
-.sell-cta-link:hover { background: #44030F; color: #f5ede0; }
+.sell-cta-link:hover { background: #360a0b; color: #fff9f3; }
 
 /* ── Mobile ────────────────────────────────────────────────── */
 @media (max-width: 860px) {
