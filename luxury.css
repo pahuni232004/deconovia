@@ -485,10 +485,10 @@ body.luxury-body{background:#fff9f3}
 
 /* ═══ Entire Luxury page in brand maroon ═══ */
 body.luxury-body{background:#360a0b}
-.lux{--gold:#d3af88;--gold-light:#e6cfae;--gold-dim:#b99a78;--black:#360a0b;--dark:#360a0b;--mid:#3f0f11;--cream:#fff9f3;--cream-dim:rgba(255,249,243,.74);background:#360a0b;color:#fff9f3}
+.lux{--gold:#d3af88;--gold-light:#e6cfae;--gold-dim:#b99a78;--black:#360a0b;--dark:#360a0b;--mid:#360a0b;--cream:#fff9f3;--cream-dim:rgba(255,249,243,.74);background:#360a0b;color:#fff9f3}
 .lux .collection-intro{background:#360a0b}
 .lux .product{background:#360a0b;border-top:1px solid rgba(211,175,136,.2)}
-.lux .product:nth-of-type(even){background:#3f0f11}
+.lux .product:nth-of-type(even){background:#360a0b}
 .lux .ornament-gem,.lux .lux-dark .ornament-gem{background:#d3af88}
 .lux .ornament::before{background:linear-gradient(to right,transparent,#d3af88)}
 .lux .ornament::after{background:linear-gradient(to left,transparent,#d3af88)}
@@ -498,7 +498,7 @@ body.luxury-body{background:#360a0b}
 .lux .tile:hover::after{border-color:rgba(211,175,136,.6)}
 .lux [class*="eyebrow"]{color:#d3af88 !important}
 /* process: slightly lighter maroon band, sand + ivory type */
-.lux .process{background:#470f11;color:#fff9f3;border-top:1px solid rgba(211,175,136,.25)}
+.lux .process{background:#360a0b;color:#fff9f3;border-top:1px solid rgba(211,175,136,.25)}
 .lux .process h2,.lux .p-step-no{color:#d3af88}
 .lux .p-step h3{color:#fff9f3}
 .lux .p-step p,.lux .process-head p{color:rgba(255,249,243,.8);font-weight:300}
@@ -509,7 +509,7 @@ body.luxury-body{background:#360a0b}
 .lux .lux-btn.solid{background:#d3af88;color:#360a0b;border-color:#d3af88}
 .lux .lux-btn.solid:hover{background:transparent;color:#d3af88}
 @media (max-width:1100px){.lux .p-step{border-top-color:rgba(211,175,136,.3)}.lux .p-step:nth-child(odd){border-right-color:rgba(211,175,136,.3)}}
-.lux .contact-section.lux-dark{background:#3f0f11}
+.lux .contact-section.lux-dark{background:#360a0b}
 .lux .process [class*="eyebrow"]{color:#d3af88 !important;opacity:1}
 
 /* centred process steps */
@@ -531,3 +531,12 @@ body.luxury-body{background:#360a0b}
   -webkit-mask:url("./assets/brand/pattern-top.png") 0 0/auto 100% repeat-x;mask:url("./assets/brand/pattern-top.png") 0 0/auto 100% repeat-x;
 }
 @media (max-width:768px){.lux .product{padding-bottom:calc(4rem + 44px)}.lux .product::after{height:44px}}
+
+/* ── Stronger, more readable text on the maroon page ── */
+.lux{--cream-dim:rgba(255,249,243,.94)}
+.lux p,.lux .hero-sub,.lux .contact-sub,.lux .collection-intro p,.lux .p-step p,.lux .process-head p{font-weight:500 !important;color:rgba(255,249,243,.95) !important}
+.lux .spec-label,.lux .spec-key,.lux [class*="spec"] [class*="label"],.lux .mat-list span,.lux .hero-eyebrow,.lux .eyebrow,.lux .p-eyebrow,.lux .p-tagline{font-weight:600 !important}
+.lux [class*="eyebrow"],.lux .p-num,.lux .contact-role{opacity:1 !important}
+.lux .p-name,.lux h2,.lux h3{text-shadow:none}
+.lux .contact-tel,.lux .contact-name{font-weight:600 !important}
+.lux .product span,.lux .product dt,.lux .product dd{font-weight:500}

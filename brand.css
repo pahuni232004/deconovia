@@ -263,13 +263,13 @@ body{background:var(--ivory);color:var(--terracotta)}
 html,body{overflow-x:clip}
 
 /* ── Luxury page: dark navigation ── */
-.luxury-body .top-nav{background:#2a0809 !important;border-bottom:1px solid rgba(211,175,136,.28) !important}
+.luxury-body .top-nav{background:#360a0b !important;border-bottom:1px solid rgba(211,175,136,.28) !important}
 .luxury-body .top-nav nav a{color:#f3e6d6 !important}
 .luxury-body .top-nav nav a.active{color:var(--sand) !important}
 .luxury-body .top-nav nav a::after{background:var(--sand) !important}
 .luxury-body .nav-toggle span{background:#f3e6d6 !important}
 @media (max-width:860px){
-  .luxury-body .top-nav nav{background:#2a0809 !important;border-left:1px solid rgba(211,175,136,.3) !important}
+  .luxury-body .top-nav nav{background:#360a0b !important;border-left:1px solid rgba(211,175,136,.3) !important}
   .luxury-body .top-nav nav a{border-bottom:1px solid rgba(211,175,136,.18) !important}
   .luxury-body .top-nav nav a.active{color:var(--sand) !important}
 }
@@ -288,7 +288,7 @@ html,body{overflow-x:clip}
 @media (min-width:861px){
   .cat-gallery{width:min(86%,620px);height:clamp(430px,calc(100vh - 290px),760px) !important}
 }
-@media (max-width:860px){.luxury-body .nav-toggle{background:#2a0809 !important;border:1px solid rgba(211,175,136,.4) !important}}
+@media (max-width:860px){.luxury-body .nav-toggle{background:#360a0b !important;border:1px solid rgba(211,175,136,.4) !important}}
 
 /* ── Cards follow the tower: card 01 content on the right half, card 02 on the left half ── */
 .flow-row-top{justify-content:flex-end !important}
@@ -386,3 +386,9 @@ html,body{overflow-x:clip}
   .flow-text-card.flow-dark{padding:2.6rem 2.4rem 2.6rem 45% !important}
   .flow-text-card.flow-light{padding:2.6rem 45% 2.6rem 2.4rem !important}
 }
+
+/* ── Services: back arrow (mirror of the next arrow, shown once you've moved on) ── */
+.sc-swipe-prev{right:auto !important;left:.75rem !important;animation:scNudgeL 2.4s ease-in-out infinite !important}
+.sc-swipe-prev::after{transform:scaleX(-1)}
+@keyframes scNudgeL{0%,100%{transform:translateY(-50%) translateX(0)}50%{transform:translateY(-50%) translateX(5px)}}
+@media (prefers-reduced-motion:reduce){.sc-swipe-prev{animation:none !important}}

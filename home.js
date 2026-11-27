@@ -309,9 +309,21 @@ if (heroFloat) {
     cardArea.scrollBy({ left: cardArea.offsetWidth, behavior: "smooth" });
   });
 
+  const prevBtn = document.createElement("button");
+  prevBtn.type = "button";
+  prevBtn.className = "sc-swipe-arrow sc-swipe-prev";
+  prevBtn.setAttribute("aria-label", "Previous service");
+  prevBtn.innerHTML = "&#8249;"; /* ‹ single left chevron */
+  servicesPin.appendChild(prevBtn);
+
+  prevBtn.addEventListener("click", () => {
+    cardArea.scrollBy({ left: -cardArea.offsetWidth, behavior: "smooth" });
+  });
+
   const syncArrow = () => {
     const maxScroll = cardArea.scrollWidth - cardArea.offsetWidth;
     nextBtn.style.display = cardArea.scrollLeft >= maxScroll - 2 ? "none" : "flex";
+    prevBtn.style.display = cardArea.scrollLeft <= 2 ? "none" : "flex";
   };
 
   cardArea.addEventListener("scroll", syncArrow, { passive: true });
