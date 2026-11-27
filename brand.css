@@ -392,3 +392,10 @@ html,body{overflow-x:clip}
 .sc-swipe-prev::after{transform:scaleX(-1)}
 @keyframes scNudgeL{0%,100%{transform:translateY(-50%) translateX(0)}50%{transform:translateY(-50%) translateX(5px)}}
 @media (prefers-reduced-motion:reduce){.sc-swipe-prev{animation:none !important}}
+
+/* ── Miniature Towers: no sticky tab bar ── */
+.cat-tabs{display:none !important}
+
+/* ── Footers: stronger pattern band ── */
+.site-footer::after{opacity:.5 !important}
+.brand-plants-band.dark{border-bottom-color:rgba(211,175,136,.9) !important}

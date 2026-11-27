@@ -540,3 +540,9 @@ body.luxury-body{background:#360a0b}
 .lux .p-name,.lux h2,.lux h3{text-shadow:none}
 .lux .contact-tel,.lux .contact-name{font-weight:600 !important}
 .lux .product span,.lux .product dt,.lux .product dd{font-weight:500}
+
+/* ── Luxury footer: bigger logo, stronger pattern band ── */
+.lux .footer-logo{height:110px !important}
+@media (max-width:860px){.lux .footer-logo{height:92px !important}}
+.lux .lux-footer.lux-dark::after{opacity:.5 !important}
+.lux .lux-footer.lux-dark{border-top:1px solid rgba(211,175,136,.7) !important}
